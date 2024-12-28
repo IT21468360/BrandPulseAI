@@ -65,7 +65,8 @@ mongodb+srv://Admin:research_autn@cluster0.lihl5.mongodb.net/
 
 # Creating Branches, Push , Pull
 
- -> All the commands shoud be executed in Git Bash Terminal
+ -> All the commands shoud be executed in Git Bash Terminal.
+ Also make sure, u r always in the right path, before executing any command.
  
 1. I have created Branches for each of u. If u need any other branches, u can create them manually in GitHub (Branch source should be "main")
 2. Make sure to 'pull' others work to ur local-repo, before u start working everytime.
