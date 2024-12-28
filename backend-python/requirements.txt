@@ -1,0 +1,12 @@
+ipykernel
+python-dotenv
+fastapi
+uvicorn
+pymongo
+pydantic
+requests
+numpy
+tensorflow
+scikit-learn
+python-dotenv
+notebook
