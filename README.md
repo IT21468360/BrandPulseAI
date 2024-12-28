@@ -86,3 +86,8 @@ After pushing changes to ur branch, u hv to merge ur chages to the main branch.
 You can do it ur self or u can drop a msg to me.
 When merging make sure u don't hv any conflicts. If u have any then make sure to resolve them.
 
+# New Requirements and dependencies
+
+1. If u need any requirement or dependency which is not mentoioned already.
+(Like Python Libraries or anything)
+Make sure to install them, and also update the requirement.txt file
