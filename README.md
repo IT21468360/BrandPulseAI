@@ -65,11 +65,13 @@ mongodb+srv://Admin:research_autn@cluster0.lihl5.mongodb.net/
 
 # Creating Branches, Push , Pull
 
+ -> All the commands shoud be executed in Git Bash Terminal
+ 
 1. I have created Branches for each of u. If u need any other branches, u can create them manually in GitHub (Branch source should be "main")
 2. Make sure to 'pull' others work to ur local-repo, before u start working everytime.
 3. 'git pull' command. (Make sure to run this command before pushing your modifications)
+   
 4. After doing ur modifications,
-
 In the terminal do the following (Make sure you are using git bash terminal)
 
 #Changes will be commited to the local repo 
@@ -77,5 +79,14 @@ In the terminal do the following (Make sure you are using git bash terminal)
 2. git commit -m "type message what you changed"
 
 #Push to your branch in the remote repo 
-3. git push origin main:my-branch    Ex: git push origin main:sentiment_analysis
+3. git push origin main:my-branch    
+Ex: git push origin main:sentiment_analysis
+
+After pushing changes to ur branch, u hv to merge ur chages to the main branch.
+You can do it ur self or u can drop a msg to me.
+When merging make sure u don't hv any conflicts. If u have any then make sure to resolve them.
+
+
+
+
 
