@@ -86,6 +86,95 @@ After pushing changes to ur branch, u hv to merge ur chages to the main branch.
 You can do it ur self or u can drop a msg to me.
 When merging make sure u don't hv any conflicts. If u have any then make sure to resolve them.
 
+# Sample Folder Structure
+
+project-name/
+├── backend-python/                  # Python backend for ML and heavy processing
+│   ├── app/
+│   │   ├── __init__.py              # Initialize Python app
+│   │   ├── main.py                  # Entry point for FastAPI
+│   │   ├── routes/                  # Python API routes
+│   │   │   ├── scrape_routes.py     # Web scraping endpoints
+│   │   │   ├── preprocess_routes.py # Data preprocessing endpoints
+│   │   │   ├── predict_routes.py    # ML model prediction endpoints
+│   │   │   ├── results_routes.py    # Fetching results from the database
+│   │   ├── controllers/             # Business logic for API routes
+│   │   │   ├── scrape_controller.py
+│   │   │   ├── preprocess_controller.py
+│   │   │   ├── predict_controller.py
+│   │   │   ├── results_controller.py
+│   │   ├── models/                  # Machine learning models
+│   │   │   ├── model1.py            # First model (e.g., NER)
+│   │   │   ├── model2.py            # Second model (e.g., sentiment analysis)
+│   │   │   ├── model3.py            # Third model (e.g., aspect-based sentiment)
+│   │   │   ├── model4.py            # Fourth model (e.g., reputation scoring)
+│   │   ├── db/
+│   │   │   ├── mongodb.py           # MongoDB connection logic
+│   │   ├── utils/                   # Helper functions
+│   │       ├── logger.py            # Logging setup
+│   │       ├── cache_handler.py     # Caching logic
+│   │       ├── preprocessing.py     # Common preprocessing functions
+│   ├── requirements.txt             # Python dependencies
+│   ├── Dockerfile                   # Dockerfile for Python backend
+│   ├── README.md                    # Python backend documentation
+│
+├── frontend-backend-nextjs/         # Combined Next.js frontend and backend
+│   ├── public/                      # Static assets
+│   │   ├── favicon.ico              # Favicon
+│   │   ├── logo.png                 # App logo
+│   ├── src/
+│   │   ├── app/                     # Next.js application logic
+│   │   │   ├── api/                 # Backend API routes
+│   │   │   │   ├── auth/
+│   │   │   │   │   ├── signin/
+│   │   │   │   │   │   └── route.js # API route for sign-in
+│   │   │   │   │   ├── validate/
+│   │   │   │   │   │   └── route.js # API route for token validation
+│   │   │   │   ├── users/
+│   │   │   │   │   └── route.js     # User-related operations
+│   │   │   ├── auth/                # Frontend auth pages
+│   │   │   │   ├── signin/
+│   │   │   │   │   ├── page.js      # Sign-in page
+│   │   │   │   ├── signup/
+│   │   │   │   │   ├── page.js      # Sign-up page
+│   │   ├── components/              # Reusable UI components
+│   │   │   ├── Header.js            # Header component
+│   │   │   ├── Footer.js            # Footer component
+│   │   │   ├── ThemeToggle.js       # Theme toggle button
+│   │   ├── context/                 # Context for global state
+│   │   │   ├── AuthContext.js       # Context for authentication
+│   │   │   ├── ThemeContext.js      # Context for theme management
+│   │   ├── styles/                  # CSS/Tailwind styles
+│   │   │   ├── globals.css          # Global styles
+│   │   │   ├── layout.css           # Layout-specific styles
+│   │   ├── db/mongodb/              # MongoDB integration
+│   │   │   ├── client.js            # MongoDB client logic
+│   │   ├── controllers/             # API logic for Next.js backend
+│   │   │   ├── authController.js    # Authentication logic
+│   │   │   ├── userController.js    # User-related operations
+│   │   ├── models/                  # Next.js backend models
+│   │   │   ├── userModel.js         # User schema and database operations
+│   ├── package.json                 # Next.js dependencies
+│   ├── Dockerfile                   # Dockerfile for Next.js app
+│   ├── README.md                    # Documentation for frontend-backend combo
+│
+├── data/                            # Data storage
+│   ├── raw/                         # Raw input data
+│   ├── processed/                   # Preprocessed data
+│
+├── notebooks/                       # Jupyter notebooks for development
+│   ├── eda.ipynb                    # Exploratory Data Analysis
+│   ├── model_experiments.ipynb      # Model experimentation
+│   ├── pipeline_testing.ipynb       # Testing end-to-end pipelines
+│
+├── logs/                            # Logs for debugging
+│   ├── backend-python.log           # Python backend logs
+│   ├── frontend-backend.log         # Logs for Next.js app
+│   ├── scraping.log                 # Logs for web scraping
+│
+├── docker-compose.yml               # Docker Compose configuration
+├── .env                             # Environment variables
+├── README.md                        # Project-level documentation
 
 
 
