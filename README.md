@@ -34,10 +34,15 @@ MONGODB_URI=mongodb+srv://Admin:research_autn@cluster0.mongodb.net/brandpulse?re
   2) select python: select interpreter
   3) Create virtual environment
   4) .conda -> python 3.11.9 (use 3.11. tensorflow is not supported for higher versions)
+  5) Activate your environment  (conda activate example_env) (use ur environment name)
  
 Install the requirements:
 Terminal -> Git Bash -> Execute the below command
- pip install -r requirements.txt
+pip install -r requirements.txt
+ (if this didn't work, use the below command)
+python -m pip install -r requirements.txt
+
+
 
 2.2. Setting up Python Backend
 Terminal -> Git Bash -> Execute the below commands
