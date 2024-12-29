@@ -8,5 +8,4 @@ requests
 numpy
 tensorflow
 scikit-learn
-python-dotenv
 notebook
