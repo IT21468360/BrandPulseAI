@@ -37,11 +37,20 @@ The project will start on the declared port on the package.json file.
 This is a full template for ease start any nextJs project. here included following features, that all are fully customizable for any prject.
 
 * Sample Header and Footer
+* Sidebar for Dashboards
 * Home page
 * Theme toggle (Light/ Dark)
 * Role base access control
 
 Please check the Development Instruction section to more info.
+
+## Template SS
+
+![1735533800687](images/README/1735533800687.png)
+
+![1735533818427](images/README/1735533818427.png)
+
+![1735533854502](images/README/1735533854502.png)
 
 ## Development Instructions
 
@@ -53,26 +62,8 @@ Please check the Development Instruction section to more info.
 2. Make the .env.local file. Rename the example.env.local file into .env.local
 3. Basic BE structure of the application
 
-   ```src/
-   ├── app/
-   │   ├── api/
-   │   │   ├── users/
-   │   │   │   └── route.js        # API Route for user-related operations
-   │   │   ├── products/
-   │   │   │   └── route.js        # API Route for product-related operations
-   │   └── ...
-   ├── controllers/
-   │   ├── userController.js       # Business logic for user operations
-   │   ├── productController.js    # Business logic for product operations
-   ├── models/
-   │   ├── userModel.js            # User schema and database operations
-   │   ├── productModel.js         # Product schema and database operations
-   ├── db/
-   │   └── mongodb/
-   │       └── client.js           # MongoDB connection logic
-   └── ...
-
-   ```
+   ![1735533704494](images/README/1735533704494.png)
+4. How to update the Header and Sidebar? Simply you can edit the `HeaderMenuItems.js` and `SidebarMenuItems.js` files in the `constant` diretory files.
 
 ## Deploy on Vercel
 

@@ -4,13 +4,7 @@ import {Dialog, DialogPanel} from "@headlessui/react";
 import {Bars3Icon, XMarkIcon} from "@heroicons/react/24/outline";
 import {useState, useEffect} from "react";
 import {useRouter} from "next/navigation";
-
-const navigation = [
-  {name: "Product", href: "#"},
-  {name: "Features", href: "#"},
-  {name: "Marketplace", href: "#"},
-  {name: "Company", href: "#"},
-];
+import {navigation} from "../constants/HeaderMenuItems";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -55,7 +49,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="absolute inset-x-0 top-0 z-50">
+      <header className="relative z-50 bg-white dark:bg-gray-900">
         <nav
           aria-label="Global"
           className="flex items-center justify-between p-6 lg:px-8 bg-white dark:bg-gray-900"
