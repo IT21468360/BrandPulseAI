@@ -35,6 +35,9 @@ MONGODB_URI=mongodb+srv://Admin:research_autn@cluster0.mongodb.net/brandpulse?re
   3) Create virtual environment
   4) .conda -> python 3.10.16 (use 3.10. tensorflow is not supported for higher versions)
   5) Activate your environment  (conda activate example_env) (use ur environment name)
+
+  ** conda env list
+  **conda activate '.......................'
  
 Install the requirements:
 Terminal -> Git Bash -> Execute the below command
