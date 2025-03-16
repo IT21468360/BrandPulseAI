@@ -1,15 +1,15 @@
 "use client";
 
-import {useState} from "react";
-import {useRouter} from "next/navigation";
-import {useAuth} from "@/app/context/AuthContext";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
-  const {saveToken} = useAuth();
+  const { saveUserSession } = useAuth(); // Use updated function
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,108 +18,75 @@ export default function Signin() {
     try {
       const response = await fetch("/api/auth/signin", {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({email, password}),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const {error} = await response.json();
-        throw new Error(error || "Failed to sign in");
+        throw new Error(data.error || "Failed to sign in");
       }
 
-      const {token} = await response.json();
+      if (!data.token || !data.user) {
+        throw new Error("Invalid response from server");
+      }
 
-      saveToken(token); // Save the token using the context
-
-      // Redirect to the dashboard or home page
-      router.push("/");
+      // Store token & user details
+      saveUserSession(data.token, data.user);
+      
+      console.log("User session stored:", data.user);
+      
+      router.push("/"); // Redirect to homepage
     } catch (err) {
       setError(err.message);
     }
   };
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white dark:bg-gray-900">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <div className="flex justify-center items-center">
-          <a href="/" aria-label="Home">
-            <img
-              alt="Your Company"
-              src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-              className="mx-auto h-10 w-auto"
-            />
-          </a>
+    <div className="flex min-h-screen items-center justify-center bg-white dark:bg-gray-900 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-lg p-10 space-y-8 bg-white shadow-2xl text-[#0B1F3F] dark:bg-white dark:text-gray-900 rounded-lg shadow-lg">
+        <div className="flex justify-center">
+          <img src="/images/signin.jpg" alt="Sign In" className="w-25 h-25" />
         </div>
-        <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          Sign in to your account
-        </h2>
-      </div>
-
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <h2 className="text-center text-3xl font-bold">Sign in to your account</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {error && (
-            <div className="text-red-500 text-sm text-center">{error}</div>
-          )}
+          {error && <div className="text-red-500 text-sm text-center">{error}</div>}
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Email address
-            </label>
-            <div className="mt-2">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="block w-full rounded-md bg-gray-100 dark:bg-gray-800 px-3 py-1.5 text-base text-gray-900 dark:text-gray-300 outline outline-1 outline-gray-300 placeholder-gray-400 focus:outline-indigo-600 dark:placeholder-gray-500 sm:text-sm"
-              />
-            </div>
+            <label htmlFor="email" className="block text-sm font-medium">Email address</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-2 block w-full rounded-md bg-white px-3 py-2 text-gray-900 border border-gray-300 shadow-md focus:border-blue-700 focus:outline-none"
+            />
           </div>
-
           <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Password
-            </label>
-            <div className="mt-2">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="block w-full rounded-md bg-gray-100 dark:bg-gray-800 px-3 py-1.5 text-base text-gray-900 dark:text-gray-300 outline outline-1 outline-gray-300 placeholder-gray-400 focus:outline-indigo-600 dark:placeholder-gray-500 sm:text-sm"
-              />
-            </div>
+            <label htmlFor="password" className="block text-sm font-medium">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              required
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mt-2 block w-full rounded-md bg-white px-3 py-2 text-gray-900 border border-gray-300 shadow-md focus:border-blue-700 focus:outline-none"
+            />
           </div>
-
-          <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Sign in
-            </button>
-          </div>
-        </form>
-
-        <p className="mt-10 text-center text-sm text-gray-500 dark:text-gray-400">
-          Not a member?{" "}
-          <a
-            href="/auth/signup"
-            className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
+          <button
+            type="submit"
+            className="w-full bg-[#0B1F3F] hover:bg-[#09172E] text-white font-semibold py-4 rounded-md shadow-lg text-lg"
           >
-            Sign Up
-          </a>
+            Sign in
+          </button>
+        </form>
+        <p className="text-center text-sm">
+          Not a member? <a href="/auth/signup" className="font-semibold text-[#0B1F3F] dark:text-blue-700">Sign Up</a>
         </p>
       </div>
     </div>
