@@ -1,32 +1,39 @@
 "use client";
 
-import {createContext, useContext, useState, useEffect} from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({children}) => {
+export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
 
-  // Load the token from localStorage on mount
+  // Load the token & user from localStorage on mount
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
-    if (savedToken) {
+    const savedUser = localStorage.getItem("user");
+    if (savedToken && savedUser) {
       setToken(savedToken);
+      setUser(JSON.parse(savedUser));
     }
   }, []);
 
-  const saveToken = (newToken) => {
+  const saveUserSession = (newToken, userData) => {
     setToken(newToken);
+    setUser(userData);
     localStorage.setItem("token", newToken);
+    localStorage.setItem("user", JSON.stringify(userData)); // Store user info
   };
 
-  const clearToken = () => {
+  const clearSession = () => {
     setToken(null);
+    setUser(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
   };
 
   return (
-    <AuthContext.Provider value={{token, saveToken, clearToken}}>
+    <AuthContext.Provider value={{ token, user, saveUserSession, clearSession }}>
       {children}
     </AuthContext.Provider>
   );
