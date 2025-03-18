@@ -57,7 +57,7 @@ python -m pip install -r requirements.txt
 
 
 2.2. Setting up Python Backend
-Terminal  -> Execute the below commands
+Terminal  -> Execute the below commands (Make sure you have activated your conda environment you created)
 1) cd backend-python
 2) uvicorn app.main:app --reload --port 8000    -> Command to run the python backend
 3) It will show as 'Application startup complete'.
