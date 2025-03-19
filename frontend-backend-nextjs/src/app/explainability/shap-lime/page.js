@@ -4,6 +4,8 @@ import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import Image from "next/image";
 import { useState } from "react";
+// If you need router logic:
+// import { useRouter, usePathname } from "next/navigation";
 
 export default function ShapLimeExplainability() {
     const [analysisText, setAnalysisText] = useState("");
@@ -16,19 +18,23 @@ export default function ShapLimeExplainability() {
                 {/* Title */}
                 <div className="bg-white p-6 rounded-lg shadow-md">
                     <h3 className="text-lg font-semibold mb-4">
-                        SHAP and LIME Explainability
+                    <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
+                     SHAP and LIME Explainability
+                        </div>
                     </h3>
                     <p className="text-gray-700">
                         SHAP (SHapley Additive exPlanations) and LIME (Local Interpretable Model-agnostic Explanations) 
                         are powerful techniques for understanding AI predictions.  
-                        SHAP provides a **global view** of feature importance, while LIME explains **individual predictions** by approximating 
-                        the model locally.
+                        SHAP provides a <strong>global view</strong> of feature importance, while LIME explains 
+                        <strong> individual predictions</strong> by approximating the model locally.
                     </p>
                 </div>
 
                 {/* SHAP Section */}
                 <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-lg font-semibold mb-4">SHAP Explainability</h3>
+                <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
+                         SHAP Explainability
+                        </div>
                     <p className="text-gray-700 mb-4">
                         SHAP explains model predictions by computing the impact of each feature on the final decision.
                     </p>
@@ -40,14 +46,16 @@ export default function ShapLimeExplainability() {
                             alt="SHAP Visualization 1" 
                             width={1500} 
                             height={1200} 
-                            className="rounded-lg shadow-md"
+                            className="rounded-lg"  // Removed shadow-md
                         />
                     </div>
                 </div>
 
                 {/* LIME Section */}
                 <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-lg font-semibold mb-4">LIME Explainability</h3>
+                     <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
+                         LIME Explainability
+                        </div>
                     <p className="text-gray-700 mb-4">
                         LIME works by perturbing the input data and observing how predictions change, helping to explain individual instances.
                     </p>
@@ -59,29 +67,20 @@ export default function ShapLimeExplainability() {
                             alt="LIME Visualization 1" 
                             width={700} 
                             height={400} 
-                            className="rounded-lg shadow-md"
+                            className="rounded-lg"  // Removed shadow-md
                         />
                         <Image 
                             src="/images/lime xai2.png" 
                             alt="LIME Visualization 2" 
                             width={1000} 
                             height={800} 
-                            className="rounded-lg shadow-md"
+                            className="rounded-lg"  // Removed shadow-md
                         />
                     </div>
                 </div>
 
                 {/* Analysis More Comments Section */}
-                <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-lg font-semibold mb-4">Analysis More Comments</h3>
-                    <textarea
-                        className="w-full p-3 border rounded-md shadow-sm text-gray-700"
-                        rows="4"
-                        placeholder="Enter your analysis comments here..."
-                        value={analysisText}
-                        onChange={(e) => setAnalysisText(e.target.value)}
-                    />
-                </div>
+             
             </div>
 
             <Footer />

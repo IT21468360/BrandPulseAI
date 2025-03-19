@@ -46,14 +46,16 @@ export default function Explainability() {
             alt="Explainable AI" 
             width={800} 
             height={400} 
-            className="rounded-lg shadow-md"
+            className="rounded-lg" 
           />
         </div>
 
         {/* How Explainability Works */}
         <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold mb-4">
-            How Explainability Works
+          <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
+          How Explainability Works
+          </div>
           </h3>
           <ul className="list-disc list-inside text-gray-700 space-y-4">
             <li>
