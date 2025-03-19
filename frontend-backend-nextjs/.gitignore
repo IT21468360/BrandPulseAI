@@ -38,3 +38,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+backend-python/app/models/finbertKeywordExtraction/model.safetensors
