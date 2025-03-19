@@ -1,5 +1,8 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
+
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import Image from "next/image";
@@ -12,9 +15,9 @@ export default function AspectWiseExplainability() {
             <div className="max-w-6xl mx-auto py-10 px-6">
                 {/* Title */}
                 <div className="bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-lg font-semibold mb-4">
-                        Aspect-Based Explainability & Report
-                    </h3>
+                <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
+                Aspect-Based Explainability & Report
+                        </div>
                     <p className="text-gray-700">
                         Aspect-Based Sentiment Analysis (ABSA) helps identify sentiment towards specific aspects of a service or product.  
                         This report presents a breakdown of sentiments across different aspects, helping to pinpoint strengths and areas needing improvement.
@@ -23,7 +26,9 @@ export default function AspectWiseExplainability() {
 
                 {/* PDF Report Display */}
                 <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-lg font-semibold mb-4">Aspect-Based Sentiment Report</h3>
+                <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
+                Aspect-Based Sentiment Report
+                        </div>
                     <iframe
                         src="/reports/sentiment_analysis_report.html"
                         width="100%"
@@ -34,7 +39,9 @@ export default function AspectWiseExplainability() {
 
                 {/* Aspect-Based Sentiment Distribution Graph */}
                 <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-lg font-semibold mb-4">Aspect-Based Sentiment Distribution</h3>
+                <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
+                Aspect-Based Sentiment Distribution
+                        </div>
                     <p className="text-gray-700 mb-4">
                         This graph illustrates the distribution of positive, negative, and neutral sentiments across different aspects.
                         It helps to visualize which areas customers feel most positively or negatively about.
@@ -44,13 +51,15 @@ export default function AspectWiseExplainability() {
                         alt="Aspect-Based Sentiment Distribution Graph"
                         width={700}
                         height={400}
-                        className="rounded-lg shadow-md"
+                        className="rounded-lg"
                     />
                 </div>
 
                 {/* Average Likes by Aspect and Sentiment */}
                 <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-lg font-semibold mb-4">Average Likes by Aspect and Sentiment</h3>
+                <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
+                Average Likes by Aspect and Sentiment
+                        </div>
                     <p className="text-gray-700 mb-4">
                         This graph shows the average number of likes for reviews categorized by aspect and sentiment.  
                         More likes on a particular sentiment indicate stronger public agreement with the expressed sentiment.
@@ -60,13 +69,15 @@ export default function AspectWiseExplainability() {
                         alt="Average Likes by Aspect and Sentiment Graph"
                         width={700}
                         height={400}
-                        className="rounded-lg shadow-md"
+                        className="rounded-lg"
                     />
                 </div>
 
                 {/* Negative Word Cloud */}
                 <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-lg font-semibold mb-4">Negative Word Cloud</h3>
+                <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
+                Negative Word Cloud
+                        </div>
                     <p className="text-gray-700 mb-4">
                         The word cloud visualizes the most frequently occurring negative words in customer feedback.
                         Larger words indicate more frequently mentioned negative terms.
@@ -76,13 +87,15 @@ export default function AspectWiseExplainability() {
                         alt="Negative Word Cloud"
                         width={600}
                         height={400}
-                        className="rounded-lg shadow-md"
+                        className="rounded-lg"
                     />
                 </div>
 
                 {/* Positive Word Cloud */}
                 <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-lg font-semibold mb-4">Positive Word Cloud</h3>
+                <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
+                Positive Word Cloud
+                        </div>
                     <p className="text-gray-700 mb-4">
                         The positive word cloud represents the most commonly mentioned words in positive customer reviews.
                         It highlights the key strengths of the service based on customer feedback.
@@ -92,7 +105,7 @@ export default function AspectWiseExplainability() {
                         alt="Positive Word Cloud"
                         width={600}
                         height={400}
-                        className="rounded-lg shadow-md"
+                        className="rounded-lg"
                     />
                 </div>
 
@@ -112,4 +125,3 @@ export default function AspectWiseExplainability() {
         </div>
     );
 }
- 
