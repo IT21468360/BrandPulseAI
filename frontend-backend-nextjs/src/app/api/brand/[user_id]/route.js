@@ -3,8 +3,7 @@ import clientPromise from "@/db/mongodb/client";
 
 export async function GET(req, { params }) {
   try {
-    // ✅ Await params properly
-    const { user_id } = await params; 
+    const { user_id } = params; 
 
     if (!user_id) {
       return NextResponse.json({ message: "User ID is required." }, { status: 400 });
@@ -15,11 +14,13 @@ export async function GET(req, { params }) {
     const client = await clientPromise;
     const db = client.db(process.env.DB_NAME);
 
-    const brands = await db.collection("brands").find({ user_id }).toArray();
+    // ✅ Fetch brands including `brand_name` and `website` (or `url`)
+    const brands = await db.collection("brands")
+      .find({ user_id })
+      .project({ brand_name: 1, website: 1, url: 1, _id: 0 }) // Includes both `website` and `url`
+      .toArray();
 
-    if (!brands.length) {
-      return NextResponse.json({ success: true, brands: [] }, { status: 200 });
-    }
+    console.log("Fetched brands:", brands); // Debugging
 
     return NextResponse.json({ success: true, brands }, { status: 200 });
   } catch (error) {

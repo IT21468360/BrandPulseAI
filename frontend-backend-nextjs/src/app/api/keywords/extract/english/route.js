@@ -1,46 +1,38 @@
 import { NextResponse } from "next/server";
-import { extractKeywords } from "@/controllers/keywordController";
+import { getKeywordsFromDB } from "@/models/keywordModel";
 import clientPromise from "@/db/mongodb/client";
 
-// ✅ **Check if Keywords Already Exist in MongoDB**
-export async function POST(req) {
+// ✅ **Fetch Stored Keywords API**
+export async function GET(req) {
   try {
-    const body = await req.json();
-    const { user_id, brand, url, dateRange, language, checkExisting } = body;
+    const { searchParams } = new URL(req.url);
+    const user_id = searchParams.get("user_id");
+    const brand = searchParams.get("brand");
+    const url = searchParams.get("url");
+    const language = searchParams.get("language");
+    const start = searchParams.get("start");
+    const end = searchParams.get("end");
 
-    if (!user_id || !brand || !url || !dateRange.start || !dateRange.end) {
-      return NextResponse.json({ message: "All fields are required." }, { status: 400 });
+    if (!user_id || !brand || !url || !language || !start || !end) {
+      return NextResponse.json({ message: "Missing required parameters." }, { status: 400 });
     }
 
     const client = await clientPromise;
     const db = client.db(process.env.DB_NAME);
 
-    // ✅ **Check if keywords exist in DB before extraction**
-    if (checkExisting) {
-      console.log("🔍 Checking existing keywords in DB...");
+    console.log("🔍 Checking existing keywords in DB...");
 
-      const existingKeywords = await db.collection("keywords").findOne(
-        { user_id, brand, url, language },
-        { projection: { _id: 0, KeywordList: 1 } } // ✅ Fetch only `KeywordList`
-      );
+    const keywords = await getKeywordsFromDB(user_id, brand, url, language, start, end);
 
-      if (existingKeywords && existingKeywords.KeywordList) {
-        console.log("✅ Keywords found in DB, returning cached result...");
-        return NextResponse.json({ exists: true, keywords: existingKeywords.KeywordList }, { status: 200 });
-      }
+    if (keywords.length > 0) {
+      console.log("✅ Keywords found in DB:", keywords);
+      return NextResponse.json({ exists: true, keywords }, { status: 200 });
+    } else {
+      console.warn("⚠️ No stored keywords found.");
+      return NextResponse.json({ exists: false, keywords: [] }, { status: 200 });
     }
-
-    console.log("⚡ Extracting new keywords...");
-    const extractedKeywords = await extractKeywords({ user_id, brand, url, dateRange, language });
-
-    if (!extractedKeywords || extractedKeywords.length === 0) {
-      console.warn("⚠️ No keywords found. Returning empty array.");
-      return NextResponse.json({ message: "No keywords found after extraction.", keywords: [] }, { status: 200 });
-    }
-
-    return NextResponse.json({ keywords: extractedKeywords }, { status: 200 });
   } catch (error) {
-    console.error("❌ API Error in Extract Keywords:", error);
+    console.error("❌ API Error in Fetch Keywords:", error);
     return NextResponse.json({ message: "Internal Server Error", error: error.message }, { status: 500 });
   }
 }

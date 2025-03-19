@@ -46,78 +46,43 @@ export default function KeywordManagement() {
     }
   };
 
-  // ✅ **Fetch Stored Keywords from MongoDB**
+  // ✅ **Fetch Keywords from MongoDB Based on Language**
   const fetchStoredKeywords = async (language) => {
-    if (!user || !selectedBrand || !inputUrl || !dateRange.start || !dateRange.end) return;
-
-    try {
-      const res = await fetch(`/api/keywords/extract/${language}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          user_id: user.id,
-          brand: selectedBrand,
-          url: inputUrl,
-          dateRange,
-          language,
-          checkExisting: true, // ✅ Fetch from DB if available
-        }),
-      });
-
-      const data = await res.json();
-      if (data.exists && data.keywords) {
-        console.log("✅ Found stored keywords in MongoDB.");
-        setKeywords(Array.isArray(data.keywords) ? data.keywords : []);
-      } else {
-        console.warn("⚠️ No stored keywords found.");
-        setKeywords([]);
-      }
-    } catch (error) {
-      console.error("❌ Error fetching stored keywords:", error);
-    }
-  };
-
-  // ✅ **Handle Keyword Extraction (English & Sinhala)**
-  const handleExtractKeywords = async (language) => {
     if (!selectedBrand || !inputUrl || !dateRange.start || !dateRange.end) {
-      alert("Please fill all required fields!");
+      alert("Please enter Brand Name, Date Range, and Website URL!");
       return;
     }
 
-    setLoading(true);
-    setLoadingMessage(`🔄 Extracting ${language.toUpperCase()} keywords...`);
-
     try {
-      const res = await fetch(`/api/keywords/extract/${language}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          user_id: user.id,
-          brand: selectedBrand,
-          url: inputUrl,
-          dateRange,
-          language,
-        }),
-      });
+      setLoading(true);
+      setLoadingMessage(`🔍 Fetching stored ${language.toUpperCase()} keywords...`);
+
+      const res = await fetch(
+        `/api/keywords/extract/english?user_id=${user.id}&brand=${selectedBrand}&url=${inputUrl}&language=${language}&start=${dateRange.start}&end=${dateRange.end}`
+      );
+
+      if (!res.ok) throw new Error("Failed to fetch stored keywords.");
 
       const data = await res.json();
-      if (!data.keywords || data.keywords.length === 0) {
-        console.warn(`⚠️ No ${language.toUpperCase()} keywords found.`);
-        setKeywords([]);
-      } else {
-        console.log(`✅ Extracted ${language.toUpperCase()} keywords.`);
-        setKeywords(data.keywords);
-      }
+      setKeywords(data.keywords || []);
     } catch (error) {
-      console.error(`❌ Error extracting ${language} keywords:`, error);
-      alert(`Failed to extract ${language} keywords. Please try again.`);
+      console.error("❌ Error fetching stored keywords:", error);
     } finally {
       setLoading(false);
       setLoadingMessage("");
     }
   };
 
-  // ✅ **Redirect to Login if not Logged In**
+  // ✅ **Remove a Keyword from Display**
+  const removeKeyword = (keyword) => {
+    setKeywords(keywords.filter((kw) => kw !== keyword));
+  };
+
+  // ✅ **Redirect to Aspect Classification Page**
+  const applyKeywords = () => {
+    router.push("/aspectclassification");
+  };
+
   if (!isLoggedIn) return null;
 
   return (
@@ -125,58 +90,72 @@ export default function KeywordManagement() {
       <Header activeTab={pathname} showFullNav={true} />
 
       <div className="max-w-6xl mx-auto py-10 px-6">
-        <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
-          KEYWORD GENERATION
+        {/* 🔹 Main Title */}
+        <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold shadow-md">
+          KEYWORD MANAGEMENT
         </div>
 
-        <div className="mt-6">
+        {/* 🔹 Keyword Generation Section */}
+        <div className="mt-6 bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold shadow-md">
+          Keyword Generation
+        </div>
+
+        <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
           <label className="block text-sm font-semibold mb-2">Select Brand</label>
-          <select className="w-full border p-3 rounded-md" value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)}>
+          <select className="w-full border p-3 rounded-md shadow-md" value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)}>
             <option value="">Choose a Brand</option>
-            {brands.map((brand) => (
-              <option key={brand._id} value={brand.brand_name}>
+            {brands.map((brand, index) => (
+              <option key={brand._id || index} value={brand.brand_name}>
                 {brand.brand_name}
               </option>
             ))}
           </select>
+
+          <label className="block text-sm font-semibold mt-4">Website URL</label>
+          <input type="text" className="w-full border p-3 rounded-md shadow-md" placeholder="Enter Website URL" value={inputUrl} onChange={(e) => setInputUrl(e.target.value)} />
+
+          <label className="block text-sm font-semibold mt-4">Start Date</label>
+          <input type="date" className="w-full border p-3 rounded-md shadow-md" onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })} />
+
+          <label className="block text-sm font-semibold mt-4">End Date</label>
+          <input type="date" className="w-full border p-3 rounded-md shadow-md" onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })} />
         </div>
 
-        <div className="mt-6 flex space-x-4">
-          <input type="date" className="border p-3 rounded-md w-1/2" onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })} />
-          <input type="date" className="border p-3 rounded-md w-1/2" onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })} />
-        </div>
-
-        <div className="mt-6">
-          <input type="text" className="border p-3 rounded-md w-full" placeholder="Enter Website URL" value={inputUrl} onChange={(e) => setInputUrl(e.target.value)} />
-        </div>
-
-        {/* ✅ Keep Both Buttons for English & Sinhala Extraction */}
+        {/* 🔹 Generate Buttons */}
         <div className="mt-6 flex justify-end space-x-4">
-          <button onClick={() => handleExtractKeywords("sinhala")} className="bg-[#0B1F3F] text-white px-6 py-3 rounded-md shadow-md">
+          <button onClick={() => fetchStoredKeywords("sinhala")} className="bg-[#0B1F3F] text-white px-6 py-3 rounded-md shadow-lg">
             Generate Sinhala Keywords
           </button>
-          <button onClick={() => handleExtractKeywords("english")} className="bg-[#0B1F3F] text-white px-6 py-3 rounded-md shadow-md">
+          <button onClick={() => fetchStoredKeywords("english")} className="bg-[#0B1F3F] text-white px-6 py-3 rounded-md shadow-lg">
             Generate English Keywords
           </button>
         </div>
 
-        {/* 🔄 Loading Indicator */}
-        {loading && <div className="mt-4 text-blue-600 text-center font-semibold">{loadingMessage} ⏳</div>}
-
-        {/* 🔹 Extracted Keywords */}
-        <div className="mt-10 bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
-          EXTRACTED KEYWORDS
+        {/* 🔹 Keyword Results Section */}
+        <div className="mt-6 bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold shadow-md">
+          Keyword Results
         </div>
 
-        <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold mb-4">Extracted Keywords</h3>
-          <div className="flex flex-wrap gap-2">
-            {(Array.isArray(keywords) ? keywords : []).map((keyword, index) => (
-              <div key={index} className="bg-gray-200 px-4 py-2 rounded-md">{keyword}</div>
-            ))}
-          </div>
+        <div className="mt-6 bg-white p-6 rounded-lg shadow-md flex flex-wrap gap-2">
+          {keywords.map((keyword, index) => (
+            <div key={index} className="relative bg-blue-500 text-white font-bold px-4 py-2 rounded-lg shadow-md cursor-pointer flex items-center">
+              <span>{keyword}</span>
+              <button
+                onClick={() => removeKeyword(keyword)}
+                className="absolute top-1 right-2 text-white text-sm font-bold"
+              >
+                ×
+              </button>
+            </div>
+          ))}
         </div>
 
+        {/* 🔹 Apply Button */}
+        <div className="mt-6 flex justify-end">
+          <button onClick={applyKeywords} className="bg-[#0B1F3F] text-white px-6 py-3 rounded-md shadow-lg">
+            Apply
+          </button>
+        </div>
       </div>
       <Footer />
     </div>

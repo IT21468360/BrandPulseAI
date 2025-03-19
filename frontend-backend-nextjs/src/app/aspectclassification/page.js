@@ -43,7 +43,7 @@ export default function AspectClassification() {
             <div className="max-w-6xl mx-auto py-10 px-6">
                 {/* Title Section */}
                 <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold shadow-md">
-                    ASPECT-BASED SENTIMENT ANALYSIS
+                    ASPECT CLASSIFICATION
                 </div>
 
                 {/* Generate Comments Button */}
