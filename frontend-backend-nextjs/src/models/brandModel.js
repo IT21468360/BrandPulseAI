@@ -1,12 +1,12 @@
 import { z } from "zod";
-import { ObjectId } from "mongodb"; // Import ObjectId for handling MongoDB _id
+import { ObjectId } from "mongodb"; 
 import clientPromise from "@/db/mongodb/client"; 
 
 // MongoDB Database Name
 const db_name = process.env.DB_NAME;
 const COLLECTION_NAME = "brands";
 
-// **1️⃣ Define Brand Schema using Zod**
+// ✅ **Brand Schema Validation**
 const BrandSchema = z.object({
   user_id: z.string().min(1, "User ID is required"),
   brand_name: z.string().min(1, "Brand name is required"),
@@ -14,20 +14,20 @@ const BrandSchema = z.object({
   website: z.string().url("Invalid URL format"),
   address: z.string().min(1, "Address is required"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  created_at: z.date().default(() => new Date()), // Default timestamp
+  created_at: z.date().default(() => new Date()), 
 });
 
-// **2️⃣ Validate Data Against the Schema**
+// ✅ **Validate Brand Data**
 export function validateBrand(data) {
-  return BrandSchema.parse(data); // Throws an error if invalid
+  return BrandSchema.parse(data);
 }
 
-// **3️⃣ Database Operations for Brand Management**
+// ✅ **Create Brand**
 export async function createBrand(brand) {
   const client = await clientPromise;
   const db = client.db(db_name);
 
-  // Check if the brand already exists for the user
+  // Check if brand already exists for the user
   const existingBrand = await db.collection(COLLECTION_NAME).findOne({
     user_id: brand.user_id,
     brand_name: brand.brand_name,
@@ -37,44 +37,28 @@ export async function createBrand(brand) {
     throw new Error("Brand with this name already exists for this user.");
   }
 
-  // Insert the brand into the database
+  // Insert brand into DB
   const result = await db.collection(COLLECTION_NAME).insertOne(brand);
   
-  return {
-    id: result.insertedId,
-    ...brand,
-  };
+  return { id: result.insertedId, ...brand };
 }
 
-export async function getBrandById(id) {
+// ✅ **Get Brand By User ID**
+export async function getBrandsByUserId(user_id) {
   const client = await clientPromise;
   const db = client.db(db_name);
-
-  if (!ObjectId.isValid(id)) {
-    throw new Error("Invalid Brand ID");
-  }
-
-  return await db.collection(COLLECTION_NAME).findOne({ _id: new ObjectId(id) });
+  
+  return await db.collection(COLLECTION_NAME).find({ user_id }).toArray();
 }
 
-export async function getBrandByName(brand_name) {
-  const client = await clientPromise;
-  const db = client.db(db_name);
-  return await db.collection(COLLECTION_NAME).findOne({ brand_name });
-}
-
+// ✅ **Get All Brands**
 export async function getAllBrands() {
   const client = await clientPromise;
   const db = client.db(db_name);
   return await db.collection(COLLECTION_NAME).find({}).toArray();
 }
 
-export async function getBrandsByUserId(user_id) {
-  const client = await clientPromise;
-  const db = client.db(db_name);
-  return await db.collection(COLLECTION_NAME).find({ user_id }).toArray();
-}
-
+// ✅ **Delete Brand**
 export async function deleteBrandById(id) {
   const client = await clientPromise;
   const db = client.db(db_name);
