@@ -1,4 +1,4 @@
-# BrandPulseAI
+# BrandPulseAI - research
 This project is conducted by a group of 4th-year SLIIT Students on behalf of their Final Year Research. 
 
 
@@ -17,45 +17,54 @@ This project is conducted by a group of 4th-year SLIIT Students on behalf of the
        Create file '.env.local'
        Then type the below:
        
-MONGODB_URI=mongodb+srv://Admin:research_autn@cluster0.mongodb.net/brandpulse?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://it21468360:it21468360@researchcluster.vctn1.mongodb.net/BrandPulseAI?retryWrites=true&w=majority
+DB_NAME=BrandPulseAI
 JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRY=86400
 PORT=3000
+NODE_OPTIONS="--dns-result-order=ipv4first"
+
 
 1.2 -> Inside 'backend-python' folder. 
        Create file '.env'
        Then type the below:
        
-MONGODB_URI=mongodb+srv://Admin:research_autn@cluster0.mongodb.net/brandpulse?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://it21468360:it21468360@researchcluster.vctn1.mongodb.net/BrandPulseAI?retryWrites=true&w=majority
+DB_NAME=BrandPulseAI
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRY=86400
+PORT=3000
 
 2. Setting up the Environment
 
-2.1. Set up virtual environment
-  1)  ctrl+shift+p
-  2) select python: select interpreter
-  3) Create virtual environment
-  4) .conda -> python 3.10.16 (use 3.10. tensorflow is not supported for higher versions)
-  5) Activate your environment  (conda activate example_env) (use ur environment name)
+2.1. Create a virtual environment : ( I have povide examples below. You can use the names you want)
+In the Terminal Power Shell), Type below commands.
+  1) To Create ->  conda create --name brandpulse python=3.10 -y (For pyython use this version)
+  2) Activate your environment -> conda activate brandpulse
+  3) To check available Environments -> conda env list
 
-  ** conda env list
-  **conda activate '.......................'
  
 Install the requirements:
-Terminal -> Git Bash -> Execute the below command
-pip install -r requirements.txt
+1. If Python or pip is not installed inside the environment, Install them using the commands. (get them from chatgpt)
+2. Terminal -> Power shell -> Execute the below commands
+3. Then run -> pip install nltk
+4. next ->
+pip install --no-cache-dir -r requirements.txt
  (if this didn't work, use the below command)
 python -m pip install -r requirements.txt
-
+5. Then run -> python -m spacy download en_core_web_sm
+6. Check whether it succeded wiithout any errors. 
 
 
 2.2. Setting up Python Backend
-Terminal -> Git Bash -> Execute the below commands
+Terminal  -> Execute the below commands (Make sure you have activated your conda environment you created)
 1) cd backend-python
 2) uvicorn app.main:app --reload --port 8000    -> Command to run the python backend
 3) It will show as 'Application startup complete'.
 4) http://127.0.0.1:8000/  go to this an check whether it is working.
 
 2.3. Setting up Next.js
-Terminal -> Git Bash -> Execute the below commands
+Terminal -> Execute the below commands
 1) cd frontend-backend-nextjs
 2) npm install (Yoou might get version errors, fix them using chat gpt)
 3) npm run dev    -> Command to run the next.js backend and frontend
@@ -65,8 +74,10 @@ Terminal -> Git Bash -> Execute the below commands
 # Setting up MongoDB compass 
 1. Download MongoDB compass if u don't have it.
 2. open it.
-3. Enter below url
-mongodb+srv://Admin:research_autn@cluster0.lihl5.mongodb.net/
+3. Add new Connection
+4. Enter below url
+mongodb+srv://it21468360:it21468360@researchcluster.vctn1.mongodb.net/BrandPulseAI?retryWrites=true&w=majority
+
 
 # Where to do your work
 
@@ -101,4 +112,4 @@ When merging make sure u don't hv any conflicts. If u have any then make sure to
 
 1. If u need any requirement or dependency which is not mentoioned already.
 (Like Python Libraries or anything)
-Make sure to install them, and also update the requirement.txt file
+Make sure to install them, and also update the requirement.txt file (Make sure they are compatible with other python library versions.)

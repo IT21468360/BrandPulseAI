@@ -11,7 +11,9 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+    "@shadcn/ui": "^0.0.4",
     "bcrypt": "^5.1.1",
+    "brand-pulse-ai": "file:",
     "dotenv": "^16.4.7",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.4",
