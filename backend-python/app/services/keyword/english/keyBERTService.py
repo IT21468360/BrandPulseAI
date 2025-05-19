@@ -1,5 +1,6 @@
 import os
 import json
+import time
 import pandas as pd
 from fastapi import APIRouter, HTTPException
 from keybert import KeyBERT
@@ -8,73 +9,90 @@ from transformers import AutoTokenizer, AutoModel
 # ✅ Initialize FastAPI Router
 router = APIRouter()
 
-# ✅ Define paths for input/output files
-CLEANED_SCRAPED_FILE = os.path.join("data", "cleaned_scraped_content.json")
-KEYBERT_KEYPHRASES_FILE_JSON = os.path.join("data", "keybert_finbert_keyphrases.json")
-KEYBERT_KEYPHRASES_FILE_CSV = os.path.join("data", "keybert_finbert_keyphrases.csv")
+# ✅ Define paths
+DATA_DIR = os.path.join("data", "keyword", "english")
+CLEANED_PARAGRAPH_FILE = os.path.join(DATA_DIR, "cleaned_paragraphs.csv")
+KEYBERT_OUTPUT_FILE_CSV = os.path.join(DATA_DIR, "keybert_keywords_per_paragraph.csv")
+UNIQUE_KEYBERT_FILE_JSON = os.path.join(DATA_DIR, "unique_keybert_keyphrases.json")
 
-# ✅ Ensure `data` directory exists
-os.makedirs("data", exist_ok=True)
+FINBERT_MODEL_PATH = "Azmarah/finbert-keyword-extraction"
 
-FINBERT_MODEL_PATH = "./app/models/finbertKeywordExtraction"
+# ✅ Ensure data directory exists
+os.makedirs(DATA_DIR, exist_ok=True)
 
-# ✅ Ensure the directory exists
-if not os.path.isdir(FINBERT_MODEL_PATH):
-    raise RuntimeError(f"❌ Model directory not found: {FINBERT_MODEL_PATH}")
+# ✅ Load fine-tuned FinBERT model
 
 try:
-    finbert_model = AutoModel.from_pretrained(FINBERT_MODEL_PATH, local_files_only=True, ignore_mismatched_sizes=True)
-    finbert_tokenizer = AutoTokenizer.from_pretrained(FINBERT_MODEL_PATH, local_files_only=True, ignore_mismatched_sizes=True)
+    finbert_model = AutoModel.from_pretrained(FINBERT_MODEL_PATH, ignore_mismatched_sizes=True)
+    finbert_tokenizer = AutoTokenizer.from_pretrained(FINBERT_MODEL_PATH, ignore_mismatched_sizes=True)
     print("✅ Successfully loaded fine-tuned FinBERT model from local directory!")
 except Exception as e:
     raise RuntimeError(f"❌ Failed to load fine-tuned FinBERT model: {e}")
 
-# ✅ Initialize KeyBERT with Fine-Tuned FinBERT
+# ✅ Initialize KeyBERT
 kw_model = KeyBERT(model=finbert_model)
 
+# ✅ Keyphrase extraction function with timing
 def extract_keyphrases_keybert(text, top_n=5):
-    """
-    Extracts keyphrases using KeyBERT with the fine-tuned FinBERT model.
-    """
-    if not isinstance(text, str) or not text.strip():
-        return []
+    start_time = time.time()
+    try:
+        keyphrases = kw_model.extract_keywords(
+            text,
+            keyphrase_ngram_range=(1, 3),
+            stop_words="english",
+            top_n=top_n,
+            use_mmr=True,
+            diversity=0.7
+        )
+        keyphrases = [kp[0].strip() for kp in keyphrases]
+    except Exception as e:
+        print(f"❌ Error extracting keyphrases: {e}")
+        keyphrases = []
+    end_time = time.time()
+    return keyphrases, (end_time - start_time)
 
-    keyphrases = kw_model.extract_keywords(
-        text,
-        keyphrase_ngram_range=(1, 3),
-        stop_words="english",
-        top_n=top_n,
-        use_mmr=True,
-        diversity=0.7
-    )
-
-    return [kp[0] for kp in keyphrases]
-
+# ✅ Route: /keybert-extract
+@router.post("/keybert-extract")
 async def keybert_extraction():
     """
-    Loads cleaned sentences, extracts keyphrases using KeyBERT + FinBERT, and saves results.
+    Extracts keyphrases from cleaned paragraphs using KeyBERT + FinBERT,
+    saves results with timing, and stores unique keywords.
     """
     try:
-        if not os.path.exists(CLEANED_SCRAPED_FILE):
-            print("❌ KeyBERT ERROR: Preprocessed content file not found.")
-            raise HTTPException(status_code=404, detail="Preprocessed content file not found.")
+        if not os.path.exists(CLEANED_PARAGRAPH_FILE):
+            raise HTTPException(status_code=404, detail="Cleaned paragraph file not found.")
 
-        with open(CLEANED_SCRAPED_FILE, "r", encoding="utf-8") as f:
-            cleaned_content = json.load(f)
+        df = pd.read_csv(CLEANED_PARAGRAPH_FILE)
 
-        if not cleaned_content:
-            print("❌ KeyBERT ERROR: Cleaned content is empty.")
-            raise HTTPException(status_code=500, detail="No valid content for KeyBERT keyword extraction.")
+        if "Paragraph" not in df.columns:
+            raise HTTPException(status_code=500, detail="CSV missing 'Paragraph' column.")
 
-        df = pd.DataFrame(cleaned_content, columns=["Sentence"])
+        if df.empty:
+            raise HTTPException(status_code=500, detail="Paragraph file is empty.")
 
-        df["keybert_keyphrases"] = df["Sentence"].apply(extract_keyphrases_keybert)
+        # ✅ Apply extraction
+        df["keybert_keyphrases"], df["execution_time"] = zip(*df["Paragraph"].apply(extract_keyphrases_keybert))
 
-        df.to_csv(KEYBERT_KEYPHRASES_FILE_CSV, index=False, encoding="utf-8")
+        # ✅ Save to CSV
+        df.to_csv(KEYBERT_OUTPUT_FILE_CSV, index=False, encoding="utf-8")
 
-        print("✅ KeyBERT extraction completed successfully!")
-        return {"success": True, "message": "KeyBERT + FinBERT extraction completed!"}
+        # ✅ Flatten and save unique keyphrases
+        all_keyphrases = [kw.strip() for keywords in df["keybert_keyphrases"] if isinstance(keywords, list) for kw in keywords]
+        unique_keyphrases = sorted(set(all_keyphrases))
+
+        with open(UNIQUE_KEYBERT_FILE_JSON, "w", encoding="utf-8") as f:
+            json.dump(unique_keyphrases, f, indent=4, ensure_ascii=False)
+
+        print("\n🔟 Sample Unique KeyBERT Keyphrases:")
+        for kw in unique_keyphrases[:10]:
+            print(f"- {kw}")
+
+        return {
+            "success": True,
+            "message": "✅ KeyBERT + FinBERT keyphrase extraction completed!",
+            "csv_file": KEYBERT_OUTPUT_FILE_CSV,
+            "unique_json_file": UNIQUE_KEYBERT_FILE_JSON
+        }
 
     except Exception as e:
-        print(f"❌ KeyBERT extraction failed: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"❌ KeyBERT extraction failed: {e}")

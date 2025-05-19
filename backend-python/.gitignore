@@ -90,7 +90,9 @@ target/
 .conda/
 
 # Exclude trained models
-/models/
+app/models/
 
+# Ignore scraped_cache folder
+scraped_cache/
 # exclude data from source control by default
 # /data/

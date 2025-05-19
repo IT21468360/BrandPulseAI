@@ -2,79 +2,98 @@ import os
 import json
 import pandas as pd
 import ast
+import time
 from fastapi import APIRouter, HTTPException
 from sentence_transformers import SentenceTransformer, util
 
 # ✅ Initialize FastAPI Router
 router = APIRouter()
 
-# ✅ Define paths for input/output files
-KEYPHRASE_EXTRACTION_FILE = os.path.join("data", "keybert_finbert_keyphrases.csv")
-HYBRID_KEYWORDS_FILE_JSON = os.path.join("data", "hybrid_keywords.json")
-HYBRID_KEYWORDS_FILE_CSV = os.path.join("data", "hybrid_keywords.csv")
+# ✅ Define paths
+DATA_DIR = os.path.join("data", "keyword", "english")
+PARAGRAPH_FILE = os.path.join(DATA_DIR, "cleaned_paragraphs.csv")
+YAKE_FILE = os.path.join(DATA_DIR, "yake_keywords_per_sentence.csv")
+KEYBERT_FILE = os.path.join(DATA_DIR, "keybert_keywords_per_paragraph.csv")
+EMBEDRANK_OUTPUT_CSV = os.path.join(DATA_DIR, "embedrank_keywords.csv")
+UNIQUE_EMBEDRANK_JSON = os.path.join(DATA_DIR, "unique_embedrank_keyphrases.json")
 
 # ✅ Ensure `data` directory exists
-os.makedirs("data", exist_ok=True)
+os.makedirs(DATA_DIR, exist_ok=True)
 
-# ✅ Load SentenceTransformer model
+# ✅ Load Sentence Transformer model
 embed_model = SentenceTransformer("sentence-transformers/msmarco-distilbert-base-v3")
 
+# ✅ EmbedRank function
 def extract_embedrank_keywords(text, yake_keywords, keybert_keywords, top_n=5):
-    """
-    Extracts relevant keywords using sentence embeddings (EmbedRank).
-    Uses YAKE and KeyBERT keywords, then ranks using semantic similarity.
-    """
+    start_time = time.time()
+    yake_keywords = yake_keywords if isinstance(yake_keywords, list) else []
+    keybert_keywords = keybert_keywords if isinstance(keybert_keywords, list) else []
     keywords = list(set(yake_keywords + keybert_keywords))
 
     if not keywords:
-        return ["No keywords found"]
+        return [], 0.0
 
     text_embedding = embed_model.encode(text, convert_to_tensor=True)
     word_embeddings = embed_model.encode(keywords, convert_to_tensor=True)
-
     similarity_scores = util.pytorch_cos_sim(text_embedding, word_embeddings)[0]
-
     ranked_keywords = sorted(zip(keywords, similarity_scores.tolist()), key=lambda x: x[1], reverse=True)[:top_n]
+    end_time = time.time()
+    return [kw[0] for kw in ranked_keywords], (end_time - start_time)
 
-    return [kw[0] for kw in ranked_keywords]
-
+# ✅ Main extraction route
+@router.post("/embedrank-extract")
 async def embedrank_extraction():
-    """
-    Loads extracted keyphrases, applies EmbedRank, and saves refined keywords.
-    """
     try:
-        # ✅ Load extracted keyphrases
-        if not os.path.exists(KEYPHRASE_EXTRACTION_FILE):
-            raise HTTPException(status_code=404, detail="Keyphrase extraction file not found.")
+        # ✅ Load datasets
+        if not all(os.path.exists(path) for path in [PARAGRAPH_FILE, YAKE_FILE, KEYBERT_FILE]):
+            raise HTTPException(status_code=404, detail="One or more required files are missing.")
 
-        df = pd.read_csv(KEYPHRASE_EXTRACTION_FILE)
+        df_para = pd.read_csv(PARAGRAPH_FILE)
+        df_yake = pd.read_csv(YAKE_FILE)
+        df_keybert = pd.read_csv(KEYBERT_FILE)
 
-        if df.empty:
-            raise HTTPException(status_code=500, detail="Extracted keyphrase DataFrame is empty.")
+        # ✅ Ensure required columns
+        if "Paragraph" not in df_para.columns:
+            raise HTTPException(status_code=500, detail="'Paragraph' column missing.")
 
-        # ✅ Ensure 'yake_keywords' and 'keybert_keyphrases' are lists
-        if "yake_keywords" in df.columns:
-            df["yake_keywords"] = df["yake_keywords"].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else [])
-        else:
-            df["yake_keywords"] = [[]] * len(df)  # Fill with empty lists if missing
+        df_yake["yake_keywords"] = df_yake["yake_keywords"].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else [])
+        df_keybert["keybert_keyphrases"] = df_keybert["keybert_keyphrases"].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else [])
 
-        if "keybert_keyphrases" in df.columns:
-            df["keybert_keyphrases"] = df["keybert_keyphrases"].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else [])
-        else:
-            df["keybert_keyphrases"] = [[]] * len(df)  # Fill with empty lists if missing
+        # ✅ Merge all
+        df = df_para.merge(df_yake, on="Paragraph", how="left").merge(df_keybert, on="Paragraph", how="left")
 
         # ✅ Apply EmbedRank
-        df["embedrank_keywords"] = df.apply(
-            lambda row: extract_embedrank_keywords(row["Sentence"], row["yake_keywords"], row["keybert_keyphrases"]),
+        df["embedrank_keywords"], df["embedrank_time"] = zip(*df.apply(
+            lambda row: extract_embedrank_keywords(row["Paragraph"], row["yake_keywords"], row["keybert_keyphrases"]),
             axis=1
-        )
+        ))
 
-        # ✅ Save results to CSV
-        df.to_csv(HYBRID_KEYWORDS_FILE_CSV, index=False, encoding="utf-8")
+        # ✅ Save full CSV
+        df.to_csv(EMBEDRANK_OUTPUT_CSV, index=False, encoding="utf-8")
 
-        print("✅ EmbedRank extraction completed successfully!")
-        return {"success": True, "message": "EmbedRank extraction completed successfully!"}
+        # ✅ Extract and save unique keywords
+        all_embedrank_keyphrases = [
+            kw.lower().strip()
+            for keyphrases in df["embedrank_keywords"]
+            if isinstance(keyphrases, list)
+            for kw in keyphrases
+        ]
+        unique_embedrank_keyphrases = sorted(set(all_embedrank_keyphrases))
+
+        with open(UNIQUE_EMBEDRANK_JSON, "w", encoding="utf-8") as f:
+            json.dump(unique_embedrank_keyphrases, f, indent=4, ensure_ascii=False)
+
+        # 🧾 Display sample
+        print("\n🔟 Sample Unique EmbedRank Keyphrases:")
+        for kw in unique_embedrank_keyphrases[:10]:
+            print(f"- {kw}")
+
+        return {
+            "success": True,
+            "message": "✅ EmbedRank keyphrase extraction completed.",
+            "embedrank_csv_file": EMBEDRANK_OUTPUT_CSV,
+            "unique_embedrank_json_file": UNIQUE_EMBEDRANK_JSON
+        }
 
     except Exception as e:
-        print(f"❌ EmbedRank extraction failed: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"❌ EmbedRank extraction failed: {e}")

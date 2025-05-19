@@ -109,7 +109,7 @@ async def scrape_content(url: str, date_range: dict):
         raise HTTPException(status_code=500, detail="❌ Failed to scrape website.")
 
     # ✅ Save to RAW_SCRAPED_FILE for downstream preprocessing
-    RAW_SCRAPED_FILE = os.path.join("data", "keyword", "english", "raw_scraped_content.json")
+    RAW_SCRAPED_FILE = os.path.join("data", "keyword", "sinhala", "raw_scraped_content.json")
     os.makedirs("data", exist_ok=True)
     with open(RAW_SCRAPED_FILE, "w", encoding="utf-8") as f:
         json.dump(scraped_content, f, ensure_ascii=False, indent=2)

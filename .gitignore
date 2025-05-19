@@ -1,0 +1,7 @@
+# Ignore the entire packages folder
+packages/
+
+# Ignore cache.py specifically (optional if already ignoring entire packages folder)
+cache.py
+keybert_hf.py
+ner_hf.py

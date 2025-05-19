@@ -16,18 +16,13 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "routes"))
 # ✅ Import Routes & Services
 from app.services.keyword.english.databaseService import db  # Fix import issue
 from app.routes.keyword_routes import router as keyword_router
-from app.routes.scrape_routes import router as scrape_router
-from app.routes.preprocess_routes import router as preprocess_router
-from app.routes.database_routes import router as database_router
+
 
 # ✅ Create FastAPI instance
 app = FastAPI()
 
 # ✅ Register Routes
 app.include_router(keyword_router, prefix="/api/keyword", tags=["Keywords"])
-app.include_router(scrape_router, prefix="/api/keyword", tags=["Scraping"])
-app.include_router(preprocess_router, prefix="/api/keyword", tags=["Preprocessing"])
-app.include_router(database_router, prefix="/api/database", tags=["Database"])
 
 # ✅ Root Route
 @app.get("/")

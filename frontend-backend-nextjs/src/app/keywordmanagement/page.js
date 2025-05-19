@@ -46,24 +46,38 @@ export default function KeywordManagement() {
     }
   };
 
-  // ✅ **Fetch Keywords from MongoDB Based on Language**
+
   const fetchStoredKeywords = async (language) => {
     if (!selectedBrand || !inputUrl || !dateRange.start || !dateRange.end) {
       alert("Please enter Brand Name, Date Range, and Website URL!");
       return;
     }
-
+  
     try {
       setLoading(true);
-      setLoadingMessage(`🔍 Fetching stored ${language.toUpperCase()} keywords...`);
-
-      const res = await fetch(
-        `/api/keywords/extract/english?user_id=${user.id}&brand=${selectedBrand}&url=${inputUrl}&language=${language}&start=${dateRange.start}&end=${dateRange.end}`
-      );
-
-      if (!res.ok) throw new Error("Failed to fetch stored keywords.");
-
+      setLoadingMessage(`🔍 Generating ${language.toUpperCase()} keywords...`);
+  
+      const res = await fetch(`/api/keywords/extract/${language}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: user.id,
+          brand: selectedBrand,
+          url: inputUrl,
+          language: language,
+          dateRange: {
+            start: dateRange.start,
+            end: dateRange.end,
+          },
+        }),
+      });
+  
       const data = await res.json();
+  
+      if (!res.ok) {
+        throw new Error(data?.message || "Failed to fetch keywords.");
+      }
+  
       setKeywords(data.keywords || []);
     } catch (error) {
       console.error("❌ Error fetching stored keywords:", error);
@@ -72,6 +86,8 @@ export default function KeywordManagement() {
       setLoadingMessage("");
     }
   };
+  
+
 
   // ✅ **Remove a Keyword from Display**
   const removeKeyword = (keyword) => {
@@ -137,7 +153,7 @@ export default function KeywordManagement() {
         </div>
 
         <div className="mt-6 bg-white p-6 rounded-lg shadow-md flex flex-wrap gap-2">
-          {keywords.map((keyword, index) => (
+          {keywords.slice(0, 20).map((keyword, index) => (
             <div key={index} className="relative bg-blue-500 text-white font-bold px-4 py-2 rounded-lg shadow-md cursor-pointer flex items-center">
               <span>{keyword}</span>
               <button

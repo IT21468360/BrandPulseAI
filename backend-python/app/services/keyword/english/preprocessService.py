@@ -2,65 +2,100 @@ import os
 import json
 import re
 import pandas as pd
+import spacy
 from fastapi import HTTPException
 
-# ✅ Define paths for input/output files
-DATA_DIR = "data"
-RAW_SCRAPED_FILE = os.path.join(DATA_DIR, "raw_scraped_content.json")
-CLEANED_SCRAPED_FILE = os.path.join(DATA_DIR, "cleaned_scraped_content.json")
-CLEANED_CSV_FILE = os.path.join(DATA_DIR, "cleaned_sentences.csv")
+# ✅ Load SpaCy NLP model
+nlp = spacy.load("en_core_web_sm")
 
-# ✅ Ensure `data` directory exists
+# ✅ Define paths
+DATA_DIR = os.path.join("data", "keyword", "english")
+RAW_SCRAPED_FILE = os.path.join(DATA_DIR, "raw_scraped_content.json")
+CLEANED_SCRAPED_FILE = os.path.join(DATA_DIR, "cleaned_scraped_paragraphs.json")
+CLEANED_CSV_FILE = os.path.join(DATA_DIR, "cleaned_paragraphs.csv")
+
 os.makedirs(DATA_DIR, exist_ok=True)
 
-# ✅ Define text cleaning patterns
-PATTERNS = {
-    "phone": r'\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b',
-    "url": r'https?://\S+|www\.\S+|\b\S+\.(?:com|org|net|edu|gov|io|lk)\b',
-    "question": r'^.*\?$',
-    "address": r'\bNo\.?\s\d+[A-Za-z]?[,\s]?.*\b',
-    "date": r'\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s?\d{1,2}[a-z]*[,\s]*\d{4}\b',
-    "redundant_period": r'(?<=\.)\s*\.(?:\s*\.)*',
-    "single_letter": r'\b[a-zA-Z]\b',
-    "bullet": r'(?:\u2022|\u25E6|\u2023|\*|-)\s?',
-    "all_symbols": r'[^a-zA-Z\s]',
-}
-
-# ✅ Function: Preprocess text
+# ✅ Paragraph Cleaner Function
 def preprocess_text(content_list):
-    """
-    Cleans the scraped content by removing unwanted patterns.
-    """
-    if not isinstance(content_list, list):
-        raise HTTPException(status_code=400, detail="❌ Preprocessing error: Input data must be a list.")
-
     cleaned_list = []
     seen_sentences = set()
 
+    # Regex patterns
+    phone_pattern = r'\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b'
+    url_pattern = r'https?://\S+|www\.\S+|\b\S+\.(?:com|org|net|edu|gov|io|lk)\b'
+    address_pattern = r'\bNo\.?\s\d+[A-Za-z]?[,\s]?.*\b'
+    date_pattern = r'\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s?\d{1,2}[a-z]*[,\s]*\d{4}\b'
+    year_month_pattern = r'\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s\d{4}\b'
+    time_range_pattern = r'\b\d{1,2}[:.]?\d{2}?\s?(?:am|pm)\s?(?:to|-)\s?\d{1,2}[:.]?\d{2}?\s?(?:am|pm)\b'
+    currency_pattern = r'\b(?:LKR|Mn|Rs|USD|EUR|GBP|INR)\b'
+    number_pattern = r'\b\d+\b'
+    bullet_pattern = r'\b[a-zA-Z]\.\s+'
+    meaningless_pattern = r'\b(?:Up to|off on|valid till|discount on|limited time|offer ends)\b.*'
+    sinhala_tamil_pattern = r'[\u0D80-\u0DFF\u0B80-\u0BFF]'
+    custom_symbols_pattern = r'[^a-zA-Z\s\.\'",]'
+    extra_periods = r'\.{2,}'
+    isolated_comma_pattern = r'(,\s*,)+'
+    trailing_commas = r',\s*$'
+    multiple_commas_mid = r'\s*,\s*,\s*'
+    isolated_letter_end_pattern = r'\b[a-zA-Z]\b[\s\.]*$'
+    dangling_short_word = r'\b\w{1,2}\s*$'
+
+    stop_words = set([
+        "a", "an", "and", "are", "as", "at", "be", "by", "for", "from", "has",
+        "he", "in", "is", "it", "its", "of", "on", "that", "the", "to", "was",
+        "were", "will", "with", "you","frequently","about","questions", "ear",
+        "month","monthly", "privacy","policy"
+    ])
+
     for content in content_list:
         try:
-            # Ensure string format
             if isinstance(content, dict) and "sentence" in content:
                 content = content["sentence"]
             elif not isinstance(content, str):
-                continue  # Skip invalid formats
-
-            # Apply regex patterns
-            for pattern in PATTERNS.values():
-                content = re.sub(pattern, "", content)
-
-            # Normalize spacing
-            content = " ".join(content.split())
-
-            # Ensure meaningful sentence length
-            words = content.split()
-            if len(words) < 5:
                 continue
 
-            # Remove duplicates
-            if content not in seen_sentences:
-                seen_sentences.add(content)
-                cleaned_list.append(content)
+            if re.search(sinhala_tamil_pattern, content):
+                continue
+
+            # Cleanup
+            cleaned = re.sub(phone_pattern, '', content)
+            cleaned = re.sub(url_pattern, '', cleaned)
+            cleaned = re.sub(address_pattern, '', cleaned)
+            cleaned = re.sub(date_pattern, '', cleaned)
+            cleaned = re.sub(year_month_pattern, '', cleaned)
+            cleaned = re.sub(time_range_pattern, '', cleaned)
+            cleaned = re.sub(currency_pattern, '', cleaned)
+            cleaned = re.sub(number_pattern, '', cleaned)
+            cleaned = re.sub(bullet_pattern, '', cleaned)
+            cleaned = re.sub(meaningless_pattern, '', cleaned)
+            cleaned = re.sub(custom_symbols_pattern, ' ', cleaned)
+
+            cleaned = re.sub(isolated_comma_pattern, ' ', cleaned)
+            cleaned = re.sub(multiple_commas_mid, ', ', cleaned)
+            cleaned = re.sub(trailing_commas, '', cleaned)
+            cleaned = re.sub(extra_periods, '.', cleaned)
+            cleaned = re.sub(r'\s*\.\s*\.', '.', cleaned)
+            cleaned = re.sub(isolated_letter_end_pattern, '', cleaned)
+            cleaned = re.sub(dangling_short_word, '', cleaned)
+
+            last_word = cleaned.split()[-1] if cleaned.split() else ''
+            if len(last_word) <= 4 and not nlp.vocab[last_word].is_alpha:
+                cleaned = ' '.join(cleaned.split()[:-1])
+
+            cleaned = re.sub(r'\b[a-zA-Z]\b[\s\.]*$', '', cleaned).strip()
+            cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+            if cleaned.startswith('.'):
+                cleaned = cleaned[1:].strip()
+
+            # POS Filtering
+            doc = nlp(cleaned)
+            tokens = [t.text for t in doc if t.pos_ != "VERB" and t.text.lower() not in stop_words]
+            cleaned = ' '.join(tokens).strip()
+
+            if len(cleaned.split()) >= 3 and cleaned not in seen_sentences:
+                seen_sentences.add(cleaned)
+                cleaned_list.append(cleaned)
 
         except Exception as e:
             print(f"⚠️ Error cleaning content: {e}")
@@ -71,45 +106,39 @@ def preprocess_text(content_list):
     return cleaned_list
 
 
+# ✅ Main Execution
 async def preprocess_content():
-    """
-    Loads scraped content, cleans it, and saves the cleaned version.
-    """
     try:
-        print("\n🔍 Attempting to load raw scraped content...")  
-
-        # ✅ Load raw content
+        print("🔍 Loading raw scraped content...")
         if not os.path.exists(RAW_SCRAPED_FILE):
-            print("❌ ERROR: Raw scraped content file not found.")
+            print("❌ Raw scraped content file not found.")
             return False
 
         with open(RAW_SCRAPED_FILE, "r", encoding="utf-8") as f:
             scraped_content = json.load(f)
 
         if not isinstance(scraped_content, list) or len(scraped_content) == 0:
-            print("❌ ERROR: Raw scraped content is empty or invalid format.")
+            print("❌ Invalid or empty scraped content.")
             return False
 
-        # ✅ Clean the content
         cleaned_content = preprocess_text(scraped_content)
         if not cleaned_content:
-            print("❌ ERROR: No valid content after preprocessing.")
+            print("❌ No content left after cleaning.")
             return False
 
-        # ✅ Save cleaned content
         with open(CLEANED_SCRAPED_FILE, "w", encoding="utf-8") as f:
             json.dump(cleaned_content, f, ensure_ascii=False, indent=2)
 
-        # ✅ Save to CSV
-        df = pd.DataFrame(cleaned_content, columns=["Sentence"])
+        df = pd.DataFrame(cleaned_content, columns=["Paragraph"])
         df.to_csv(CLEANED_CSV_FILE, index=False, encoding="utf-8")
 
-        print(f"✅ Successfully preprocessed {len(cleaned_content)} sentences.")
+        print(f"✅ Successfully cleaned {len(cleaned_content)} paragraphs.")
         return True
 
     except json.JSONDecodeError:
-        print("❌ ERROR: Failed to decode JSON from raw scraped file.")
+        print("❌ JSON decode error.")
         return False
     except Exception as e:
-        print(f"❌ ERROR in Preprocessing: {e}")
+        print(f"❌ Preprocessing error: {e}")
         return False
+

@@ -34,9 +34,9 @@ export async function getKeywordsFromDB(user_id, brand, url, language) {
       user_id,
       brand,
       url,
-      language
-      // "dateRange.start": { $lte: start }, // ✅ Fetch if start is earlier than or equal to requested
-      // "dateRange.end": { $gte: end }      // ✅ Fetch if end is later than or equal to requested
+      language,
+      "dateRange.start": { $lte: start }, // ✅ Fetch if start is earlier than or equal to requested
+      "dateRange.end": { $gte: end }      // ✅ Fetch if end is later than or equal to requested
     },
     { projection: { _id: 0, KeywordList: 1 } }
   );
