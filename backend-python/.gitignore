@@ -90,7 +90,7 @@ target/
 .conda/
 
 # Exclude trained models
-app/models/
+backend-python/app/models/
 
 # Ignore scraped_cache folder
 scraped_cache/

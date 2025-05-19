@@ -5,3 +5,6 @@ packages/
 cache.py
 keybert_hf.py
 ner_hf.py
+
+
+backend-python/app/models/
