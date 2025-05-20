@@ -6,16 +6,13 @@ import { getKeywordsFromDB } from "@/models/keywordModel";
 // 🔁 POST: Call Python backend and return extracted keywords
 export async function POST(req, { params }) {
   try {
-    const language = params.language;  // ✅ 'sinhala' or 'english'
-    const data = await req.json();
-
-    // 🔧 Inject the language into the data
-    data.language = language;
+    const language = params.language;
+    const body = await req.json();
 
     const response = await fetch("http://127.0.0.1:8000/api/keyword/extract", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...body, language }),
     });
 
     const result = await response.json();

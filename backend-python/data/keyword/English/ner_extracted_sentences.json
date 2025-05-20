@@ -1,54 +1,12 @@
 [
     {
-        "Paragraph": "Transaction Banking HNB TxB",
-        "entities": []
-    },
-    {
-        "Paragraph": "List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page",
-        "entities": []
-    },
-    {
-        "Paragraph": "List out if your PC ready E Banking",
-        "entities": []
-    },
-    {
-        "Paragraph": "Personal Online Banking",
-        "entities": []
-    },
-    {
-        "Paragraph": "All rights . Hatton National Bank PLC PQ",
+        "Paragraph": "Great Place TAGS Awards",
         "entities": [
             [
-                "Hatton National Bank PLC",
-                "ORG",
-                13,
-                37
-            ]
-        ]
-    },
-    {
-        "Paragraph": "Personal Online Banking CashExpress Corporate Online Banking Payfast Transaction Banking HNB TxB Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Corporate Website",
-        "entities": []
-    },
-    {
-        "Paragraph": "Corporate Online Banking",
-        "entities": [
-            [
-                "Corporate Online Banking",
-                "SERVICE",
+                "Great Place TAGS Awards",
+                "PRODUCT",
                 0,
-                24
-            ]
-        ]
-    },
-    {
-        "Paragraph": "Personal Online Banking CashExpress Corporate Online Banking Payfast Transaction Banking HNB TxB Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Corporate Website All rights . Hatton National Bank PLC PQ .",
-        "entities": [
-            [
-                "Hatton National Bank PLC",
-                "ORG",
-                385,
-                409
+                23
             ]
         ]
     }
