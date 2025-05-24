@@ -47,45 +47,77 @@ else:
 # ✅ Main pipeline function
 async def process_full_extraction(user_id, brand, url, dateRange, language):
     try:
-        # Step 1: Scrape and preprocess
+        status_messages = []
+
+        # Step 1: Scraping
         scrape_result = await scrape_content(url, dateRange)
         if not scrape_result or "scraped_content" not in scrape_result:
-            raise HTTPException(status_code=500, detail="Scraping failed. No content returned.")
+            raise HTTPException(status_code=500, detail="Scraping failed.")
+        status_messages.append("🔍 Scraping completed")
 
+        # Step 2: Preprocessing
         if not await preprocess_content():
-            raise HTTPException(status_code=500, detail="Preprocessing failed. No processed content.")
+            raise HTTPException(status_code=500, detail="Preprocessing failed.")
+        status_messages.append("🧹 Preprocessing completed")
 
-        # Step 2: Run extraction
+        # Step 3: Keyword Extraction (NER, YAKE, KeyBERT, EmbedRank)
         await ner_extraction()
-        await yake_extraction()
-        await keybert_extraction()
-        await embedrank_extraction()
+        status_messages.append("🧠 NER extraction done")
 
-        # Step 3: Score & combine
+        await yake_extraction()
+        status_messages.append("🔍 YAKE extraction done")
+
+        await keybert_extraction()
+        status_messages.append("🧠 KeyBERT extraction done")
+
+        await embedrank_extraction()
+        status_messages.append("🔗 EmbedRank completed")
+
+        # Step 4: Score & Combine
         keywords_df = score_and_rank_keywords()
         if keywords_df.empty:
-            return {"message": "No keywords extracted."}
+            status_messages.append("⚠️ No keywords extracted.")
+            return {
+                "success": False,
+                "message": "No keywords extracted.",
+                "keywords": [],
+                "statusMessages": status_messages
+            }
+        status_messages.append("📊 Keyword scoring done")
 
-        # Step 4: Boost & filter
+        # Step 5: Boost financial terms
         boosted_df = boost_financial_keywords(keywords_df)
-        if boosted_df.empty:
-            return {"message": "No relevant financial keywords extracted."}
+        status_messages.append("💸 Financial boost scoring applied")
 
-        # Step 5: Save results
-        save_final_keywords(user_id, brand, url, language, dateRange, boosted_df)
-        save_keywords_to_db(user_id, brand, url, language, dateRange, boosted_df)
+        # Step 6: Filter by financial vocab
+        filtered_df = boosted_df[boosted_df["Keyword"].isin(financial_vocab)]
+        if filtered_df.empty:
+            status_messages.append("⚠️ No matches in financial vocabulary")
+            return {
+                "success": False,
+                "message": "No financial matches found",
+                "keywords": [],
+                "statusMessages": status_messages
+            }
 
-        print("✅ Full extraction process completed successfully!")
+        # Step 7: Save to DB & JSON
+        save_final_keywords(user_id, brand, url, language, dateRange, filtered_df)
+        save_keywords_to_db(user_id, brand, url, language, dateRange, filtered_df)
+        status_messages.append("💾 Saved to database")
+
+        status_messages.append("✅ Keyword extraction complete")
+
         return {
             "success": True,
             "message": "Financial Keywords extracted and saved successfully!",
-            "keywords": boosted_df["Keyword"].astype(str).tolist()
+            "keywords": boosted_df["Keyword"].astype(str).tolist(),
+            "statusMessages": status_messages
         }
 
     except Exception as e:
         error_trace = traceback.format_exc()
-        print(f"❌ Error in process_full_extraction:\n{error_trace}")
-        raise HTTPException(status_code=500, detail=f"Keyword Extraction Failed: {str(e)}")
+        print(f"❌ Error: {error_trace}")
+        raise HTTPException(status_code=500, detail=f"Extraction failed: {str(e)}")
 
 
 # ✅ Combine & Score Keywords

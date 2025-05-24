@@ -14,7 +14,7 @@ export default function BrandRegistration() {
   const [formData, setFormData] = useState({
     brand_name: "",
     industry: "",
-    website: "",
+    websites: [""],
     address: "",
     phone: "",
   });
@@ -29,6 +29,22 @@ export default function BrandRegistration() {
       router.push("/auth/signin"); // Redirect if not logged in
     }
   }, [token, user]);
+
+  const handleWebsiteChange = (index, value) => {
+    const updatedWebsites = [...formData.websites];
+    updatedWebsites[index] = value;
+    setFormData({ ...formData, websites: updatedWebsites });
+  };
+
+  const addWebsiteField = () => {
+    setFormData({ ...formData, websites: [...formData.websites, ""] });
+  };
+
+  const removeWebsiteField = (index) => {
+    const updatedWebsites = [...formData.websites];
+    updatedWebsites.splice(index, 1);
+    setFormData({ ...formData, websites: updatedWebsites });
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -138,17 +154,29 @@ export default function BrandRegistration() {
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium">Website URL</label>
-              <input
-                type="url"
-                name="website"
-                required
-                value={formData.website}
-                onChange={handleChange}
-                className="mt-2 block w-full rounded-md px-3 py-2 border border-gray-300 shadow-md focus:border-blue-700 focus:outline-none"
-              />
-            </div>
+            <label className="block text-sm font-medium">Website URLs</label>
+            {formData.websites.map((website, index) => (
+              <div key={index} className="flex gap-2 mb-2">
+                <input
+                  type="url"
+                  required
+                  value={website}
+                  onChange={(e) => handleWebsiteChange(index, e.target.value)}
+                  className="flex-grow border px-3 py-2 rounded-md shadow-md"
+                />
+                {index > 0 && (
+                  <button type="button" onClick={() => removeWebsiteField(index)} className="text-red-500 font-bold">✕</button>
+                )}
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={addWebsiteField}
+              className="mt-1 text-sm text-blue-600 font-medium"
+            >
+              + Add Another URL
+            </button>
+
 
             <div>
               <label className="block text-sm font-medium">Address</label>

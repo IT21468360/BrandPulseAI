@@ -9,6 +9,8 @@ export default function AspectClassification() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [aspects, setAspects] = useState([]);
     const [showComments, setShowComments] = useState(false); // Controls visibility of comments
+    const [appliedKeywords, setAppliedKeywords] = useState([]); //Azmarah
+
     const router = useRouter();
 
     // Check for authentication on page load
@@ -20,6 +22,15 @@ export default function AspectClassification() {
             setIsLoggedIn(true);
         }
     }, []);
+
+    //Azmarah
+    useEffect(() => {
+        const stored = localStorage.getItem("applied_keywords");
+        if (stored) {
+            setAppliedKeywords(JSON.parse(stored)); // Your state handler
+        }
+    }, []);
+
 
     // Fetch aspect classification data
     const fetchAspects = async () => {
@@ -45,6 +56,20 @@ export default function AspectClassification() {
                 <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold shadow-md">
                     ASPECT CLASSIFICATION
                 </div>
+                
+                {/* Applied Keywords Section with Margin */}
+                <div className="mt-4 mb-4 p-4 bg-indigo-100 border-l-4 border-indigo-500 text-indigo-900 rounded-md">
+                <strong>Applied Keywords:</strong>{" "}
+                {appliedKeywords.map((kw, i) => (
+                    <span
+                    key={i}
+                    className="inline-block bg-indigo-200 text-indigo-800 px-3 py-1 rounded-full text-sm mr-2 mb-1"
+                    >
+                    {kw}
+                    </span>
+                ))}
+                </div>
+
 
                 {/* Generate Comments Button */}
                 <div className="mt-6 bg-white p-6 rounded-lg shadow-lg flex justify-center">
