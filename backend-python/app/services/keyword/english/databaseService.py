@@ -86,16 +86,31 @@ def save_keywords_to_db(user_id, brand, url, language, date_range, keywords_df):
         raise HTTPException(status_code=500, detail=f"MongoDB Save Failed: {str(e)}")
 
 
-# ✅ Function to retrieve keywords for a user
+# ✅ Function to retrieve top 20 keywords for a user
 def get_keywords_by_user(user_id):
     try:
-        data = list(keywords_collection.find({"user_id": user_id}, {"_id": 0}))
-        if not data:
+        result = keywords_collection.find({"user_id": user_id})
+        top_keywords_data = []
+
+        for doc in result:
+            # Only return top 20 keywords per document
+            keywords_subset = doc.get("KeywordList", [])[:20]
+            top_keywords_data.append({
+                "brand": doc.get("brand"),
+                "url": doc.get("url"),
+                "language": doc.get("language"),
+                "dateRange": doc.get("dateRange"),
+                "keywords": keywords_subset
+            })
+
+        if not top_keywords_data:
             return "⚠ No keywords found for the user."
-        return data
+
+        return top_keywords_data
     except Exception as e:
         print(f"❌ Error retrieving keywords: {e}")
         return []
+
 
 # ✅ Function to clear all keywords (for testing)
 def clear_keywords():

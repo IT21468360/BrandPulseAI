@@ -11,10 +11,10 @@ const BrandSchema = z.object({
   user_id: z.string().min(1, "User ID is required"),
   brand_name: z.string().min(1, "Brand name is required"),
   industry: z.string().min(1, "Industry is required"),
-  website: z.string().url("Invalid URL format"),
+  websites: z.array(z.string().url("Invalid website URL")).min(1, "At least one website is required"),
   address: z.string().min(1, "Address is required"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  created_at: z.date().default(() => new Date()), 
+  created_at: z.date().default(() => new Date()),
 });
 
 // ✅ **Validate Brand Data**
