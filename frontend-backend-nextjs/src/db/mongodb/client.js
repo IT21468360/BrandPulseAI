@@ -1,6 +1,7 @@
+// frontend-backend-nextjs/src/db/mongodb/client.js
 import { MongoClient } from "mongodb";
 
-const uri = process.env.MONGODB_URI; // ✅ Uses .env.local
+const uri = process.env.MONGODB_URI; // ✅ Reads from .env.local
 let client;
 let clientPromise;
 

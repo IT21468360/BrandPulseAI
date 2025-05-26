@@ -59,3 +59,9 @@ numba==0.57.0  # Downgraded for better compatibility with NumPy 1.24.3
 # Stopwords & NLP Extras
 spacy-langdetect==0.1.2
 spacy-lookups-data==1.0.5
+
+
+# Extra Requirements for Model Compatibility
+sentencepiece==0.1.99
+scipy==1.10.1
+openpyxl==3.1.2  # Only if you handle .xlsx files
