@@ -47,6 +47,7 @@
         "yake_execution_time": 0.04465126991271973
     },
     {
+<<<<<<< HEAD
         "Paragraph": "Corporate Online Banking",
         "yake_keywords": [
             "Corporate Online Banking",
@@ -55,6 +56,14 @@
             "Banking",
             "Online",
             "Corporate"
+=======
+        "Paragraph": "News Updates our latest news updates .",
+        "yake_keywords": [
+            "latest news updates",
+            "Updates our latest",
+            "Updates",
+            "latest"
+>>>>>>> d20d6d7450c5cdd2218a399775421983b46d0a1f
         ],
         "yake_execution_time": 0.005041599273681641
     },
@@ -109,6 +118,514 @@
             "List",
             "ready"
         ],
+<<<<<<< HEAD
         "yake_execution_time": 0.003997802734375
+=======
+        "yake_execution_time": 0.012993574142456055
+    },
+    {
+        "Paragraph": "Success Stories Our keen focus entrepreneurs across country us SME SSE communities their full potential .",
+        "yake_keywords": [
+            "SME SSE communities",
+            "SME SSE",
+            "Success Stories",
+            "keen focus entrepreneurs",
+            "Stories Our keen",
+            "country us SME",
+            "SSE communities",
+            "full potential",
+            "keen focus",
+            "focus entrepreneurs"
+        ],
+        "yake_execution_time": 0.05155634880065918
+    },
+    {
+        "Paragraph": "I benefit money business while",
+        "yake_keywords": [
+            "benefit money business",
+            "benefit money",
+            "money business",
+            "benefit",
+            "money",
+            "business"
+        ],
+        "yake_execution_time": 0.008996009826660156
+    },
+    {
+        "Paragraph": "Sri Lanka s financial service provider HNB Finance water purification system Mohoththuwarama",
+        "yake_keywords": [
+            "provider HNB Finance",
+            "HNB Finance water",
+            "purification system Mohoththuwarama",
+            "service provider HNB",
+            "Finance water purification",
+            "HNB Finance",
+            "Sri Lanka",
+            "system Mohoththuwarama",
+            "financial service provider",
+            "water purification system"
+        ],
+        "yake_execution_time": 0.08056831359863281
+    },
+    {
+        "Paragraph": "HNB FINANCE International Women s Day",
+        "yake_keywords": [
+            "HNB FINANCE International",
+            "FINANCE International Women",
+            "HNB FINANCE",
+            "Women s Day",
+            "FINANCE International",
+            "International Women",
+            "HNB",
+            "Day",
+            "FINANCE",
+            "International"
+        ],
+        "yake_execution_time": 0.03199887275695801
+    },
+    {
+        "Paragraph": "HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February",
+        "yake_keywords": [
+            "Wijeyawardana Vidyalaya February",
+            "Yalu Daskam Art",
+            "Daskam Art Workshop",
+            "Art Workshop Wijeyawardana",
+            "Workshop Wijeyawardana Vidyalaya",
+            "HNB Finance young",
+            "minds Yalu Daskam",
+            "HNB Finance",
+            "Vidyalaya February",
+            "Finance young minds"
+        ],
+        "yake_execution_time": 0.06656360626220703
+    },
+    {
+        "Paragraph": "HNB Finance oasis Mohoththuwarama Primary School",
+        "yake_keywords": [
+            "Mohoththuwarama Primary School",
+            "HNB Finance oasis",
+            "Finance oasis Mohoththuwarama",
+            "oasis Mohoththuwarama Primary",
+            "HNB Finance",
+            "Primary School",
+            "Mohoththuwarama Primary",
+            "Finance oasis",
+            "oasis Mohoththuwarama",
+            "HNB"
+        ],
+        "yake_execution_time": 0.06099843978881836
+    },
+    {
+        "Paragraph": "our latest news updates .",
+        "yake_keywords": [
+            "latest news updates",
+            "updates",
+            "latest"
+        ],
+        "yake_execution_time": 0.0040051937103271484
+    },
+    {
+        "Paragraph": "Mehewara CSR Projects",
+        "yake_keywords": [
+            "Mehewara CSR Projects",
+            "CSR Projects",
+            "Mehewara CSR",
+            "Projects",
+            "CSR",
+            "Mehewara"
+        ],
+        "yake_execution_time": 0.00799560546875
+    },
+    {
+        "Paragraph": "HNB Finance subsidiary Hatton National Bank PLC unblemished record almost two decades leader finance industry diverse portfolio financial products services .",
+        "yake_keywords": [
+            "Hatton National Bank",
+            "National Bank PLC",
+            "Bank PLC unblemished",
+            "subsidiary Hatton National",
+            "HNB Finance subsidiary",
+            "Finance subsidiary Hatton",
+            "PLC unblemished record",
+            "financial products services",
+            "decades leader finance",
+            "leader finance industry"
+        ],
+        "yake_execution_time": 0.1095890998840332
+    },
+    {
+        "Paragraph": "HNB Finance PLC",
+        "yake_keywords": [
+            "HNB Finance PLC",
+            "HNB Finance",
+            "Finance PLC",
+            "HNB",
+            "PLC",
+            "Finance"
+        ],
+        "yake_execution_time": 0.006998777389526367
+    },
+    {
+        "Paragraph": "Mehewara CSR Projects Mehewara fund series ongoing CSR projects our customers need . fund financial contribution our dedicated employees organisation . HNB Finance oasis Mohoththuwarama Primary School Sri Lanka s financial service provider HNB Finance water purification system Mohoththuwarama",
+        "yake_keywords": [
+            "Primary School Sri",
+            "School Sri Lanka",
+            "Mohoththuwarama Primary School",
+            "HNB Finance oasis",
+            "provider HNB Finance",
+            "HNB Finance water",
+            "oasis Mohoththuwarama Primary",
+            "Mehewara CSR Projects",
+            "CSR Projects Mehewara",
+            "Finance oasis Mohoththuwarama"
+        ],
+        "yake_execution_time": 0.0943303108215332
+    },
+    {
+        "Paragraph": "Our keen focus entrepreneurs across country us SME SSE communities their full potential .",
+        "yake_keywords": [
+            "SME SSE communities",
+            "SME SSE",
+            "keen focus entrepreneurs",
+            "country us SME",
+            "SSE communities",
+            "full potential",
+            "keen focus",
+            "focus entrepreneurs",
+            "entrepreneurs across country",
+            "communities their full"
+        ],
+        "yake_execution_time": 0.05020856857299805
+    },
+    {
+        "Paragraph": "HNB FINANCE partners Kiya.ai January , HNB FINANCE presence branch Mullaitivu January , HNB FINANCE International Women s Day March , HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , HNB FINANCE partners Kiya.ai January , HNB FINANCE presence branch Mullaitivu January , HNB FINANCE International Women s Day March , HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February",
+        "yake_keywords": [
+            "HNB FINANCE International",
+            "HNB FINANCE partners",
+            "HNB FINANCE presence",
+            "HNB Finance young",
+            "FINANCE International Women",
+            "Wijeyawardana Vidyalaya February",
+            "Yalu Daskam Art",
+            "Daskam Art Workshop",
+            "Art Workshop Wijeyawardana",
+            "Workshop Wijeyawardana Vidyalaya"
+        ],
+        "yake_execution_time": 0.07919883728027344
+    },
+    {
+        "Paragraph": "HNB FINANCE presence branch Mullaitivu January",
+        "yake_keywords": [
+            "HNB FINANCE presence",
+            "branch Mullaitivu January",
+            "HNB FINANCE",
+            "Mullaitivu January",
+            "FINANCE presence branch",
+            "presence branch Mullaitivu",
+            "FINANCE presence",
+            "branch Mullaitivu",
+            "HNB",
+            "January"
+        ],
+        "yake_execution_time": 0.041634559631347656
+    },
+    {
+        "Paragraph": "This website cookies best experience our website .",
+        "yake_keywords": [
+            "cookies best experience",
+            "website cookies",
+            "experience our website",
+            "website",
+            "cookies",
+            "experience"
+        ],
+        "yake_execution_time": 0.01399683952331543
+    },
+    {
+        "Paragraph": "News Updates our latest news updates .",
+        "yake_keywords": [
+            "latest news updates",
+            "Updates our latest",
+            "Updates",
+            "latest"
+        ],
+        "yake_execution_time": 0.006000518798828125
+    },
+    {
+        "Paragraph": "HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya",
+        "yake_keywords": [
+            "Workshop Wijeyawardana Vidyalaya",
+            "Yalu Daskam Art",
+            "Daskam Art Workshop",
+            "Art Workshop Wijeyawardana",
+            "HNB Finance young",
+            "minds Yalu Daskam",
+            "HNB Finance",
+            "Wijeyawardana Vidyalaya",
+            "Finance young minds",
+            "young minds Yalu"
+        ],
+        "yake_execution_time": 0.06055045127868652
+    },
+    {
+        "Paragraph": "Strength Born Strength",
+        "yake_keywords": [
+            "Strength Born Strength",
+            "Strength Born",
+            "Born Strength",
+            "Strength",
+            "Born"
+        ],
+        "yake_execution_time": 0.0060007572174072266
+    },
+    {
+        "Paragraph": "Services Convenience Flexibility HNB Finance PLC Strength Strength HNB Finance subsidiary Hatton National Bank PLC unblemished record almost two decades leader finance industry diverse portfolio financial products services . Products your future products growth Success Stories Our keen focus entrepreneurs across country us SME SSE communities their full potential . HNB FINANCE been immense strength our lives HNB FINANCE been our financial partner over years now . Therefore , we have been able business so . I benefit money business while I able loan without any guarantors through Swashakthi Savings , I able easily money I . Us financial institution passionate team customer centric , well diversified products services responsible sustainable way . Customers Employees Branches Mehewara CSR Projects Mehewara fund series ongoing CSR projects our customers need . fund financial contribution our dedicated employees organisation . HNB Finance oasis Mohoththuwarama Primary School Sri Lanka s financial service provider HNB Finance water purification system Mohoththuwarama Pri . News Updates our latest news updates . HNB FINANCE partners Kiya.ai January , HNB FINANCE presence branch Mullaitivu January , HNB FINANCE International Women s Day March , HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , HNB FINANCE partners Kiya.ai January , HNB FINANCE presence branch Mullaitivu January , HNB FINANCE International Women s Day March , HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , prev next Great Place TAGS Awards",
+        "yake_keywords": [
+            "HNB FINANCE International",
+            "FINANCE International Women",
+            "Wijeyawardana Vidyalaya February",
+            "Yalu Daskam Art",
+            "Daskam Art Workshop",
+            "Art Workshop Wijeyawardana",
+            "Workshop Wijeyawardana Vidyalaya",
+            "HNB FINANCE presence",
+            "HNB Finance young",
+            "HNB FINANCE partners"
+        ],
+        "yake_execution_time": 0.14278483390808105
+    },
+    {
+        "Paragraph": "HNB Finance oasis Mohoththuwarama Primary School Sri Lanka s financial service provider HNB Finance water purification system Mohoththuwarama",
+        "yake_keywords": [
+            "Primary School Sri",
+            "School Sri Lanka",
+            "Mohoththuwarama Primary School",
+            "HNB Finance oasis",
+            "provider HNB Finance",
+            "HNB Finance water",
+            "oasis Mohoththuwarama Primary",
+            "Finance oasis Mohoththuwarama",
+            "service provider HNB",
+            "Finance water purification"
+        ],
+        "yake_execution_time": 0.08117103576660156
+    },
+    {
+        "Paragraph": "financial institution passionate team customer centric , well diversified products services responsible sustainable",
+        "yake_keywords": [
+            "financial institution passionate",
+            "team customer centric",
+            "services responsible sustainable",
+            "institution passionate team",
+            "passionate team customer",
+            "diversified products services",
+            "products services responsible",
+            "financial institution",
+            "customer centric",
+            "responsible sustainable"
+        ],
+        "yake_execution_time": 0.07652091979980469
+    },
+    {
+        "Paragraph": "HNB FINANCE been immense strength our lives HNB FINANCE been our financial partner over years now . Therefore , we have been able business",
+        "yake_keywords": [
+            "lives HNB FINANCE",
+            "HNB FINANCE",
+            "FINANCE been immense",
+            "lives HNB",
+            "immense strength",
+            "strength our lives",
+            "financial partner",
+            "partner over years",
+            "FINANCE",
+            "HNB"
+        ],
+        "yake_execution_time": 0.017000436782836914
+    },
+    {
+        "Paragraph": "your future products growth",
+        "yake_keywords": [
+            "future products growth",
+            "products growth",
+            "future products",
+            "growth",
+            "future",
+            "products"
+        ],
+        "yake_execution_time": 0.008001565933227539
+    },
+    {
+        "Paragraph": "HNB FINANCE been our financial partner over years now . Therefore , we have been able business",
+        "yake_keywords": [
+            "HNB FINANCE",
+            "financial partner",
+            "partner over years",
+            "HNB",
+            "FINANCE",
+            "business",
+            "financial",
+            "partner",
+            "years"
+        ],
+        "yake_execution_time": 0.01499795913696289
+    },
+    {
+        "Paragraph": "Us financial institution passionate team customer centric , well diversified products services responsible sustainable",
+        "yake_keywords": [
+            "team customer centric",
+            "services responsible sustainable",
+            "financial institution passionate",
+            "institution passionate team",
+            "passionate team customer",
+            "diversified products services",
+            "products services responsible",
+            "customer centric",
+            "responsible sustainable",
+            "financial institution"
+        ],
+        "yake_execution_time": 0.08154726028442383
+    },
+    {
+        "Paragraph": "I benefit money business while I able loan without any guarantors through Swashakthi Savings , I able easily money I .",
+        "yake_keywords": [
+            "benefit money business",
+            "Swashakthi Savings",
+            "guarantors through Swashakthi",
+            "benefit money",
+            "money business",
+            "easily money",
+            "Savings",
+            "Swashakthi",
+            "money",
+            "benefit"
+        ],
+        "yake_execution_time": 0.03872847557067871
+    },
+    {
+        "Paragraph": "HNB FINANCE partners Kiya.ai January",
+        "yake_keywords": [
+            "HNB FINANCE partners",
+            "partners Kiya.ai January",
+            "FINANCE partners Kiya.ai",
+            "HNB FINANCE",
+            "Kiya.ai January",
+            "FINANCE partners",
+            "partners Kiya.ai",
+            "HNB",
+            "January",
+            "FINANCE"
+        ],
+        "yake_execution_time": 0.03699779510498047
+    },
+    {
+        "Paragraph": "HNB FINANCE partners Kiya.ai January , HNB FINANCE presence branch Mullaitivu January , HNB FINANCE International Women s Day March , HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , HNB FINANCE partners Kiya.ai January , HNB FINANCE presence branch Mullaitivu January , HNB FINANCE International Women s Day March , HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , prev next",
+        "yake_keywords": [
+            "HNB FINANCE International",
+            "HNB FINANCE partners",
+            "HNB FINANCE presence",
+            "HNB Finance young",
+            "FINANCE International Women",
+            "Wijeyawardana Vidyalaya February",
+            "Yalu Daskam Art",
+            "Daskam Art Workshop",
+            "Art Workshop Wijeyawardana",
+            "Workshop Wijeyawardana Vidyalaya"
+        ],
+        "yake_execution_time": 0.09854245185852051
+    },
+    {
+        "Paragraph": "Mehewara fund series ongoing CSR projects our customers need . fund financial contribution our dedicated employees organisation .",
+        "yake_keywords": [
+            "series ongoing CSR",
+            "ongoing CSR projects",
+            "dedicated employees organisation",
+            "Mehewara fund series",
+            "fund series ongoing",
+            "fund financial contribution",
+            "ongoing CSR",
+            "CSR projects",
+            "employees organisation",
+            "Mehewara fund"
+        ],
+        "yake_execution_time": 0.05601310729980469
+    },
+    {
+        "Paragraph": "HNB FINANCE been immense strength our lives HNB FINANCE been our financial partner over years now . Therefore , we have been able business so . I benefit money business while I able loan without any guarantors through Swashakthi Savings , I able easily money I .",
+        "yake_keywords": [
+            "lives HNB FINANCE",
+            "HNB FINANCE",
+            "benefit money business",
+            "Swashakthi Savings",
+            "FINANCE been immense",
+            "lives HNB",
+            "guarantors through Swashakthi",
+            "immense strength",
+            "strength our lives",
+            "financial partner"
+        ],
+        "yake_execution_time": 0.06252598762512207
+    },
+    {
+        "Paragraph": "HNB FINANCE International Women s Day March",
+        "yake_keywords": [
+            "HNB FINANCE International",
+            "FINANCE International Women",
+            "HNB FINANCE",
+            "Day March",
+            "FINANCE International",
+            "International Women",
+            "Women s Day",
+            "HNB",
+            "March",
+            "FINANCE"
+        ],
+        "yake_execution_time": 0.036015987396240234
+    },
+    {
+        "Paragraph": "Success Stories Our keen focus entrepreneurs across country us SME SSE communities their full potential . HNB FINANCE been immense strength our lives HNB FINANCE been our financial partner over years now . Therefore , we have been able business so . I benefit money business while I able loan without any guarantors through Swashakthi Savings , I able easily money I .",
+        "yake_keywords": [
+            "lives HNB FINANCE",
+            "SME SSE communities",
+            "keen focus entrepreneurs",
+            "HNB FINANCE",
+            "benefit money business",
+            "Swashakthi Savings",
+            "SME SSE",
+            "Success Stories",
+            "FINANCE been immense",
+            "lives HNB"
+        ],
+        "yake_execution_time": 0.06956076622009277
+    },
+    {
+        "Paragraph": "HNB FINANCE been immense strength our lives HNB FINANCE been our financial partner over years now . Therefore , we have been able business",
+        "yake_keywords": [
+            "lives HNB FINANCE",
+            "HNB FINANCE",
+            "FINANCE been immense",
+            "lives HNB",
+            "immense strength",
+            "strength our lives",
+            "financial partner",
+            "partner over years",
+            "FINANCE",
+            "HNB"
+        ],
+        "yake_execution_time": 0.028004884719848633
+    },
+    {
+        "Paragraph": "HNB FINANCE been immense strength our lives",
+        "yake_keywords": [
+            "HNB FINANCE",
+            "FINANCE been immense",
+            "strength our lives",
+            "HNB",
+            "immense strength",
+            "FINANCE",
+            "lives",
+            "immense",
+            "strength"
+        ],
+        "yake_execution_time": 0.014522790908813477
+>>>>>>> d20d6d7450c5cdd2218a399775421983b46d0a1f
     }
 ]

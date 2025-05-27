@@ -1,42 +1,39 @@
 import { NextResponse } from "next/server";
-import mongoose from "mongoose";
-import Sentiment from "@/models/sentimentModel"; // ✅ Use alias if `jsconfig.json` or `tsconfig.json` is configured
-
-// ✅ Optional: Cache DB connection in development to prevent multiple connects
-let isConnected = false;
+import clientPromise from "@/db/mongodb/client";
 
 export async function GET(req) {
     try {
         const { searchParams } = new URL(req.url);
         const language = searchParams.get("language");
 
-        // ✅ Validate language
-        if (!language || !["english", "sinhala"].includes(language.toLowerCase())) {
-            return NextResponse.json(
-                { error: "Missing or invalid language parameter" },
-                { status: 400 }
-            );
+        const client = await clientPromise;
+        const db = client.db("BrandPulseAI");
+
+        const collectionName = language === "english" 
+            ? "english_sentiment_predictions" 
+            : "sinhala_sentiment_predictions";
+
+        const collection = db.collection(collectionName);
+
+        // ✅ Step 1: Find the latest file
+        const latest = await collection
+            .find({ language })
+            .sort({ source_file: -1 }) // sort by file name (which has date)
+            .limit(1)
+            .toArray();
+
+        if (!latest.length) {
+            return NextResponse.json([], { status: 200 });
         }
 
-        // ✅ Connect to MongoDB if not already
-        if (!isConnected || mongoose.connection.readyState !== 1) {
-            await mongoose.connect(process.env.MONGODB_URI, {
-                dbName: "BrandPulseAI", // ✅ Set DB name explicitly
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            });
-            isConnected = true;
-        }
+        const latestFile = latest[0].source_file;
 
-        // ✅ Fetch sentiments based on language
-        const results = await Sentiment.find({ language }).lean();
+        // ✅ Step 2: Fetch only comments from the latest file
+        const results = await collection.find({ language, source_file: latestFile }).toArray();
 
-        return NextResponse.json({ data: results }, { status: 200 });
+        return NextResponse.json(results, { status: 200 });
     } catch (error) {
-        console.error("🔥 MongoDB Fetch Error:", error);
-        return NextResponse.json(
-            { error: "Failed to fetch sentiment data", details: error.message },
-            { status: 500 }
-        );
+        console.error("❌ Error fetching sentiment results:", error);
+        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }
