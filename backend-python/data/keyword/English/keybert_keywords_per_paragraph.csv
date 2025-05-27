@@ -1,4 +1,14 @@
 Paragraph,keybert_keyphrases,execution_time
+<<<<<<< HEAD
+Transaction Banking HNB TxB,"['transaction banking hnb', 'banking', 'transaction', 'hnb', 'txb']",0.4267456531524658
+Personal Online Banking CashExpress Corporate Online Banking Payfast Transaction Banking HNB TxB Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Corporate Website,"['online banking cashexpress', 'hnb txb check', 'list pc ready', 'page balance', 'home']",0.539935827255249
+Personal Online Banking CashExpress Corporate Online Banking Payfast Transaction Banking HNB TxB Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Corporate Website All rights . Hatton National Bank PLC PQ .,"['online banking cashexpress', 'hnb txb check', 'home page balance', 'list pc ready', 'rights hatton national']",0.4929158687591553
+Corporate Online Banking,"['corporate online banking', 'banking', 'corporate online', 'corporate', 'online']",0.08217668533325195
+Personal Online Banking,"['personal online banking', 'online banking', 'banking', 'online', 'personal']",0.07025909423828125
+All rights . Hatton National Bank PLC PQ,"['bank plc pq', 'hatton national bank', 'rights hatton national', 'plc', 'pq']",0.09807300567626953
+List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page,"['pc ready banking', 'inquiry check list', 'login internet', 'home page', 'balance']",0.20790457725524902
+List out if your PC ready E Banking,"['pc ready banking', 'list pc ready', 'pc', 'list', 'ready']",0.0824289321899414
+=======
 "News Updates our latest news updates . HNB FINANCE partners Kiya.ai January , HNB FINANCE presence branch Mullaitivu January , HNB FINANCE International Women s Day March , HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , HNB FINANCE partners Kiya.ai January , HNB FINANCE presence branch Mullaitivu January , HNB FINANCE International Women s Day March , HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , prev next","['updates hnb finance', 'women day march', 'ai january', 'workshop wijeyawardana vidyalaya', 'partners']",0.34369492530822754
 our latest news updates .,"['latest news updates', 'latest news', 'news', 'latest', 'updates']",0.037899017333984375
 "Us financial institution passionate team customer centric , well diversified products services responsible sustainable","['team customer centric', 'diversified products services', 'financial institution passionate', 'sustainable', 'centric diversified']",0.08851027488708496
@@ -43,3 +53,4 @@ HNB Finance oasis Mohoththuwarama Primary School,"['hnb finance', 'mohoththuwara
 Mehewara fund series ongoing CSR projects our customers need . fund financial contribution our dedicated employees organisation .,"['csr projects customers', 'customers need fund', 'contribution dedicated employees', 'mehewara fund', 'series ongoing']",0.10450577735900879
 Strength Born Strength,"['strength born strength', 'strength born', 'strength', 'born strength', 'born']",0.03638267517089844
 Mehewara CSR Projects Mehewara fund series ongoing CSR projects our customers need . fund financial contribution our dedicated employees organisation .,"['mehewara csr projects', 'customers need fund', 'contribution', 'dedicated employees organisation', 'series ongoing']",0.10403180122375488
+>>>>>>> d20d6d7450c5cdd2218a399775421983b46d0a1f

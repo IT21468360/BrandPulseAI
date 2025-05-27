@@ -11,7 +11,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 from fastapi import HTTPException
 
-# ✅ WebDriver options (headless mode for efficiency)
+# ✅ WebDriver options
 options = webdriver.ChromeOptions()
 options.add_argument("--headless")
 options.add_argument("--no-sandbox")
@@ -19,25 +19,33 @@ options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--disable-gpu")
 options.add_argument("--disable-blink-features=AutomationControlled")
 options.add_argument("--ignore-certificate-errors")
+prefs = {
+    "profile.managed_default_content_settings.images": 2,
+    "profile.managed_default_content_settings.fonts": 2
+}
+options.add_experimental_option("prefs", prefs)
 
 # ✅ Cache setup
 CACHE_DIR = "scraped_cache"
 os.makedirs(CACHE_DIR, exist_ok=True)
 CACHE_EXPIRATION_MINUTES = 2
 
-# ✅ Generate a cache file path
+# ✅ Constants
+MAX_SCROLLS = 10
+SCROLL_PAUSE_TIME = 2
+MAX_RUNTIME_SECONDS = 60
+MAX_INTERNAL_LINKS = 10  # To avoid infinite site crawling
+
 def get_cache_file_path(url):
     hash_name = hashlib.md5(url.encode()).hexdigest()
     return os.path.join(CACHE_DIR, f"{hash_name}_cache.json")
 
-# ✅ Check cache validity
 def is_cache_valid(cache_file):
     if os.path.exists(cache_file):
         file_mtime = datetime.fromtimestamp(os.path.getmtime(cache_file))
         return (datetime.now() - file_mtime) <= timedelta(minutes=CACHE_EXPIRATION_MINUTES)
     return False
 
-# ✅ Load cached data if available
 def load_cache(cache_file):
     try:
         with open(cache_file, 'r', encoding='utf-8') as f:
@@ -46,7 +54,6 @@ def load_cache(cache_file):
         print(f"⚠️ Cache load error: {e}")
         return None
 
-# ✅ Save scraped content to cache
 def save_to_cache(cache_file, data):
     try:
         with open(cache_file, 'w', encoding='utf-8') as f:
@@ -54,18 +61,16 @@ def save_to_cache(cache_file, data):
     except Exception as e:
         print(f"⚠️ Cache save error: {e}")
 
-# ✅ Extract meaningful text from the webpage
 def extract_main_text(driver):
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
-    # Remove unwanted elements (navigation bars, scripts, etc.)
-    for tag in soup(['header', 'footer', 'form', 'a', 'ul', 'li', 'script', 'style', 'meta', 'noscript']):
+    # Remove unwanted elements
+    for tag in soup(['header', 'footer', 'form', 'script', 'style', 'meta', 'noscript']):
         tag.decompose()
 
-    # Extract text from relevant tags
     tags_to_extract = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'div', 'span']
     content_set = set()
-    
+
     for tag in tags_to_extract:
         elements = soup.find_all(tag)
         for element in elements:
@@ -75,30 +80,74 @@ def extract_main_text(driver):
 
     return list(content_set)
 
-# ✅ Scrape content from a given URL
+def simulate_scroll(driver):
+    last_height = driver.execute_script("return document.body.scrollHeight")
+    for _ in range(MAX_SCROLLS):
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(SCROLL_PAUSE_TIME)
+        new_height = driver.execute_script("return document.body.scrollHeight")
+        if new_height == last_height:
+            break
+        last_height = new_height
+
+def scrape_page(driver, url):
+    try:
+        driver.get(url)
+        simulate_scroll(driver)
+        content = extract_main_text(driver)
+        return content
+    except Exception as e:
+        print(f"⚠️ Error scraping {url}: {e}")
+        return []
+
 def scrape_website(url):
     try:
         service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service, options=options)
-        driver.get(url)
+        driver.set_page_load_timeout(60)
+        driver.implicitly_wait(10)
 
-        all_page_content = extract_main_text(driver)
+        scraped_data = []
+        visited = set()
+        to_visit = [url]
+
+        start_time = time.time()
+
+        while to_visit and len(visited) < MAX_INTERNAL_LINKS:
+            current_url = to_visit.pop(0)
+            if current_url in visited:
+                continue
+            print(f"🔗 Scraping: {current_url}")
+            visited.add(current_url)
+
+            scraped_data += scrape_page(driver, current_url)
+
+            # Respect time limit
+            if time.time() - start_time > MAX_RUNTIME_SECONDS:
+                print("⏳ Time limit reached.")
+                break
+
+            # Extract internal links (same domain only)
+            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            for a in soup.find_all('a', href=True):
+                href = a['href']
+                if href.startswith("/") and len(to_visit) < MAX_INTERNAL_LINKS:
+                    full_url = url.rstrip("/") + href
+                    if full_url not in visited:
+                        to_visit.append(full_url)
+
     except Exception as e:
         print(f"❌ Scraping error: {e}")
         return None
     finally:
         driver.quit()
 
-    return all_page_content
+    return scraped_data
 
-# ✅ Main scraping function (called from `scrape_route.py`)
+# ✅ Main scraping function
 async def scrape_content(url: str, date_range: dict):
-    """
-    Scrapes the given website URL, caches the results,
-    and saves to raw_scraped_content.json.
-    """
     print(f"🔍 Scraping {url} from {date_range['start']} to {date_range['end']}")
-    
+
     cache_file = get_cache_file_path(url)
     if is_cache_valid(cache_file):
         os.remove(cache_file)
@@ -108,11 +157,10 @@ async def scrape_content(url: str, date_range: dict):
     if not scraped_content:
         raise HTTPException(status_code=500, detail="❌ Failed to scrape website.")
 
-    # ✅ Save to RAW_SCRAPED_FILE for downstream preprocessing
     RAW_SCRAPED_FILE = os.path.join("data", "keyword", "english", "raw_scraped_content.json")
-    os.makedirs("data", exist_ok=True)
+    os.makedirs(os.path.dirname(RAW_SCRAPED_FILE), exist_ok=True)
+
     with open(RAW_SCRAPED_FILE, "w", encoding="utf-8") as f:
         json.dump(scraped_content, f, ensure_ascii=False, indent=2)
 
     return {"scraped_content": scraped_content}
-

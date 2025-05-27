@@ -94,7 +94,7 @@ def get_keywords_by_user(user_id):
 
         for doc in result:
             # Only return top 20 keywords per document
-            keywords_subset = doc.get("KeywordList", [])[:20]
+            keywords_subset = doc.get("KeywordList", [])
             top_keywords_data.append({
                 "brand": doc.get("brand"),
                 "url": doc.get("url"),

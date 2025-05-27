@@ -3,7 +3,14 @@ import json
 import re
 import pandas as pd
 import spacy
+from collections import Counter
 from fastapi import HTTPException
+from nltk.util import ngrams
+import nltk
+
+# ✅ Download NLTK dependencies if not done already
+nltk.download('punkt')
+nltk.download('stopwords')
 
 # ✅ Load SpaCy NLP model
 nlp = spacy.load("en_core_web_sm")
@@ -13,8 +20,31 @@ DATA_DIR = os.path.join("data", "keyword", "english")
 RAW_SCRAPED_FILE = os.path.join(DATA_DIR, "raw_scraped_content.json")
 CLEANED_SCRAPED_FILE = os.path.join(DATA_DIR, "cleaned_scraped_paragraphs.json")
 CLEANED_CSV_FILE = os.path.join(DATA_DIR, "cleaned_paragraphs.csv")
+TOP_KEYWORDS_FILE = os.path.join(DATA_DIR, "top_keywords.json")
 
 os.makedirs(DATA_DIR, exist_ok=True)
+
+# ✅ Keyword extraction
+def extract_keywords_phrases(text_list, top_k=25):
+    all_tokens = []
+    for text in text_list:
+        doc = nlp(text.lower())
+        tokens = [token.text for token in doc if token.is_alpha and not token.is_stop and len(token.text) > 2]
+        all_tokens.extend(tokens)
+
+    unigram_counts = Counter(all_tokens)
+    bigram_counts = Counter(ngrams(all_tokens, 2))
+    trigram_counts = Counter(ngrams(all_tokens, 3))
+
+    top_unigrams = unigram_counts.most_common(top_k)
+    top_bigrams = [(" ".join(bi), count) for bi, count in bigram_counts.most_common(top_k)]
+    top_trigrams = [(" ".join(tri), count) for tri, count in trigram_counts.most_common(top_k)]
+
+    return {
+        "top_unigrams": top_unigrams,
+        "top_bigrams": top_bigrams,
+        "top_trigrams": top_trigrams
+    }
 
 # ✅ Paragraph Cleaner Function
 def preprocess_text(content_list):
@@ -105,7 +135,6 @@ def preprocess_text(content_list):
 
     return cleaned_list
 
-
 # ✅ Main Execution
 async def preprocess_content():
     try:
@@ -126,13 +155,21 @@ async def preprocess_content():
             print("❌ No content left after cleaning.")
             return False
 
+        # Save cleaned JSON
         with open(CLEANED_SCRAPED_FILE, "w", encoding="utf-8") as f:
             json.dump(cleaned_content, f, ensure_ascii=False, indent=2)
 
+        # Save CSV
         df = pd.DataFrame(cleaned_content, columns=["Paragraph"])
         df.to_csv(CLEANED_CSV_FILE, index=False, encoding="utf-8")
 
+        # 🔍 Extract top phrases and save
+        keyword_data = extract_keywords_phrases(df["Paragraph"].tolist(), top_k=25)
+        with open(TOP_KEYWORDS_FILE, "w", encoding="utf-8") as f:
+            json.dump(keyword_data, f, ensure_ascii=False, indent=2)
+
         print(f"✅ Successfully cleaned {len(cleaned_content)} paragraphs.")
+        print(f"✅ Top keywords & phrases saved to: {TOP_KEYWORDS_FILE}")
         return True
 
     except json.JSONDecodeError:
@@ -141,4 +178,3 @@ async def preprocess_content():
     except Exception as e:
         print(f"❌ Preprocessing error: {e}")
         return False
-

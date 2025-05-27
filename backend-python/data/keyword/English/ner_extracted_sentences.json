@@ -1,5 +1,22 @@
 [
     {
+<<<<<<< HEAD
+        "Paragraph": "Transaction Banking HNB TxB",
+        "entities": []
+    },
+    {
+        "Paragraph": "Personal Online Banking CashExpress Corporate Online Banking Payfast Transaction Banking HNB TxB Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Corporate Website",
+        "entities": []
+    },
+    {
+        "Paragraph": "Personal Online Banking CashExpress Corporate Online Banking Payfast Transaction Banking HNB TxB Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Corporate Website All rights . Hatton National Bank PLC PQ .",
+        "entities": [
+            [
+                "Hatton National Bank PLC",
+                "ORG",
+                385,
+                409
+=======
         "Paragraph": "HNB Finance subsidiary Hatton National Bank PLC unblemished record almost two decades leader finance industry diverse portfolio financial products services .",
         "entities": [
             [
@@ -7,10 +24,20 @@
                 "ORG",
                 0,
                 11
+>>>>>>> d20d6d7450c5cdd2218a399775421983b46d0a1f
             ]
         ]
     },
     {
+<<<<<<< HEAD
+        "Paragraph": "Corporate Online Banking",
+        "entities": [
+            [
+                "Corporate Online Banking",
+                "SERVICE",
+                0,
+                24
+=======
         "Paragraph": "Mehewara fund series ongoing CSR projects our customers need . fund financial contribution our dedicated employees organisation .",
         "entities": []
     },
@@ -40,10 +67,18 @@
                 "PRODUCT",
                 415,
                 472
+>>>>>>> d20d6d7450c5cdd2218a399775421983b46d0a1f
             ]
         ]
     },
     {
+<<<<<<< HEAD
+        "Paragraph": "Personal Online Banking",
+        "entities": []
+    },
+    {
+        "Paragraph": "All rights . Hatton National Bank PLC PQ",
+=======
         "Paragraph": "Us financial institution passionate team customer centric , well diversified products services responsible sustainable way . Customers Employees Branches",
         "entities": []
     },
@@ -60,33 +95,25 @@
     },
     {
         "Paragraph": "HNB FINANCE been immense strength our lives",
+>>>>>>> d20d6d7450c5cdd2218a399775421983b46d0a1f
         "entities": [
             [
-                "HNB FINANCE",
+                "Hatton National Bank PLC",
                 "ORG",
-                0,
-                11
+                13,
+                37
             ]
         ]
     },
     {
-        "Paragraph": "HNB Finance PLC Strength Strength HNB Finance subsidiary Hatton National Bank PLC unblemished record almost two decades leader finance industry diverse portfolio financial products services .",
-        "entities": [
-            [
-                "HNB Finance PLC",
-                "ORG",
-                0,
-                15
-            ]
-        ]
-    },
-    {
-        "Paragraph": "Products your future products growth",
+        "Paragraph": "List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page Balance Inquiry Check List out if your PC ready E Banking Login Internet Banking Home Page",
         "entities": []
     },
     {
-        "Paragraph": "Customers Employees Branches",
+        "Paragraph": "List out if your PC ready E Banking",
         "entities": []
+<<<<<<< HEAD
+=======
     },
     {
         "Paragraph": "Success Stories Our keen focus entrepreneurs across country us SME SSE communities their full potential .",
@@ -748,5 +775,6 @@
                 11
             ]
         ]
+>>>>>>> d20d6d7450c5cdd2218a399775421983b46d0a1f
     }
 ]
