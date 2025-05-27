@@ -1,28 +1,42 @@
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
-import Sentiment from "../../../models/sentimentModel";
+import Sentiment from "@/models/sentimentModel"; // ✅ Use alias if `jsconfig.json` or `tsconfig.json` is configured
+
+// ✅ Optional: Cache DB connection in development to prevent multiple connects
+let isConnected = false;
 
 export async function GET(req) {
     try {
-        // ✅ Get language parameter from URL
         const { searchParams } = new URL(req.url);
         const language = searchParams.get("language");
 
-        if (!language) {
-            return NextResponse.json({ error: "Missing language parameter" }, { status: 400 });
+        // ✅ Validate language
+        if (!language || !["english", "sinhala"].includes(language.toLowerCase())) {
+            return NextResponse.json(
+                { error: "Missing or invalid language parameter" },
+                { status: 400 }
+            );
         }
 
-        // ✅ Ensure MongoDB is connected
-        if (mongoose.connection.readyState !== 1) {
-            await mongoose.connect(process.env.MONGODB_URI);
+        // ✅ Connect to MongoDB if not already
+        if (!isConnected || mongoose.connection.readyState !== 1) {
+            await mongoose.connect(process.env.MONGODB_URI, {
+                dbName: "BrandPulseAI", // ✅ Set DB name explicitly
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            });
+            isConnected = true;
         }
 
-        // ✅ Fetch data from MongoDB
+        // ✅ Fetch sentiments based on language
         const results = await Sentiment.find({ language }).lean();
 
-        return NextResponse.json(results, { status: 200 });
+        return NextResponse.json({ data: results }, { status: 200 });
     } catch (error) {
-        console.error("Error fetching sentiment data:", error);
-        return NextResponse.json({ error: "Failed to fetch sentiment data" }, { status: 500 });
+        console.error("🔥 MongoDB Fetch Error:", error);
+        return NextResponse.json(
+            { error: "Failed to fetch sentiment data", details: error.message },
+            { status: 500 }
+        );
     }
 }

@@ -14,25 +14,31 @@ DATA_DIR = os.path.join("data", "keyword", "english")
 CLEANED_PARAGRAPH_FILE = os.path.join(DATA_DIR, "cleaned_paragraphs.csv")
 KEYBERT_OUTPUT_FILE_CSV = os.path.join(DATA_DIR, "keybert_keywords_per_paragraph.csv")
 UNIQUE_KEYBERT_FILE_JSON = os.path.join(DATA_DIR, "unique_keybert_keyphrases.json")
-
-FINBERT_MODEL_PATH = "Azmarah/finbert-keyword-extraction"
+KEYBERT_FINANCIAL_FILE_JSON = os.path.join(DATA_DIR, "keybert_financial_keyphrases.json")
+FINANCIAL_VOCAB_FILE = os.path.join(DATA_DIR, "new_financial_vocabulary.json")
 
 # ✅ Ensure data directory exists
 os.makedirs(DATA_DIR, exist_ok=True)
 
-# ✅ Load fine-tuned FinBERT model
-
+# ✅ Load Financial Vocabulary
 try:
-    finbert_model = AutoModel.from_pretrained(FINBERT_MODEL_PATH, ignore_mismatched_sizes=True)
-    finbert_tokenizer = AutoTokenizer.from_pretrained(FINBERT_MODEL_PATH, ignore_mismatched_sizes=True)
-    print("✅ Successfully loaded fine-tuned FinBERT model from local directory!")
+    with open(FINANCIAL_VOCAB_FILE, "r", encoding="utf-8") as f:
+        financial_vocab = set(word.lower().strip() for word in json.load(f))
+except Exception as e:
+    raise RuntimeError(f"❌ Failed to load financial vocabulary: {e}")
+
+# ✅ Load fine-tuned FinBERT model
+try:
+    finbert_model = AutoModel.from_pretrained("Azmarah/finbert-keyword-extraction", ignore_mismatched_sizes=True)
+    finbert_tokenizer = AutoTokenizer.from_pretrained("Azmarah/finbert-keyword-extraction", ignore_mismatched_sizes=True)
+    print("✅ Successfully loaded fine-tuned FinBERT model.")
 except Exception as e:
     raise RuntimeError(f"❌ Failed to load fine-tuned FinBERT model: {e}")
 
 # ✅ Initialize KeyBERT
 kw_model = KeyBERT(model=finbert_model)
 
-# ✅ Keyphrase extraction function with timing
+# ✅ Keyphrase extractor with timing
 def extract_keyphrases_keybert(text, top_n=5):
     start_time = time.time()
     try:
@@ -55,8 +61,8 @@ def extract_keyphrases_keybert(text, top_n=5):
 @router.post("/keybert-extract")
 async def keybert_extraction():
     """
-    Extracts keyphrases from cleaned paragraphs using KeyBERT + FinBERT,
-    saves results with timing, and stores unique keywords.
+    Extracts keyphrases using KeyBERT + FinBERT, saves full output,
+    and filters domain-specific keyphrases using financial vocabulary.
     """
     try:
         if not os.path.exists(CLEANED_PARAGRAPH_FILE):
@@ -70,28 +76,41 @@ async def keybert_extraction():
         if df.empty:
             raise HTTPException(status_code=500, detail="Paragraph file is empty.")
 
-        # ✅ Apply extraction
+        # ✅ Apply KeyBERT
         df["keybert_keyphrases"], df["execution_time"] = zip(*df["Paragraph"].apply(extract_keyphrases_keybert))
 
-        # ✅ Save to CSV
+        # ✅ Save full output to CSV
         df.to_csv(KEYBERT_OUTPUT_FILE_CSV, index=False, encoding="utf-8")
 
-        # ✅ Flatten and save unique keyphrases
-        all_keyphrases = [kw.strip() for keywords in df["keybert_keyphrases"] if isinstance(keywords, list) for kw in keywords]
+        # ✅ Collect and deduplicate all phrases
+        all_keyphrases = [
+            kw.lower().strip()
+            for keywords in df["keybert_keyphrases"]
+            if isinstance(keywords, list)
+            for kw in keywords
+        ]
         unique_keyphrases = sorted(set(all_keyphrases))
 
+        # ✅ Save all unique keyphrases
         with open(UNIQUE_KEYBERT_FILE_JSON, "w", encoding="utf-8") as f:
             json.dump(unique_keyphrases, f, indent=4, ensure_ascii=False)
 
-        print("\n🔟 Sample Unique KeyBERT Keyphrases:")
-        for kw in unique_keyphrases[:10]:
+        # ✅ Filter keyphrases that match the financial vocabulary
+        matched_financial_keywords = [kw for kw in unique_keyphrases if kw in financial_vocab]
+
+        with open(KEYBERT_FINANCIAL_FILE_JSON, "w", encoding="utf-8") as f:
+            json.dump(matched_financial_keywords, f, indent=4, ensure_ascii=False)
+
+        print("\n🔟 Sample Financial Matches from KeyBERT:")
+        for kw in matched_financial_keywords[:10]:
             print(f"- {kw}")
 
         return {
             "success": True,
-            "message": "✅ KeyBERT + FinBERT keyphrase extraction completed!",
+            "message": "✅ KeyBERT + FinBERT extraction and financial matching completed.",
             "csv_file": KEYBERT_OUTPUT_FILE_CSV,
-            "unique_json_file": UNIQUE_KEYBERT_FILE_JSON
+            "unique_json_file": UNIQUE_KEYBERT_FILE_JSON,
+            "matched_financial_keywords_file": KEYBERT_FINANCIAL_FILE_JSON
         }
 
     except Exception as e:

@@ -1,0 +1,304 @@
+{
+  "top_unigrams": [
+    [
+      "banking",
+      28
+    ],
+    [
+      "list",
+      10
+    ],
+    [
+      "ready",
+      10
+    ],
+    [
+      "login",
+      9
+    ],
+    [
+      "internet",
+      9
+    ],
+    [
+      "home",
+      9
+    ],
+    [
+      "page",
+      9
+    ],
+    [
+      "check",
+      8
+    ],
+    [
+      "online",
+      6
+    ],
+    [
+      "balance",
+      6
+    ],
+    [
+      "inquiry",
+      6
+    ],
+    [
+      "corporate",
+      5
+    ],
+    [
+      "transaction",
+      3
+    ],
+    [
+      "hnb",
+      3
+    ],
+    [
+      "txb",
+      3
+    ],
+    [
+      "personal",
+      3
+    ],
+    [
+      "cashexpress",
+      2
+    ],
+    [
+      "payfast",
+      2
+    ],
+    [
+      "website",
+      2
+    ],
+    [
+      "rights",
+      2
+    ],
+    [
+      "hatton",
+      2
+    ],
+    [
+      "national",
+      2
+    ],
+    [
+      "bank",
+      2
+    ],
+    [
+      "plc",
+      2
+    ]
+  ],
+  "top_bigrams": [
+    [
+      "list ready",
+      10
+    ],
+    [
+      "ready banking",
+      10
+    ],
+    [
+      "banking login",
+      9
+    ],
+    [
+      "login internet",
+      9
+    ],
+    [
+      "internet banking",
+      9
+    ],
+    [
+      "banking home",
+      9
+    ],
+    [
+      "home page",
+      9
+    ],
+    [
+      "check list",
+      8
+    ],
+    [
+      "online banking",
+      6
+    ],
+    [
+      "page balance",
+      6
+    ],
+    [
+      "balance inquiry",
+      6
+    ],
+    [
+      "inquiry check",
+      6
+    ],
+    [
+      "transaction banking",
+      3
+    ],
+    [
+      "banking hnb",
+      3
+    ],
+    [
+      "hnb txb",
+      3
+    ],
+    [
+      "personal online",
+      3
+    ],
+    [
+      "corporate online",
+      3
+    ],
+    [
+      "banking cashexpress",
+      2
+    ],
+    [
+      "cashexpress corporate",
+      2
+    ],
+    [
+      "banking payfast",
+      2
+    ],
+    [
+      "payfast transaction",
+      2
+    ],
+    [
+      "txb check",
+      2
+    ],
+    [
+      "page corporate",
+      2
+    ],
+    [
+      "corporate website",
+      2
+    ],
+    [
+      "rights hatton",
+      2
+    ]
+  ],
+  "top_trigrams": [
+    [
+      "list ready banking",
+      10
+    ],
+    [
+      "ready banking login",
+      9
+    ],
+    [
+      "banking login internet",
+      9
+    ],
+    [
+      "login internet banking",
+      9
+    ],
+    [
+      "internet banking home",
+      9
+    ],
+    [
+      "banking home page",
+      9
+    ],
+    [
+      "check list ready",
+      8
+    ],
+    [
+      "home page balance",
+      6
+    ],
+    [
+      "page balance inquiry",
+      6
+    ],
+    [
+      "balance inquiry check",
+      6
+    ],
+    [
+      "inquiry check list",
+      6
+    ],
+    [
+      "transaction banking hnb",
+      3
+    ],
+    [
+      "banking hnb txb",
+      3
+    ],
+    [
+      "personal online banking",
+      3
+    ],
+    [
+      "corporate online banking",
+      3
+    ],
+    [
+      "online banking cashexpress",
+      2
+    ],
+    [
+      "banking cashexpress corporate",
+      2
+    ],
+    [
+      "cashexpress corporate online",
+      2
+    ],
+    [
+      "online banking payfast",
+      2
+    ],
+    [
+      "banking payfast transaction",
+      2
+    ],
+    [
+      "payfast transaction banking",
+      2
+    ],
+    [
+      "hnb txb check",
+      2
+    ],
+    [
+      "txb check list",
+      2
+    ],
+    [
+      "home page corporate",
+      2
+    ],
+    [
+      "page corporate website",
+      2
+    ]
+  ]
+}

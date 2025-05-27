@@ -27,7 +27,8 @@ export default function SentimentAnalysis() {
     const fetchSentimentResults = async (language) => {
         try {
             const response = await fetch(`/api/fetch?language=${language}`);
-            const data = await response.json();
+            const json = await response.json();
+            const data = json.data || [];
             setSentimentResults(data);
             calculateAspectScores(data);
         } catch (error) {
@@ -53,6 +54,8 @@ export default function SentimentAnalysis() {
     };
 
     const calculateAspectScores = (data) => {
+        if (!Array.isArray(data)) return;
+
         const aspectSentiments = {};
 
         data.forEach(({ aspect, sentiment_label, sentiment_score }) => {
@@ -67,9 +70,7 @@ export default function SentimentAnalysis() {
         const aspectAverages = {};
         Object.keys(aspectSentiments).forEach(aspect => {
             const avgScore = (aspectSentiments[aspect].totalScore / aspectSentiments[aspect].count).toFixed(2);
-
-            // ✅ Assign sentiment label based on the score
-            let sentimentLabel = "Neutral"; // Default
+            let sentimentLabel = "Neutral";
             if (avgScore >= 0.67) sentimentLabel = "Positive";
             else if (avgScore < 0.34) sentimentLabel = "Negative";
 
@@ -79,15 +80,17 @@ export default function SentimentAnalysis() {
         setAspectScores(aspectAverages);
     };
 
-    const filteredResults = sentimentResults.filter((item) => {
-        const matchesFilter =
-            filter === "all" ||
-            (filter === "positive" && item.sentiment_label === "Positive") ||
-            (filter === "negative" && item.sentiment_label === "Negative") ||
-            (filter === "neutral" && item.sentiment_label === "Neutral");
-        const matchesSearch = item.comment.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesFilter && matchesSearch;
-    });
+    const filteredResults = Array.isArray(sentimentResults)
+        ? sentimentResults.filter((item) => {
+            const matchesFilter =
+                filter === "all" ||
+                (filter === "positive" && item.sentiment_label === "Positive") ||
+                (filter === "negative" && item.sentiment_label === "Negative") ||
+                (filter === "neutral" && item.sentiment_label === "Neutral");
+            const matchesSearch = item.comment.toLowerCase().includes(searchQuery.toLowerCase());
+            return matchesFilter && matchesSearch;
+        })
+        : [];
 
     if (!isLoggedIn) return null;
 
@@ -96,7 +99,6 @@ export default function SentimentAnalysis() {
             <Header activeTab={pathname} showFullNav={true} />
             <div className="max-w-6xl mx-auto py-10 px-6">
                 
-                {/* ✅ Card 1: Sentiment Analysis (DO NOT CHANGE) */}
                 <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
                     SENTIMENT ANALYSIS
                 </div>
@@ -126,120 +128,114 @@ export default function SentimentAnalysis() {
                     </div>
                 </div>
 
-{/* ✅ Card 2: Sentiment Results (WITH SENTIMENT BAR) */}
-<div className="mt-4">
-    <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
-        SENTIMENT RESULTS
-    </div>
+                <div className="mt-4">
+                    <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
+                        SENTIMENT RESULTS
+                    </div>
 
-    {/* ✅ Search Bar & Sentiment Filter Dropdown (Above Card 2) */}
-    <div className="mt-6 mb-4 flex justify-between">
-        <input 
-            type="text" 
-            placeholder="Search comments..." 
-            value={searchQuery} 
-            onChange={(e) => setSearchQuery(e.target.value)} 
-            className="p-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 w-1/3"
-        />
-        <select 
-            value={filter} 
-            onChange={(e) => setFilter(e.target.value)} 
-            className="p-2 border rounded-lg shadow-sm bg-white text-gray-800 cursor-pointer transition w-1/3"
-        >
-            <option value="all">All Sentiments</option>
-            <option value="positive">Positive</option>
-            <option value="negative">Negative</option>
-            <option value="neutral">Neutral</option>
-        </select>
-    </div>
+                    <div className="mt-6 mb-4 flex justify-between">
+                        <input 
+                            type="text" 
+                            placeholder="Search comments..." 
+                            value={searchQuery} 
+                            onChange={(e) => setSearchQuery(e.target.value)} 
+                            className="p-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 w-1/3"
+                        />
+                        <select 
+                            value={filter} 
+                            onChange={(e) => setFilter(e.target.value)} 
+                            className="p-2 border rounded-lg shadow-sm bg-white text-gray-800 cursor-pointer transition w-1/3"
+                        >
+                            <option value="all">All Sentiments</option>
+                            <option value="positive">Positive</option>
+                            <option value="negative">Negative</option>
+                            <option value="neutral">Neutral</option>
+                        </select>
+                    </div>
 
-    <div className="bg-white p-6 rounded-lg shadow-md overflow-x-auto">
-        <div className="overflow-y-auto max-h-[400px] border border-gray-300 rounded-lg">
-            <table className="min-w-full border-collapse">
-                <thead>
-                    <tr className="bg-gray-200 text-left">
-                        <th className="border p-3">Comment</th>
-                        <th className="border p-3">Aspect</th>
-                        <th className="border p-3">Sentiment Label</th>
-                        <th className="border p-3">Sentiment Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredResults.map((item, index) => {
-                        const percentage = Math.round(item.sentiment_score * 100);
-                        return (
-                            <tr key={index} className="border-b hover:bg-gray-100 transition duration-200">
-                                <td className="border p-3">{item.comment}</td>
-                                <td className="border p-3">{item.aspect}</td>
-                                <td className={`border p-3 font-semibold ${
-                                    item.sentiment_label === "Positive" ? "text-red-500" :
-                                    item.sentiment_label === "Negative" ? "text-green-500" :
-                                    "text-gray-500"
-                                }`}>
-                                    {item.sentiment_label}
-                                </td>
-                                <td className="border p-3">
-                                    <div className="mb-1 font-semibold">
-                                        {item.sentiment_score.toFixed(2)} ({percentage}%)
-                                    </div>
-                                    <div className="h-5 bg-gray-300 rounded-md">
-                                        <div className={`h-5 rounded-md ${
-                                            item.sentiment_label === "Positive" ? "bg-red-500" :
-                                            item.sentiment_label === "Negative" ? "bg-green-500" :
-                                            "bg-gray-500"
-                                        }`} style={{ width: `${percentage}%` }}></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                    <div className="bg-white p-6 rounded-lg shadow-md overflow-x-auto">
+                        <div className="overflow-y-auto max-h-[400px] border border-gray-300 rounded-lg">
+                            <table className="min-w-full border-collapse">
+                                <thead>
+                                    <tr className="bg-gray-200 text-left">
+                                        <th className="border p-3">Comment</th>
+                                        <th className="border p-3">Aspect</th>
+                                        <th className="border p-3">Sentiment Label</th>
+                                        <th className="border p-3">Sentiment Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {filteredResults.map((item, index) => {
+                                        const percentage = Math.round(item.sentiment_score * 100);
+                                        return (
+                                            <tr key={index} className="border-b hover:bg-gray-100 transition duration-200">
+                                                <td className="border p-3">{item.comment}</td>
+                                                <td className="border p-3">{item.aspect}</td>
+                                                <td className={`border p-3 font-semibold ${
+                                                    item.sentiment_label === "Positive" ? "text-red-500" :
+                                                    item.sentiment_label === "Negative" ? "text-green-500" :
+                                                    "text-gray-500"
+                                                }`}>
+                                                    {item.sentiment_label}
+                                                </td>
+                                                <td className="border p-3">
+                                                    <div className="mb-1 font-semibold">
+                                                        {item.sentiment_score.toFixed(2)} ({percentage}%)
+                                                    </div>
+                                                    <div className="h-5 bg-gray-300 rounded-md">
+                                                        <div className={`h-5 rounded-md ${
+                                                            item.sentiment_label === "Positive" ? "bg-red-500" :
+                                                            item.sentiment_label === "Negative" ? "bg-green-500" :
+                                                            "bg-gray-500"
+                                                        }`} style={{ width: `${percentage}%` }}></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
+                <div className="mt-6">
+                    <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
+                        ASPECT DESCRIPTION
+                    </div>
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                        <table className="min-w-full border border-gray-300 rounded-lg overflow-hidden">
+                            <thead>
+                                <tr className="bg-gray-200">
+                                    <th className="border p-3 text-left">Aspect</th>
+                                    <th className="border p-3 text-left">Overall Sentiment</th>
+                                    <th className="border p-3 text-left">Avg Sentiment Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {Object.entries(aspectScores).map(([aspect, { avgScore, sentimentLabel }]) => {
+                                    const sentimentColor = sentimentLabel === "Positive"
+                                        ? "text-red-600 font-semibold"
+                                        : sentimentLabel === "Negative"
+                                        ? "text-green-600 font-semibold"
+                                        : "text-gray-600 font-semibold";
 
-                {/* ✅ Card 3: Aspect Description (Proper Table with Color-Coded Labels & Enhanced Styling) */}
-<div className="mt-6">
-    <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
-        ASPECT DESCRIPTION
-    </div>
-    <div className="bg-white p-6 rounded-lg shadow-md">
-        <table className="min-w-full border border-gray-300 rounded-lg overflow-hidden">
-            <thead>
-                <tr className="bg-gray-200">
-                    <th className="border p-3 text-left">Aspect</th>
-                    <th className="border p-3 text-left">Overall Sentiment</th>
-                    <th className="border p-3 text-left">Avg Sentiment Score</th>
-                </tr>
-            </thead>
-            <tbody>
-                {Object.entries(aspectScores).map(([aspect, { avgScore, sentimentLabel }]) => {
-                    // ✅ Set color based on sentiment label
-                    const sentimentColor = sentimentLabel === "Positive"
-                        ? "text-red-600 font-semibold"
-                        : sentimentLabel === "Negative"
-                        ? "text-green-600 font-semibold"
-                        : "text-gray-600 font-semibold";
-
-                    return (
-                        <tr key={aspect} className="border-b hover:bg-gray-100 transition duration-200">
-                            <td className="border p-3 font-semibold">{aspect}</td>
-                            <td className={`border p-3 ${sentimentColor}`}>
-                                {sentimentLabel}
-                            </td>
-                            <td className="border p-3 font-semibold">
-                                {avgScore}
-                            </td>
-                        </tr>
-                    );
-                })}
-            </tbody>
-        </table>
-    </div>
-</div>
-
+                                    return (
+                                        <tr key={aspect} className="border-b hover:bg-gray-100 transition duration-200">
+                                            <td className="border p-3 font-semibold">{aspect}</td>
+                                            <td className={`border p-3 ${sentimentColor}`}>
+                                                {sentimentLabel}
+                                            </td>
+                                            <td className="border p-3 font-semibold">
+                                                {avgScore}
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
             </div>
             <Footer />
