@@ -19,19 +19,34 @@ export default function AspectClassification() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
+    // 🔐 Keep login alive on refresh
     useEffect(() => {
         const token = localStorage.getItem("token");
-        if (!token) {
-            router.push("/auth/signin");
-        } else {
+        if (token) {
             setIsLoggedIn(true);
+        } else {
+            setTimeout(() => {
+                router.push("/auth/signin");
+            }, 300);
         }
     }, []);
 
+    // ✅ Load applied keywords
     useEffect(() => {
         const stored = localStorage.getItem("applied_keywords");
         if (stored) {
             setAppliedKeywords(JSON.parse(stored));
+        }
+    }, []);
+
+    // ✅ Load scraped data from localStorage
+    useEffect(() => {
+        const storedBrand = localStorage.getItem("brand_info");
+        const storedAspects = localStorage.getItem("aspects");
+        if (storedBrand && storedAspects) {
+            setBrandInfo(JSON.parse(storedBrand));
+            setAspects(JSON.parse(storedAspects));
+            setShowComments(true);
         }
     }, []);
 
@@ -45,9 +60,15 @@ export default function AspectClassification() {
                 }
             );
             const data = await res.json();
+
             setAspects({ English: data.English, Sinhala: data.Sinhala });
             setBrandInfo({ brand: brandName, keywords: keywordsArray, scrape_id: scrapeId });
             setShowComments(true);
+
+            // ✅ Save to localStorage
+            localStorage.setItem("brand_info", JSON.stringify({ brand: brandName, keywords: keywordsArray, scrape_id: scrapeId }));
+            localStorage.setItem("aspects", JSON.stringify({ English: data.English, Sinhala: data.Sinhala }));
+
             setTimeout(() => window.scrollTo({ top: 700, behavior: "smooth" }), 300);
         } catch (error) {
             console.error("❌ Error fetching aspects:", error);
@@ -65,6 +86,11 @@ export default function AspectClassification() {
 
         try {
             setLoading(true);
+
+            // ✅ Clear previous session data
+            localStorage.removeItem("brand_info");
+            localStorage.removeItem("aspects");
+
             const res = await fetch(
                 `http://localhost:8000/api/aspect/scrape?start_date=${startDate.toISOString().split("T")[0]}&end_date=${endDate.toISOString().split("T")[0]}`,
                 { method: "GET" }
@@ -80,11 +106,11 @@ export default function AspectClassification() {
                 }
             } else {
                 alert("❌ Scraping failed.");
-                setLoading(false);
             }
         } catch (error) {
             console.error("❌ Scraping error:", error);
             alert("❌ Scraping crashed.");
+        } finally {
             setLoading(false);
         }
     };
@@ -190,29 +216,42 @@ export default function AspectClassification() {
 
                 {/* 🏷️ Brand Info Card */}
                 {brandInfo.brand && (
-                    <div className="relative bg-white border border-yellow-300 shadow-md p-6 mt-10 max-w-3xl mx-auto rounded-lg text-sm">
-                        <div className="absolute top-2 right-3 text-3xl opacity-10">📁</div>
-                        <div className="space-y-3 text-gray-800">
-                            <div className="flex items-center gap-2">
-                                <span className="text-yellow-600">🏢</span>
-                                <strong>Brand:</strong> {brandInfo.brand}
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <span className="text-yellow-600">🔑</span>
-                                <strong>Keywords:</strong> {brandInfo.keywords.join(", ")}
-                            </div>
-                            {startDate && endDate && (
+                    <>
+                        <div className="relative bg-white border border-yellow-300 shadow-md p-6 mt-10 max-w-3xl mx-auto rounded-lg text-sm">
+                            <div className="absolute top-2 right-3 text-3xl opacity-10">📁</div>
+                            <div className="space-y-3 text-gray-800">
                                 <div className="flex items-center gap-2">
-                                    <span className="text-yellow-600">📅</span>
-                                    <strong>Date Range:</strong> {startDate.toISOString().split("T")[0]} to {endDate.toISOString().split("T")[0]}
+                                    <span className="text-yellow-600">🏢</span>
+                                    <strong>Brand:</strong> {brandInfo.brand}
                                 </div>
-                            )}
-                            <div className="flex items-center gap-2">
-                                <span className="text-yellow-600">🆔</span>
-                                <strong>Scrape ID:</strong> {brandInfo.scrape_id}
+                                <div className="flex items-center gap-2">
+                                    <span className="text-yellow-600">🔑</span>
+                                    <strong>Keywords:</strong> {brandInfo.keywords.join(", ")}
+                                </div>
+                                {startDate && endDate && (
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-yellow-600">📅</span>
+                                        <strong>Date Range:</strong>{" "}
+                                        {startDate.toISOString().split("T")[0]} to {endDate.toISOString().split("T")[0]}
+                                    </div>
+                                )}
+                                <div className="flex items-center gap-2">
+                                    <span className="text-yellow-600">🆔</span>
+                                    <strong>Scrape ID:</strong> {brandInfo.scrape_id}
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+                        {/* 🚀 Sentiment Analysis Button */}
+                        <div className="text-center mt-6">
+                            <a
+                                href="/sentimentanalysis"
+                                className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition"
+                            >
+                                📊 Go to Sentiment Analysis Dashboard
+                            </a>
+                        </div>
+                    </>
                 )}
 
                 {/* 💬 Comment Tables */}

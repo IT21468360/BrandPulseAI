@@ -1,304 +1,308 @@
 {
   "top_unigrams": [
     [
-      "banking",
-      28
-    ],
-    [
-      "list",
-      10
-    ],
-    [
-      "ready",
-      10
-    ],
-    [
-      "login",
-      9
-    ],
-    [
-      "internet",
-      9
-    ],
-    [
-      "home",
-      9
-    ],
-    [
-      "page",
-      9
-    ],
-    [
-      "check",
-      8
-    ],
-    [
-      "online",
-      6
-    ],
-    [
-      "balance",
-      6
-    ],
-    [
-      "inquiry",
-      6
-    ],
-    [
-      "corporate",
-      5
-    ],
-    [
-      "transaction",
-      3
+      "finance",
+      108
     ],
     [
       "hnb",
-      3
+      105
     ],
     [
-      "txb",
-      3
+      "savings",
+      28
     ],
     [
-      "personal",
-      3
+      "financial",
+      28
     ],
     [
-      "cashexpress",
-      2
+      "women",
+      19
     ],
     [
-      "payfast",
-      2
+      "january",
+      18
     ],
     [
-      "website",
-      2
+      "explore",
+      17
     ],
     [
-      "rights",
-      2
+      "loans",
+      15
     ],
     [
-      "hatton",
-      2
+      "able",
+      15
     ],
     [
-      "national",
-      2
+      "business",
+      13
     ],
     [
-      "bank",
-      2
+      "products",
+      12
     ],
     [
-      "plc",
-      2
+      "strength",
+      11
+    ],
+    [
+      "leasing",
+      11
+    ],
+    [
+      "housing",
+      11
+    ],
+    [
+      "general",
+      11
+    ],
+    [
+      "international",
+      10
+    ],
+    [
+      "day",
+      10
+    ],
+    [
+      "services",
+      10
+    ],
+    [
+      "deposits",
+      10
+    ],
+    [
+      "money",
+      10
+    ],
+    [
+      "partners",
+      10
+    ],
+    [
+      "presence",
+      10
+    ],
+    [
+      "branch",
+      10
+    ],
+    [
+      "mullaitivu",
+      10
+    ],
+    [
+      "young",
+      10
     ]
   ],
   "top_bigrams": [
     [
-      "list ready",
+      "hnb finance",
+      105
+    ],
+    [
+      "january hnb",
+      17
+    ],
+    [
+      "savings hnb",
+      13
+    ],
+    [
+      "finance general",
+      11
+    ],
+    [
+      "general savings",
+      11
+    ],
+    [
+      "finance international",
       10
     ],
     [
-      "ready banking",
+      "international women",
       10
     ],
     [
-      "banking login",
+      "women day",
+      10
+    ],
+    [
+      "finance partners",
+      10
+    ],
+    [
+      "finance presence",
+      10
+    ],
+    [
+      "presence branch",
+      10
+    ],
+    [
+      "branch mullaitivu",
+      10
+    ],
+    [
+      "finance young",
+      10
+    ],
+    [
+      "young minds",
+      10
+    ],
+    [
+      "minds yalu",
+      10
+    ],
+    [
+      "yalu daskam",
+      10
+    ],
+    [
+      "daskam art",
+      10
+    ],
+    [
+      "art workshop",
+      10
+    ],
+    [
+      "workshop wijeyawardana",
+      10
+    ],
+    [
+      "wijeyawardana vidyalaya",
+      10
+    ],
+    [
+      "day march",
       9
     ],
     [
-      "login internet",
+      "march hnb",
       9
     ],
     [
-      "internet banking",
+      "miyulasi women",
       9
     ],
     [
-      "banking home",
+      "women savings",
       9
     ],
     [
-      "home page",
+      "partners january",
       9
-    ],
-    [
-      "check list",
-      8
-    ],
-    [
-      "online banking",
-      6
-    ],
-    [
-      "page balance",
-      6
-    ],
-    [
-      "balance inquiry",
-      6
-    ],
-    [
-      "inquiry check",
-      6
-    ],
-    [
-      "transaction banking",
-      3
-    ],
-    [
-      "banking hnb",
-      3
-    ],
-    [
-      "hnb txb",
-      3
-    ],
-    [
-      "personal online",
-      3
-    ],
-    [
-      "corporate online",
-      3
-    ],
-    [
-      "banking cashexpress",
-      2
-    ],
-    [
-      "cashexpress corporate",
-      2
-    ],
-    [
-      "banking payfast",
-      2
-    ],
-    [
-      "payfast transaction",
-      2
-    ],
-    [
-      "txb check",
-      2
-    ],
-    [
-      "page corporate",
-      2
-    ],
-    [
-      "corporate website",
-      2
-    ],
-    [
-      "rights hatton",
-      2
     ]
   ],
   "top_trigrams": [
     [
-      "list ready banking",
+      "january hnb finance",
+      17
+    ],
+    [
+      "savings hnb finance",
+      13
+    ],
+    [
+      "hnb finance general",
+      11
+    ],
+    [
+      "finance general savings",
+      11
+    ],
+    [
+      "hnb finance international",
       10
     ],
     [
-      "ready banking login",
+      "finance international women",
+      10
+    ],
+    [
+      "international women day",
+      10
+    ],
+    [
+      "hnb finance partners",
+      10
+    ],
+    [
+      "hnb finance presence",
+      10
+    ],
+    [
+      "finance presence branch",
+      10
+    ],
+    [
+      "presence branch mullaitivu",
+      10
+    ],
+    [
+      "hnb finance young",
+      10
+    ],
+    [
+      "finance young minds",
+      10
+    ],
+    [
+      "young minds yalu",
+      10
+    ],
+    [
+      "minds yalu daskam",
+      10
+    ],
+    [
+      "yalu daskam art",
+      10
+    ],
+    [
+      "daskam art workshop",
+      10
+    ],
+    [
+      "art workshop wijeyawardana",
+      10
+    ],
+    [
+      "workshop wijeyawardana vidyalaya",
+      10
+    ],
+    [
+      "women day march",
       9
     ],
     [
-      "banking login internet",
+      "day march hnb",
       9
     ],
     [
-      "login internet banking",
+      "march hnb finance",
       9
     ],
     [
-      "internet banking home",
+      "miyulasi women savings",
       9
     ],
     [
-      "banking home page",
+      "finance partners january",
       9
     ],
     [
-      "check list ready",
-      8
-    ],
-    [
-      "home page balance",
-      6
-    ],
-    [
-      "page balance inquiry",
-      6
-    ],
-    [
-      "balance inquiry check",
-      6
-    ],
-    [
-      "inquiry check list",
-      6
-    ],
-    [
-      "transaction banking hnb",
-      3
-    ],
-    [
-      "banking hnb txb",
-      3
-    ],
-    [
-      "personal online banking",
-      3
-    ],
-    [
-      "corporate online banking",
-      3
-    ],
-    [
-      "online banking cashexpress",
-      2
-    ],
-    [
-      "banking cashexpress corporate",
-      2
-    ],
-    [
-      "cashexpress corporate online",
-      2
-    ],
-    [
-      "online banking payfast",
-      2
-    ],
-    [
-      "banking payfast transaction",
-      2
-    ],
-    [
-      "payfast transaction banking",
-      2
-    ],
-    [
-      "hnb txb check",
-      2
-    ],
-    [
-      "txb check list",
-      2
-    ],
-    [
-      "home page corporate",
-      2
-    ],
-    [
-      "page corporate website",
-      2
+      "partners january hnb",
+      9
     ]
   ]
 }
