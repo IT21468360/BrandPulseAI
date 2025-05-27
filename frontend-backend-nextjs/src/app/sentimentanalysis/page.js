@@ -54,7 +54,6 @@ export default function SentimentAnalysis() {
         }
     };
 
-    // ✅ Fixed version with most frequent label as overall sentiment
     const calculateAspectScores = (data) => {
         const aspectStats = {};
 
@@ -214,9 +213,9 @@ export default function SentimentAnalysis() {
                                                 <td className="border p-3">{item.comment}</td>
                                                 <td className="border p-3">{item.aspect}</td>
                                                 <td className={`border p-3 font-semibold ${
-                                                    item.sentiment_label === "Positive" ? "text-red-500" :
-                                                    item.sentiment_label === "Negative" ? "text-green-500" :
-                                                    "text-gray-500"
+                                                    item.sentiment_label === "Positive" ? "text-green-600" :
+                                                    item.sentiment_label === "Negative" ? "text-red-600" :
+                                                    "text-gray-600"
                                                 }`}>
                                                     {item.sentiment_label}
                                                 </td>
@@ -226,9 +225,9 @@ export default function SentimentAnalysis() {
                                                     </div>
                                                     <div className="h-5 bg-gray-300 rounded-md">
                                                         <div className={`h-5 rounded-md ${
-                                                            item.sentiment_label === "Positive" ? "bg-red-500" :
-                                                            item.sentiment_label === "Negative" ? "bg-green-500" :
-                                                            "bg-gray-500"
+                                                            item.sentiment_label === "Positive" ? "bg-green-600" :
+                                                            item.sentiment_label === "Negative" ? "bg-red-600" :
+                                                            "bg-gray-600"
                                                         }`} style={{ width: `${percentage}%` }}></div>
                                                     </div>
                                                 </td>
@@ -261,9 +260,9 @@ export default function SentimentAnalysis() {
                             <tbody>
                                 {Object.entries(aspectScores).map(([aspect, { avgScore, sentimentLabel }]) => {
                                     const sentimentColor = sentimentLabel === "Positive"
-                                        ? "text-red-600 font-semibold"
-                                        : sentimentLabel === "Negative"
                                         ? "text-green-600 font-semibold"
+                                        : sentimentLabel === "Negative"
+                                        ? "text-red-600 font-semibold"
                                         : "text-gray-600 font-semibold";
 
                                     return (
