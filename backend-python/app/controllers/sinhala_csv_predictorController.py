@@ -4,7 +4,6 @@ import pandas as pd
 from datetime import datetime
 from app.services.sentiment_sinhala_service import predict_sentiment_sinhala
 from app.db.mongodb import sinhala_collection
-from datetime import datetime
 import pytz
 
 def extract_timestamp(filename):
@@ -31,7 +30,7 @@ def get_latest_sinhala_excel():
 
 def process_sinhala_csv_prediction():
     xlsx_path = get_latest_sinhala_excel()
-    df = pd.read_excel(xlsx_path)  # ✅ Automatically handles Unicode/Sinhala
+    df = pd.read_excel(xlsx_path)
 
     if "Comment" not in df.columns or "Aspect" not in df.columns:
         raise ValueError("Excel file must contain 'Comment' and 'Aspect' columns")
@@ -45,6 +44,7 @@ def process_sinhala_csv_prediction():
         except Exception as e:
             print(f"❌ Error for comment: {row['Comment']} | Error: {e}")
             continue
+
         sri_lanka_time = datetime.now(pytz.timezone("Asia/Colombo"))
         record = {
             "comment": row["Comment"],
@@ -59,9 +59,25 @@ def process_sinhala_csv_prediction():
             record["date"] = row["Date"]
         predictions.append(record)
 
+    # ✅ Insert to MongoDB
     inserted = sinhala_collection.insert_many(predictions)
     for i, _id in enumerate(inserted.inserted_ids):
         predictions[i]["_id"] = str(_id)
+
+    # ✅ Save output predictions to Excel
+    output_folder = os.path.join("data", "Sentiment", "Sinhala")
+    os.makedirs(output_folder, exist_ok=True)
+
+    timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_filename = f"sinhala_sentiments_{timestamp_str}.xlsx"
+    output_path = os.path.join(output_folder, output_filename)
+
+    df_output = pd.DataFrame(predictions)
+    if "_id" in df_output.columns:
+        df_output.drop(columns=["_id"], inplace=True)
+
+    df_output.to_excel(output_path, index=False, encoding="utf-8")
+    print(f"📁 Output saved to: {output_path}")
 
     return {
         "status": "✅ Sinhala Sentiment Saved",
