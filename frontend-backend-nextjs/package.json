@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "set PORT=3000 && next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev":  "set PORT=3000 && next dev",
+    "build":"next build",
+    "start":"next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@shadcn/ui": "^0.0.4",
+    "axios": "^1.4.0",              
     "bcrypt": "^5.1.1",
     "brand-pulse-ai": "file:",
     "dotenv": "^16.4.7",
