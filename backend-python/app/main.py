@@ -1,21 +1,10 @@
-<<<<<<< Updated upstream
-=======
 import os
 import sys
 from dotenv import load_dotenv
->>>>>>> Stashed changes
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
-<<<<<<< Updated upstream
-# Create a FastAPI app instance
-app = FastAPI()
-
-@app.get("/")
-def read_root():
-    return {"message": "Welcome to the Python backend!"}
-=======
 # 1) Load environment vars
 load_dotenv()
 
@@ -86,4 +75,3 @@ if __name__ == "__main__":
         port=int(os.getenv("PORT", 8000)),
         reload=True
     )
->>>>>>> Stashed changes
