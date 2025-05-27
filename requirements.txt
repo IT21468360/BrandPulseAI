@@ -59,3 +59,9 @@ numba==0.57.0  # Downgraded for better compatibility with NumPy 1.24.3
 # Stopwords & NLP Extras
 spacy-langdetect==0.1.2
 spacy-lookups-data==1.0.5
+
+# Youtube API
+google-api-python-client==2.124.0
+
+#xlsx Files
+openpyxl==3.1.2
