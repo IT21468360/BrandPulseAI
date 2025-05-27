@@ -5,28 +5,31 @@ export async function processEnglishSentiment() {
         const client = await clientPromise;
         const db = client.db("BrandPulseAI");
 
-        // ✅ Step 1: Fetch English reviews from MongoDB
-        const reviews = await db.collection("reviews").find({ language: "english" }).toArray();
+        console.log("✅ Step 1: Connected to MongoDB");
 
-        if (reviews.length === 0) {
-            return { message: "No English reviews found." };
-        }
-
-        // ✅ Step 2: Send reviews to English Sentiment Model API (Replace with actual API)
-        const modelResponse = await fetch("http://localhost:8000/api/english-predict", {
+        const response = await fetch("http://127.0.0.1:8000/api/csv/english-csv-predict", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ reviews }),
         });
 
-        const sentimentResults = await modelResponse.json();
+        const sentimentResults = await response.json();
 
-        // ✅ Step 3: Save Sentiment Results in MongoDB
-        await db.collection("sentiment_results").insertMany(sentimentResults);
+        console.log("✅ Step 2: Got predictions:", sentimentResults);
+
+        if (!Array.isArray(sentimentResults) || sentimentResults.length === 0) {
+            console.log(" ✅ Step 3: predictions returned");
+            return { message: "Model did not return predictions." };
+        }
+
+        const insertResult = await db
+            .collection("english_sentiment_predictions")
+            .insertMany(sentimentResults);
+
+        console.log(`✅ Step 4: Inserted ${insertResult.insertedCount} documents into MongoDB.`);
 
         return sentimentResults;
     } catch (error) {
-        console.error("Error processing English sentiment:", error);
+        console.error("❌ Error processing English sentiment:", error);
         return null;
     }
 }
