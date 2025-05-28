@@ -14,6 +14,7 @@ export default function SentimentAnalysis() {
     const [fromDate, setFromDate] = useState("");
     const [toDate, setToDate] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
     const pathname = usePathname();
 
@@ -38,19 +39,26 @@ export default function SentimentAnalysis() {
     };
 
     const handleGenerateSentiments = async (language) => {
-        const apiEndpoint = language === "english"
-            ? "/api/sentiments/english"
-            : "/api/sentiments/sinhala";
+        try {
+            setLoading(true);
+            const apiEndpoint = language === "english"
+                ? "/api/sentiments/english"
+                : "/api/sentiments/sinhala";
 
-        const response = await fetch(apiEndpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" }
-        });
+            const response = await fetch(apiEndpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" }
+            });
 
-        if (response.ok) {
-            fetchSentimentResults(language);
-        } else {
-            console.error(`Error processing ${language} sentiment analysis`);
+            if (response.ok) {
+                await fetchSentimentResults(language);
+            } else {
+                console.error(`Error processing ${language} sentiment analysis`);
+            }
+        } catch (error) {
+            console.error("❌ Error generating sentiments:", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -110,11 +118,26 @@ export default function SentimentAnalysis() {
     if (!isLoggedIn) return null;
 
     return (
-        <div className="bg-gray-100 min-h-screen">
+        <div className="bg-gray-100 min-h-screen relative">
+            {loading && (
+                <>
+                    <div className="fixed top-0 left-0 right-0 z-50">
+                        <div className="h-1 w-full bg-indigo-200">
+                            <div className="h-1 bg-indigo-600 animate-pulse w-1/2 mx-auto rounded" />
+                        </div>
+                    </div>
+                    <div className="fixed inset-0 bg-white bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-40">
+                        <div className="flex flex-col items-center">
+                            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-indigo-600 border-opacity-70" />
+                            <p className="mt-4 text-indigo-700 font-semibold">Processing Sentiments...</p>
+                        </div>
+                    </div>
+                </>
+            )}
+
             <Header activeTab={pathname} showFullNav={true} />
             <div className="max-w-6xl mx-auto py-10 px-6">
 
-                {/* CARD 1: Generate Sentiments */}
                 <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
                     SENTIMENT ANALYSIS
                 </div>
@@ -144,13 +167,11 @@ export default function SentimentAnalysis() {
                     </div>
                 </div>
 
-                {/* CARD 2: Sentiment Results */}
                 <div className="mt-4">
                     <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
                         SENTIMENT RESULTS
                     </div>
 
-                    {/* Filters */}
                     <div className="mt-6 mb-4 flex flex-wrap gap-4 justify-between">
                         <input
                             type="text"
@@ -192,7 +213,6 @@ export default function SentimentAnalysis() {
                         </div>
                     </div>
 
-                    {/* Table */}
                     <div className="bg-white p-6 rounded-lg shadow-md overflow-x-auto">
                         <div className="overflow-y-auto max-h-[400px] border border-gray-300 rounded-lg">
                             <table className="min-w-full border-collapse">
@@ -243,7 +263,6 @@ export default function SentimentAnalysis() {
                     </div>
                 </div>
 
-                {/* CARD 3: Aspect Summary */}
                 <div className="mt-6">
                     <div className="bg-[#0B1F3F] text-white p-4 rounded-md text-lg font-semibold">
                         ASPECT DESCRIPTION
@@ -279,6 +298,7 @@ export default function SentimentAnalysis() {
                                 })}
                             </tbody>
                         </table>
+                        
                     </div>
                 </div>
             </div>

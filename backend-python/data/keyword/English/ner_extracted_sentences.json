@@ -1,5 +1,135 @@
 [
     {
+<<<<<<< HEAD
+        "Paragraph": "Services Convenience Flexibility Leasing explore Deposits Savings explore Relax Personal Loans Micro Loans Housing Loans Business Loans Gold Loans HNB Finance PLC Strength Strength HNB Finance subsidiary Hatton National Bank PLC unblemished record almost two decades leader finance industry diverse portfolio financial products services . Products your future products growth HNB Finance General Savings HNB Finance Leasing HNB Finance Housing Financial Solution HNB Finance Fixed Deposits HNB Finance Miyulasi Women 's Savings HNB Finance General Savings HNB Finance Leasing HNB Finance Housing Financial Solution HNB Finance Fixed Deposits HNB Finance Miyulasi Women 's Savings HNB Finance General Savings Success Stories Our keen focus entrepreneurs across country us SME SSE communities their full potential . HNB FINANCE been immense strength our lives HNB FINANCE been our financial partner over years now . Therefore , we have been able business so . more I benefit money business while I able loan without any guarantors through Swashakthi Savings , I able easily money I . more View all stories Us financial institution passionate team customer centric , well diversified products services responsible sustainable way . , Customers , Employees Branches Mehewara CSR Projects Mehewara fund series ongoing CSR projects our customers need . fund financial contribution our dedicated employees organisation . Explore HNB Finance oasis Mohoththuwarama Primary School Sri Lanka s financial service provider HNB Finance water purification system Mohoththuwarama Pri . Explore News Updates our latest news updates . All HNB FINANCE partners Kiya.ai January , more HNB FINANCE presence branch Mullaitivu January , more HNB FINANCE International Women s Day March , more HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , more HNB FINANCE partners Kiya.ai January , more HNB FINANCE presence branch Mullaitivu January , more HNB FINANCE International Women s Day March , more HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , more prev next Great Place TAGS Awards",
+        "entities": [
+            [
+                "Relax Personal Loans",
+                "ORG",
+                74,
+                94
+            ],
+            [
+                "Micro Loans",
+                "PRODUCT",
+                95,
+                106
+            ],
+            [
+                "Gold Loans",
+                "PRODUCT",
+                136,
+                146
+            ],
+            [
+                "HNB Finance PLC",
+                "ORG",
+                147,
+                162
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                376,
+                387
+            ],
+            [
+                "General Savings",
+                "PRODUCT",
+                388,
+                403
+            ],
+            [
+                "Miyulasi Women 's Savings",
+                "ORG",
+                502,
+                527
+            ],
+            [
+                "General Savings",
+                "PRODUCT",
+                540,
+                555
+            ],
+            [
+                "Miyulasi Women 's Savings",
+                "ORG",
+                654,
+                679
+            ],
+            [
+                "General Savings Success Stories",
+                "PRODUCT",
+                692,
+                723
+            ],
+            [
+                "SME",
+                "ORG",
+                771,
+                774
+            ],
+            [
+                "SSE",
+                "ORG",
+                775,
+                778
+            ],
+            [
+                "HNB",
+                "ORG",
+                814,
+                817
+            ],
+            [
+                "HNB",
+                "ORG",
+                858,
+                861
+            ],
+            [
+                "Swashakthi Savings",
+                "PRODUCT",
+                1037,
+                1055
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                1422,
+                1433
+            ],
+            [
+                "Mohoththuwarama Primary School",
+                "PRODUCT",
+                1440,
+                1470
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                1510,
+                1521
+            ],
+            [
+                "Explore News Updates",
+                "PRODUCT",
+                1570,
+                1590
+            ],
+            [
+                "HNB FINANCE",
+                "ORG",
+                1621,
+                1632
+            ],
+            [
+                "HNB FINANCE",
+                "ORG",
+                1665,
+                1676
+            ],
+=======
         "Paragraph": "HNB FINANCE been immense strength our lives",
         "entities": [
             [
@@ -13,15 +143,67 @@
     {
         "Paragraph": "HNB FINANCE International Women s Day March , more",
         "entities": [
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
             [
                 "HNB FINANCE International",
                 "PRODUCT",
-                0,
-                25
+                1719,
+                1744
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                1770,
+                1781
+            ],
+            [
+                "Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February",
+                "PRODUCT",
+                1794,
+                1851
+            ],
+            [
+                "HNB FINANCE",
+                "ORG",
+                1859,
+                1870
+            ],
+            [
+                "HNB FINANCE",
+                "ORG",
+                1903,
+                1914
+            ],
+            [
+                "HNB FINANCE International",
+                "PRODUCT",
+                1957,
+                1982
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                2008,
+                2019
+            ],
+            [
+                "Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February",
+                "PRODUCT",
+                2032,
+                2089
             ]
         ]
     },
     {
+<<<<<<< HEAD
+        "Paragraph": "Mehewara CSR Projects Mehewara fund series ongoing CSR projects our customers need . fund financial contribution our dedicated employees organisation . Explore",
+        "entities": [
+            [
+                "Mehewara CSR Projects Mehewara",
+                "SERVICE",
+                0,
+                30
+=======
         "Paragraph": "HNB Finance Miyulasi Women 's Savings explore",
         "entities": [
             [
@@ -35,10 +217,13 @@
                 "ORG",
                 12,
                 37
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
             ]
         ]
     },
     {
+<<<<<<< HEAD
+=======
         "Paragraph": "HNB Finance oasis Mohoththuwarama Primary School Sri Lanka s financial service provider HNB Finance water purification system Mohoththuwarama Pri . Explore",
         "entities": [
             [
@@ -79,6 +264,7 @@
         ]
     },
     {
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
         "Paragraph": "Success Stories Our keen focus entrepreneurs across country us SME SSE communities their full potential .",
         "entities": [
             [
@@ -96,6 +282,9 @@
         ]
     },
     {
+<<<<<<< HEAD
+        "Paragraph": "HNB Finance Fixed Deposits",
+=======
         "Paragraph": "Services Convenience Flexibility Leasing explore Deposits Savings explore Relax Personal Loans Micro Loans Housing Loans Business Loans Gold Loans HNB Finance PLC Strength Strength HNB Finance subsidiary Hatton National Bank PLC unblemished record almost two decades leader finance industry diverse portfolio financial products services . Products your future products growth HNB Finance General Savings HNB Finance Leasing HNB Finance Housing Financial Solution HNB Finance Fixed Deposits HNB Finance Miyulasi Women 's Savings HNB Finance General Savings HNB Finance Leasing HNB Finance Housing Financial Solution HNB Finance Fixed Deposits HNB Finance Miyulasi Women 's Savings HNB Finance General Savings Success Stories Our keen focus entrepreneurs across country us SME SSE communities their full potential . HNB FINANCE been immense strength our lives HNB FINANCE been our financial partner over years now . Therefore , we have been able business so . more I benefit money business while I able loan without any guarantors through Swashakthi Savings , I able easily money I . more View all stories Us financial institution passionate team customer centric , well diversified products services responsible sustainable way . Customers Employees Branches Mehewara CSR Projects Mehewara fund series ongoing CSR projects our customers need . fund financial contribution our dedicated employees organisation . Explore HNB Finance oasis Mohoththuwarama Primary School Sri Lanka s financial service provider HNB Finance water purification system Mohoththuwarama Pri . Explore News Updates our latest news updates . All HNB FINANCE partners Kiya.ai January , more HNB FINANCE presence branch Mullaitivu January , more HNB FINANCE International Women s Day March , more HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , more HNB FINANCE partners Kiya.ai January , more HNB FINANCE presence branch Mullaitivu January , more HNB FINANCE International Women s Day March , more HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , more prev next Great Place TAGS Awards",
         "entities": [
             [
@@ -685,15 +874,12 @@
     },
     {
         "Paragraph": "Sri Lanka s financial service provider HNB Finance water purification system Mohoththuwarama",
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
         "entities": [
             [
-                "Sri Lanka",
-                "GPE",
-                0,
-                9
-            ],
-            [
                 "HNB Finance",
+<<<<<<< HEAD
+=======
                 "ORG",
                 39,
                 50
@@ -876,17 +1062,21 @@
         "entities": [
             [
                 "Miyulasi Women 's Savings",
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
                 "PRODUCT",
                 0,
-                25
+                11
             ]
         ]
     },
     {
+<<<<<<< HEAD
+=======
         "Paragraph": "Us financial institution passionate team customer centric , well diversified products services responsible sustainable",
         "entities": []
     },
     {
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
         "Paragraph": "HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , more",
         "entities": [
             [
@@ -904,13 +1094,90 @@
         ]
     },
     {
-        "Paragraph": "HNB Finance Leasing explore",
+<<<<<<< HEAD
+        "Paragraph": "HNB FINANCE been immense strength our lives",
         "entities": [
             [
-                "HNB Finance Leasing",
+                "HNB FINANCE",
+                "ORG",
+                0,
+                11
+            ]
+        ]
+    },
+    {
+        "Paragraph": "This website cookies best experience our website .",
+        "entities": []
+    },
+    {
+        "Paragraph": "Mehewara fund series ongoing CSR projects our customers need . fund financial contribution our dedicated employees organisation .",
+        "entities": []
+    },
+    {
+        "Paragraph": "HNB Finance oasis Mohoththuwarama Primary School Sri Lanka s financial service provider HNB Finance water purification system Mohoththuwarama Pri . Explore",
+        "entities": [
+            [
+                "HNB Finance",
+                "ORG",
+                0,
+                11
+            ],
+            [
+                "Mohoththuwarama Primary School",
+                "PRODUCT",
+                18,
+                48
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                88,
+                99
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB FINANCE been our financial partner over years now . Therefore , we have been able business",
+        "entities": [
+            [
+                "HNB FINANCE",
+                "ORG",
+                0,
+                11
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB Finance Miyulasi Women 's Savings explore",
+        "entities": [
+            [
+                "HNB Finance",
                 "PRODUCT",
                 0,
-                19
+                11
+            ],
+            [
+                "Miyulasi Women 's Savings",
+                "ORG",
+                12,
+                37
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB Finance oasis Mohoththuwarama Primary School",
+        "entities": [
+            [
+                "HNB Finance",
+                "ORG",
+                0,
+                11
+            ],
+            [
+                "Mohoththuwarama Primary School",
+                "PRODUCT",
+                18,
+                48
             ]
         ]
     },
@@ -932,6 +1199,265 @@
         ]
     },
     {
+        "Paragraph": "Miyulasi Women 's Savings",
+        "entities": [
+            [
+                "Miyulasi Women 's Savings",
+                "PRODUCT",
+                0,
+                25
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB Finance General Savings",
+        "entities": [
+            [
+                "HNB Finance General Savings",
+                "PRODUCT",
+                0,
+                27
+            ]
+        ]
+    },
+    {
+        "Paragraph": "Mehewara CSR Projects Mehewara fund series ongoing CSR projects our customers need . fund financial contribution our dedicated employees organisation . Explore HNB Finance oasis Mohoththuwarama Primary School Sri Lanka s financial service provider HNB Finance water purification system Mohoththuwarama Pri . Explore",
+        "entities": [
+            [
+                "Mehewara CSR Projects Mehewara",
+                "SERVICE",
+                0,
+                30
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                160,
+                171
+            ],
+            [
+                "Mohoththuwarama Primary School",
+                "PRODUCT",
+                178,
+                208
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                248,
+                259
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB FINANCE partners Kiya.ai January , more HNB FINANCE presence branch Mullaitivu January , more HNB FINANCE International Women s Day March , more HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , more HNB FINANCE partners Kiya.ai January , more HNB FINANCE presence branch Mullaitivu January , more HNB FINANCE International Women s Day March , more HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , more",
+        "entities": [
+            [
+                "HNB FINANCE",
+                "ORG",
+                0,
+                11
+            ],
+            [
+                "HNB FINANCE",
+                "ORG",
+                44,
+                55
+            ],
+            [
+                "HNB FINANCE International",
+                "PRODUCT",
+                98,
+                123
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                149,
+                160
+            ],
+            [
+                "Yalu Daskam",
+                "PRODUCT",
+                173,
+                184
+            ],
+            [
+                "Art Workshop Wijeyawardana Vidyalaya February",
+                "PRODUCT",
+                185,
+                230
+            ],
+            [
+                "HNB FINANCE",
+                "ORG",
+                238,
+                249
+            ],
+            [
+                "HNB FINANCE",
+                "ORG",
+                282,
+                293
+            ],
+            [
+                "HNB FINANCE International",
+                "PRODUCT",
+                336,
+                361
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                387,
+                398
+            ],
+            [
+                "Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February",
+                "PRODUCT",
+                411,
+                468
+            ]
+        ]
+    },
+    {
+        "Paragraph": "financial institution passionate team customer centric , well diversified products services responsible sustainable",
+        "entities": []
+    },
+    {
+        "Paragraph": "Sri Lanka s financial service provider HNB Finance water purification system Mohoththuwarama",
+        "entities": [
+            [
+                "Sri Lanka",
+                "GPE",
+                0,
+                9
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                39,
+                50
+            ]
+        ]
+    },
+    {
+        "Paragraph": "Services Convenience Flexibility Leasing explore Deposits Savings explore Relax Personal Loans Micro Loans Housing Loans Business Loans Gold Loans",
+        "entities": [
+            [
+                "Relax Personal Loans",
+                "ORG",
+                74,
+                94
+            ],
+            [
+                "Micro Loans",
+                "PRODUCT",
+                95,
+                106
+            ],
+            [
+                "Gold Loans",
+                "PRODUCT",
+                136,
+                146
+=======
+        "Paragraph": "HNB Finance Leasing explore",
+        "entities": [
+            [
+                "HNB Finance Leasing",
+                "PRODUCT",
+                0,
+                19
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
+            ]
+        ]
+    },
+    {
+<<<<<<< HEAD
+        "Paragraph": "your future products growth",
+        "entities": []
+    },
+    {
+        "Paragraph": "HNB FINANCE been immense strength our lives HNB FINANCE been our financial partner over years now . Therefore , we have been able business so . more I benefit money business while I able loan without any guarantors through Swashakthi Savings , I able easily money I . more",
+        "entities": [
+            [
+                "HNB FINANCE",
+                "ORG",
+                0,
+                11
+            ],
+            [
+                "HNB",
+                "ORG",
+                44,
+                47
+            ],
+            [
+                "Swashakthi Savings",
+                "PRODUCT",
+                223,
+                241
+            ]
+        ]
+    },
+    {
+        "Paragraph": "News Updates our latest news updates . All",
+        "entities": []
+    },
+    {
+        "Paragraph": "HNB Finance PLC Strength Strength HNB Finance subsidiary Hatton National Bank PLC unblemished record almost two decades leader finance industry diverse portfolio financial products services .",
+        "entities": [
+            [
+                "HNB Finance PLC",
+                "ORG",
+                0,
+                15
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB Finance Housing Financial Solution",
+=======
+        "Paragraph": "HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya",
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
+        "entities": [
+            [
+                "HNB Finance",
+                "PRODUCT",
+                0,
+                11
+            ]
+        ]
+    },
+    {
+<<<<<<< HEAD
+        "Paragraph": "Us financial institution passionate team customer centric , well diversified products services responsible sustainable way . , Customers , Employees Branches",
+        "entities": []
+    },
+    {
+        "Paragraph": "I benefit money business while I able loan without any guarantors through Swashakthi Savings , I able easily money I . more",
+        "entities": [
+            [
+                "Swashakthi Savings",
+                "PRODUCT",
+                74,
+                92
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB Finance Leasing explore",
+        "entities": [
+            [
+                "HNB Finance Leasing",
+                "PRODUCT",
+                0,
+                19
+            ]
+        ]
+    },
+    {
         "Paragraph": "I able loan without any guarantors through Swashakthi Savings , I able easily money I .",
         "entities": [
             [
@@ -943,6 +1469,72 @@
         ]
     },
     {
+        "Paragraph": "Success Stories Our keen focus entrepreneurs across country us SME SSE communities their full potential . HNB FINANCE been immense strength our lives HNB FINANCE been our financial partner over years now . Therefore , we have been able business so . more I benefit money business while I able loan without any guarantors through Swashakthi Savings , I able easily money I . more View all stories",
+=======
+        "Paragraph": "I able loan without any guarantors through Swashakthi Savings , I able easily money I .",
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
+        "entities": [
+            [
+                "Swashakthi Savings",
+                "PRODUCT",
+<<<<<<< HEAD
+                329,
+                347
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB Finance General Savings HNB Finance Leasing HNB Finance Housing Financial Solution HNB Finance Fixed Deposits HNB Finance Miyulasi Women 's Savings HNB Finance General Savings HNB Finance Leasing HNB Finance Housing Financial Solution HNB Finance Fixed Deposits HNB Finance Miyulasi Women 's Savings HNB Finance General Savings explore",
+        "entities": [
+            [
+                "HNB Finance",
+                "PRODUCT",
+                0,
+                11
+            ],
+            [
+                "General Savings",
+                "PRODUCT",
+                12,
+                27
+            ],
+            [
+                "Miyulasi Women 's Savings",
+                "ORG",
+                126,
+                151
+            ],
+            [
+                "General Savings",
+                "PRODUCT",
+                164,
+                179
+            ],
+            [
+                "Miyulasi Women 's Savings",
+                "ORG",
+                278,
+                303
+            ],
+            [
+                "General Savings",
+                "PRODUCT",
+                316,
+                331
+=======
+                43,
+                61
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
+            ]
+        ]
+    },
+    {
+<<<<<<< HEAD
+        "Paragraph": "Services Convenience Flexibility",
+        "entities": []
+    },
+    {
+=======
         "Paragraph": "financial institution passionate team customer centric , well diversified products services responsible sustainable",
         "entities": []
     },
@@ -1037,6 +1629,7 @@
         ]
     },
     {
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
         "Paragraph": "HNB FINANCE been immense strength our lives HNB FINANCE been our financial partner over years now . Therefore , we have been able business so . more",
         "entities": [
             [
@@ -1054,6 +1647,33 @@
         ]
     },
     {
+<<<<<<< HEAD
+        "Paragraph": "I benefit money business while",
+        "entities": []
+    },
+    {
+        "Paragraph": "Our keen focus entrepreneurs across country us SME SSE communities their full potential .",
+        "entities": [
+            [
+                "SME",
+                "ORG",
+                47,
+                50
+            ],
+            [
+                "SSE",
+                "ORG",
+                51,
+                54
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB FINANCE partners Kiya .",
+        "entities": [
+            [
+                "HNB FINANCE",
+=======
         "Paragraph": "your future products growth",
         "entities": []
     },
@@ -1062,19 +1682,96 @@
         "entities": [
             [
                 "HNB Finance",
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
                 "ORG",
                 0,
                 11
             ],
             [
+<<<<<<< HEAD
+                "Kiya",
+                "GPE",
+                21,
+                25
+=======
                 "Mohoththuwarama Primary School",
                 "PRODUCT",
                 18,
                 48
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
             ]
         ]
     },
     {
+<<<<<<< HEAD
+        "Paragraph": "HNB FINANCE partners Kiya.ai January , more HNB FINANCE presence branch Mullaitivu January , more HNB FINANCE International Women s Day March , more HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , more HNB FINANCE partners Kiya.ai January , more HNB FINANCE presence branch Mullaitivu January , more HNB FINANCE International Women s Day March , more HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , more prev next",
+        "entities": [
+            [
+                "HNB FINANCE",
+                "ORG",
+                0,
+                11
+            ],
+            [
+                "HNB FINANCE",
+                "ORG",
+                44,
+                55
+            ],
+            [
+                "HNB FINANCE International",
+                "PRODUCT",
+                98,
+                123
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                149,
+                160
+            ],
+            [
+                "Yalu Daskam",
+                "PRODUCT",
+                173,
+                184
+            ],
+            [
+                "Art Workshop Wijeyawardana Vidyalaya February",
+                "PRODUCT",
+                185,
+                230
+            ],
+            [
+                "HNB FINANCE",
+                "ORG",
+                238,
+                249
+            ],
+            [
+                "HNB FINANCE",
+                "ORG",
+                282,
+                293
+            ],
+            [
+                "HNB FINANCE International",
+                "PRODUCT",
+                336,
+                361
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                387,
+                398
+            ],
+            [
+                "Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February",
+                "PRODUCT",
+                411,
+                468
+=======
         "Paragraph": "Mehewara CSR Projects Mehewara fund series ongoing CSR projects our customers need . fund financial contribution our dedicated employees organisation . Explore",
         "entities": [
             [
@@ -1082,15 +1779,24 @@
                 "SERVICE",
                 0,
                 30
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
             ]
         ]
     },
     {
+<<<<<<< HEAD
+        "Paragraph": "our latest news updates .",
+        "entities": []
+    },
+    {
+        "Paragraph": "HNB FINANCE partners Kiya.ai January , more",
+=======
         "Paragraph": "Services Convenience Flexibility",
         "entities": []
     },
     {
         "Paragraph": "HNB FINANCE been our financial partner over years now . Therefore , we have been able business",
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
         "entities": [
             [
                 "HNB FINANCE",
@@ -1099,5 +1805,293 @@
                 11
             ]
         ]
+<<<<<<< HEAD
+    },
+    {
+        "Paragraph": "Us financial institution passionate team customer centric , well diversified products services responsible sustainable",
+        "entities": []
+    },
+    {
+        "Paragraph": "HNB FINANCE International Women s Day",
+        "entities": [
+            [
+                "HNB FINANCE International",
+                "PRODUCT",
+                0,
+                25
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB Finance PLC",
+        "entities": [
+            [
+                "HNB Finance PLC",
+                "ORG",
+                0,
+                15
+            ]
+        ]
+    },
+    {
+        "Paragraph": ", Customers , Employees Branches",
+        "entities": []
+    },
+    {
+        "Paragraph": "Great Place TAGS Awards",
+        "entities": [
+            [
+                "Great Place TAGS Awards",
+                "PRODUCT",
+                0,
+                23
+            ]
+        ]
+    },
+    {
+        "Paragraph": "Products your future products growth HNB Finance General Savings HNB Finance Leasing HNB Finance Housing Financial Solution HNB Finance Fixed Deposits HNB Finance Miyulasi Women 's Savings HNB Finance General Savings HNB Finance Leasing HNB Finance Housing Financial Solution HNB Finance Fixed Deposits HNB Finance Miyulasi Women 's Savings HNB Finance General Savings explore",
+        "entities": [
+            [
+                "HNB Finance",
+                "ORG",
+                37,
+                48
+            ],
+            [
+                "General Savings",
+                "PRODUCT",
+                49,
+                64
+            ],
+            [
+                "Miyulasi Women 's Savings",
+                "ORG",
+                163,
+                188
+            ],
+            [
+                "General Savings",
+                "PRODUCT",
+                201,
+                216
+            ],
+            [
+                "Miyulasi Women 's Savings",
+                "ORG",
+                315,
+                340
+            ],
+            [
+                "General Savings",
+                "PRODUCT",
+                353,
+                368
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB Finance General Savings explore",
+        "entities": [
+            [
+                "HNB Finance",
+                "PRODUCT",
+                0,
+                11
+            ],
+            [
+                "General Savings",
+                "PRODUCT",
+                12,
+                27
+            ]
+        ]
+    },
+    {
+        "Paragraph": "News Updates our latest news updates . All HNB FINANCE partners Kiya.ai January , more HNB FINANCE presence branch Mullaitivu January , more HNB FINANCE International Women s Day March , more HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , more HNB FINANCE partners Kiya.ai January , more HNB FINANCE presence branch Mullaitivu January , more HNB FINANCE International Women s Day March , more HNB Finance young minds Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February , more prev next",
+        "entities": [
+            [
+                "HNB FINANCE",
+                "ORG",
+                43,
+                54
+            ],
+            [
+                "HNB FINANCE",
+                "ORG",
+                87,
+                98
+            ],
+            [
+                "HNB FINANCE International",
+                "PRODUCT",
+                141,
+                166
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                192,
+                203
+            ],
+            [
+                "Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February",
+                "PRODUCT",
+                216,
+                273
+            ],
+            [
+                "HNB FINANCE",
+                "ORG",
+                281,
+                292
+            ],
+            [
+                "HNB FINANCE",
+                "ORG",
+                325,
+                336
+            ],
+            [
+                "HNB FINANCE International",
+                "PRODUCT",
+                379,
+                404
+            ],
+            [
+                "HNB Finance",
+                "ORG",
+                430,
+                441
+            ],
+            [
+                "Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February",
+                "PRODUCT",
+                454,
+                511
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB Finance Leasing",
+        "entities": [
+            [
+                "HNB Finance Leasing",
+                "PRODUCT",
+                0,
+                19
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB Finance subsidiary Hatton National Bank PLC unblemished record almost two decades leader finance industry diverse portfolio financial products services .",
+        "entities": [
+            [
+                "HNB Finance",
+                "ORG",
+                0,
+                11
+            ]
+        ]
+    },
+    {
+        "Paragraph": "Strength Born Strength",
+        "entities": []
+    },
+    {
+        "Paragraph": "HNB Finance Miyulasi Women 's Savings",
+        "entities": [
+            [
+                "HNB Finance",
+                "PRODUCT",
+                0,
+                11
+            ],
+            [
+                "Miyulasi Women 's Savings",
+                "ORG",
+                12,
+                37
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB FINANCE International Women s Day March , more",
+        "entities": [
+            [
+                "HNB FINANCE International",
+                "PRODUCT",
+                0,
+                25
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB FINANCE presence branch Mullaitivu",
+        "entities": [
+            [
+                "HNB FINANCE",
+                "ORG",
+                0,
+                11
+            ]
+        ]
+    },
+    {
+        "Paragraph": "Leasing explore Deposits Savings explore Relax Personal Loans Micro Loans Housing Loans Business Loans Gold Loans",
+        "entities": [
+            [
+                "Relax Personal Loans",
+                "ORG",
+                41,
+                61
+            ],
+            [
+                "Micro Loans",
+                "PRODUCT",
+                62,
+                73
+            ],
+            [
+                "Gold Loans",
+                "PRODUCT",
+                103,
+                113
+            ]
+        ]
+    },
+    {
+        "Paragraph": "Mehewara CSR Projects",
+        "entities": [
+            [
+                "Mehewara CSR Projects",
+                "SERVICE",
+                0,
+                21
+            ]
+        ]
+    },
+    {
+        "Paragraph": "Housing Financial Solution",
+        "entities": [
+            [
+                "Housing Financial Solution",
+                "PRODUCT",
+                0,
+                26
+            ]
+        ]
+    },
+    {
+        "Paragraph": "HNB FINANCE presence branch Mullaitivu January , more",
+        "entities": [
+            [
+                "HNB FINANCE",
+                "ORG",
+                0,
+                11
+            ]
+        ]
+=======
+>>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
     }
 ]
