@@ -2,7 +2,6 @@ import os
 import json
 import pandas as pd
 import traceback
-from collections import defaultdict
 from fastapi import HTTPException
 from pymongo import MongoClient
 from dotenv import load_dotenv
@@ -26,6 +25,8 @@ collection = db[COLLECTION_NAME]
 async def process_sinhala_extraction(user_id, brand, url, dateRange, language):
     try:
         folder_path = os.path.join("data", "keyword", "sinhala")
+        keybert_path = os.path.join(folder_path, "KeyBERT_keywords.json")
+        vocab_path = os.path.join(folder_path, "sinhala_financial_vocab.json")
 
         # Step 1: Scrape and preprocess
         scrape_result = await scrape_content(url, dateRange)
@@ -39,20 +40,19 @@ async def process_sinhala_extraction(user_id, brand, url, dateRange, language):
         if not run_keybert_extraction():
             raise HTTPException(status_code=500, detail="KeyBERT extraction failed.")
 
+        # Step 3: Filter with Financial Vocabulary
+        filtered_keywords_df = filter_keywords_with_vocab(keybert_path, vocab_path)
+        if filtered_keywords_df.empty:
+            return {"message": "No valid financial keywords extracted."}
 
-        # Step 3: Score and rank keywords from JSON
-        keywords_df = score_and_rank_keywords(folder_path)
-        if keywords_df.empty:
-            return { "message": "No keywords extracted." }
-
-        # Step 4: Save to DB and JSON
-        save_final_keywords(user_id, brand, url, language, dateRange, keywords_df)
-        save_keywords_to_db(user_id, brand, url, language, dateRange, keywords_df)
+        # Step 4: Save final results
+        save_final_keywords(user_id, brand, url, language, dateRange, filtered_keywords_df)
+        save_keywords_to_db(user_id, brand, url, language, dateRange, filtered_keywords_df)
 
         return {
             "success": True,
-            "message": "Keywords extracted and saved successfully!",
-            "keywords": keywords_df["Keyword"].tolist()
+            "message": "Filtered financial keywords extracted and saved successfully!",
+            "keywords": filtered_keywords_df["Keyword"].tolist()
         }
 
     except Exception as e:
@@ -60,45 +60,29 @@ async def process_sinhala_extraction(user_id, brand, url, dateRange, language):
         raise HTTPException(status_code=500, detail=f"Keyword Extraction Failed: {str(e)}")
 
 
-# ✅ Scoring based on JSON files
-def score_and_rank_keywords(folder_path):
-    json_files = {
-        "KeyBERT": os.path.join(folder_path, "KeyBERT_keywords.json"),
-        "Financial": os.path.join(folder_path, "sinhala_financial_vocab.json")
-    }
+# ✅ Filter KeyBERT keywords using financial vocabulary
+def filter_keywords_with_vocab(keybert_file_path, vocab_file_path):
+    try:
+        with open(keybert_file_path, "r", encoding="utf-8") as f:
+            keybert_data = json.load(f)
 
-    score_map = {
-        "KeyBERT": 3,
-        "Financial": 4
-    }
+        with open(vocab_file_path, "r", encoding="utf-8") as f:
+            financial_vocab = set(json.load(f))  # List to set
 
-    keyword_scores = defaultdict(int)
+        keyword_set = set()
+        for item in keybert_data:
+            keywords = item.get("keywords", [])
+            if isinstance(keywords, str):
+                keywords = json.loads(keywords)
+            for kw in keywords:
+                if kw in financial_vocab:
+                    keyword_set.add(kw)
 
-    for method, file_path in json_files.items():
-        try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                keyword_data = json.load(f)
+        return pd.DataFrame(list(keyword_set), columns=["Keyword"])
 
-            if isinstance(keyword_data, dict):
-                keyword_data = [keyword_data]
-
-            for item in keyword_data:
-                if isinstance(item, dict) and "keywords" in item:
-                    keywords = item["keywords"]
-                    if isinstance(keywords, str):
-                        keywords = json.loads(keywords)
-                    for keyword in keywords:
-                        keyword_scores[keyword] += score_map[method]
-                elif isinstance(keyword_data, list) and isinstance(item, str):
-                    keyword_scores[item] += score_map[method]
-
-        except FileNotFoundError:
-            print(f"❌ File not found: {file_path}")
-        except json.JSONDecodeError:
-            print(f"❌ JSON decode error in {file_path}")
-
-    sorted_keywords = sorted(keyword_scores.items(), key=lambda x: x[1], reverse=True)
-    return pd.DataFrame(sorted_keywords, columns=["Keyword", "Score"])
+    except Exception as e:
+        print(f"❌ Error filtering keywords: {e}")
+        return pd.DataFrame(columns=["Keyword"])
 
 
 # ✅ Save final keywords as JSON

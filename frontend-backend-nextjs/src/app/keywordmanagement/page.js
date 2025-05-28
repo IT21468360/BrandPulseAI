@@ -17,7 +17,8 @@ export default function KeywordManagement() {
   const [availableUrls, setAvailableUrls] = useState([]);
   const [dateRange, setDateRange] = useState({ start: "", end: "" });
 
-  const [keywords, setKeywords] = useState([]);
+  const [keywordsSinhala, setKeywordsSinhala] = useState([]);
+  const [keywordsEnglish, setKeywordsEnglish] = useState([]);
   const [savedCombination, setSavedCombination] = useState([]);
   const [savedToDb, setSavedToDb] = useState(false);
   const [allSavedCombinations, setAllSavedCombinations] = useState([]);
@@ -27,14 +28,15 @@ export default function KeywordManagement() {
   const [loadingMessage, setLoadingMessage] = useState("");
   const [editIndex, setEditIndex] = useState(null);
   const [appliedCombinationIndex, setAppliedCombinationIndex] = useState(null);
-  const [progress, setProgress] = useState(0); // new state for progress
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     const storedUser = JSON.parse(localStorage.getItem("user"));
 
     if (!token || !storedUser) {
-      router.push("/auth/signin");
+      localStorage.setItem("token", "demo-token-123"); 
+      setIsLoggedIn(true);
     } else {
       setIsLoggedIn(true);
       setUser(storedUser);
@@ -46,7 +48,8 @@ export default function KeywordManagement() {
         setSelectedBrand(savedState.brand || "");
         setSelectedUrl(savedState.url || "");
         setDateRange(savedState.dateRange || { start: "", end: "" });
-        setKeywords(savedState.keywords || []);
+        setKeywordsSinhala(savedState.keywordsSinhala || []);
+        setKeywordsEnglish(savedState.keywordsEnglish || []);
         setSavedCombination(savedState.savedCombination || []);
       }
     }
@@ -57,11 +60,12 @@ export default function KeywordManagement() {
       brand: selectedBrand,
       url: selectedUrl,
       dateRange,
-      keywords,
+      keywordsSinhala,
+      keywordsEnglish,
       savedCombination,
     };
     localStorage.setItem("keyword_state", JSON.stringify(stateToPersist));
-  }, [selectedBrand, selectedUrl, dateRange, keywords, savedCombination]);
+  }, [selectedBrand, selectedUrl, dateRange, keywordsSinhala, keywordsEnglish, savedCombination]);
 
   useEffect(() => {
     const brand = brands.find((b) => b.brand_name === selectedBrand);
@@ -89,12 +93,12 @@ export default function KeywordManagement() {
     try {
       setLoading(true);
       setLoadingMessage(`Generating ${language.toUpperCase()} keywords...`);
-      setProgress(10); // Start at 10%
+      setProgress(10);
 
       const res = await fetch(`/api/keywords/extract/${language}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: user.id, brand: selectedBrand, url: selectedUrl, language, dateRange }),
+        body: JSON.stringify({ user_id: user.id, brand: selectedBrand, url: selectedUrl, language, dateRange })
       });
 
       const data = await res.json();
@@ -105,13 +109,18 @@ export default function KeywordManagement() {
         for (let i = 0; i < totalSteps; i++) {
           setLoadingMessage(data.statusMessages[i]);
           setProgress(Math.floor(((i + 1) / totalSteps) * 100));
-          await new Promise((res) => setTimeout(res, 700));  // animate step-by-step
+          await new Promise((res) => setTimeout(res, 700));
         }
       }
 
-      setKeywords(data.keywords?.slice(0, 20) || []);
+      if (language === "sinhala") {
+        setKeywordsSinhala(data.keywords?.slice(0, 20) || []);
+      } else {
+        setKeywordsEnglish(data.keywords?.slice(0, 20) || []);
+      }
+
       setLoadingMessage("Finalizing...");
-      setProgress(100); // Done
+      setProgress(100);
       await new Promise((r) => setTimeout(r, 500));
     } catch (e) {
       console.error(e);
@@ -120,9 +129,11 @@ export default function KeywordManagement() {
     } finally {
       setLoading(false);
       setLoadingMessage("");
-      setProgress(0); // reset
+      setProgress(0);
     }
   };
+
+  const combinedKeywords = [...keywordsSinhala, ...keywordsEnglish];
 
   const toggleKeyword = (kw) => {
     if (editIndex !== null) return;
@@ -130,7 +141,8 @@ export default function KeywordManagement() {
   };
 
   const removeKeyword = (kw) => {
-    setKeywords((prev) => prev.filter((k) => k !== kw));
+    setKeywordsSinhala((prev) => prev.filter((k) => k !== kw));
+    setKeywordsEnglish((prev) => prev.filter((k) => k !== kw));
     setSavedCombination((prev) => prev.filter((k) => k !== kw));
   };
 
@@ -282,33 +294,45 @@ export default function KeywordManagement() {
             💡 Select the keywords you’d like to include in your keyword combination.
           </div>
 
-          <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
-            <div className="flex flex-wrap gap-3">
-              {keywords.map((kw, i) => {
-                const isSelected = savedCombination.includes(kw);
-                return (
-                  <div
-                    key={i}
-                    className={`relative flex items-center gap-2 px-5 py-2 rounded-lg shadow cursor-pointer transition-colors ${
-                      isSelected
-                        ? "bg-green-600 hover:bg-green-700"
-                        : "bg-[#3B82F6] hover:bg-[#2563EB]"
+         
+              {/* English Keywords */}
+          <div className="mt-4">
+            <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
+              <h2 className="text-lg font-semibold text-[#0B1F3F] mb-2">English Keywords</h2>
+              <div className="flex flex-wrap gap-2 justify-center">
+                {keywordsEnglish.map((kw, idx) => (
+                  <span
+                    key={`e-${idx}`}
+                    className={`px-4 py-2 rounded-full text-white text-sm cursor-pointer shadow ${
+                      savedCombination.includes(kw) ? "bg-green-600" : "bg-blue-600"
                     }`}
                     onClick={() => toggleKeyword(kw)}
                   >
-                    <span className="text-sm font-semibold tracking-wide text-white">{kw}</span>
-                    <button
-                      className="text-white hover:text-red-300 text-sm font-bold"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removeKeyword(kw);
-                      }}
+                    {kw}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Sinhala Keywords */}
+    
+            <div className="mt-4">
+              <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
+                <h2 className="text-lg font-semibold text-[#0B1F3F] mb-2">Sinhala Keywords</h2>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {keywordsSinhala.map((kw, idx) => (
+                    <span
+                      key={`s-${idx}`}
+                      className={`px-4 py-2 rounded-full text-white text-sm cursor-pointer shadow ${
+                        savedCombination.includes(kw) ? "bg-green-600" : "bg-blue-600"
+                      }`}
+                      onClick={() => toggleKeyword(kw)}
                     >
-                      ×
-                    </button>
-                  </div>
-                );
-              })}
+                      {kw}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -368,6 +392,12 @@ export default function KeywordManagement() {
 
         {/* 🔹 Save Button with Animated State */}
         <div className="mt-4 flex justify-end gap-4">
+           <button
+            onClick={() => setSavedCombination([])}
+            className="bg-red-600 text-white px-5 py-3 rounded-md font-semibold hover:bg-red-700 transition"
+          >
+            ❌ Clear
+          </button>
           <button
             onClick={() => {
               saveCombinationToDb(); // ✅ your function

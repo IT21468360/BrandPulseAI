@@ -1,439 +1,308 @@
 {
   "top_unigrams": [
     [
-      "finance",
-      108
+      "combank",
+      109
     ],
     [
-      "hnb",
-      105
+      "bank",
+      89
     ],
     [
-      "savings",
-      28
+      "accounts",
+      56
     ],
     [
-      "financial",
-      28
+      "cards",
+      54
     ],
     [
-      "women",
-      19
+      "credit",
+      53
     ],
     [
-      "january",
-      18
-    ],
-    [
-      "explore",
-      17
-    ],
-    [
-      "loans",
-      15
-    ],
-    [
-      "able",
-      15
-    ],
-    [
-      "business",
-      13
-    ],
-    [
-      "products",
-      12
-    ],
-    [
-<<<<<<< HEAD
-=======
-      "strength",
-      11
-    ],
-    [
->>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
-      "leasing",
-      11
-    ],
-    [
-      "housing",
-      11
-    ],
-    [
-<<<<<<< HEAD
-      "strength",
-      11
-    ],
-    [
-      "general",
-      11
-=======
-      "general",
-      11
-    ],
-    [
-      "international",
-      10
-    ],
-    [
-      "day",
-      10
->>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
-    ],
-    [
-      "services",
-      10
+      "commercial",
+      43
     ],
     [
       "deposits",
-      10
+      42
     ],
     [
-      "money",
-      10
+      "sri",
+      37
     ],
     [
-      "partners",
-      10
+      "digital",
+      35
     ],
     [
-      "presence",
-      10
+      "debit",
+      31
     ],
     [
-      "branch",
-      10
+      "loans",
+      29
     ],
     [
-      "mullaitivu",
-      10
+      "card",
+      29
     ],
     [
-<<<<<<< HEAD
-      "international",
-      10
+      "lanka",
+      28
     ],
     [
-      "day",
-      10
+      "interest",
+      28
     ],
     [
-=======
->>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
-      "young",
-      10
+      "best",
+      26
+    ],
+    [
+      "banking",
+      26
+    ],
+    [
+      "services",
+      25
+    ],
+    [
+      "account",
+      24
+    ],
+    [
+      "rates",
+      24
+    ],
+    [
+      "transactions",
+      24
+    ],
+    [
+      "dreams",
+      23
+    ],
+    [
+      "exclusive",
+      22
+    ],
+    [
+      "app",
+      22
+    ],
+    [
+      "easy",
+      21
+    ],
+    [
+      "online",
+      20
     ]
   ],
   "top_bigrams": [
     [
-      "hnb finance",
-      105
+      "commercial bank",
+      39
     ],
     [
-      "january hnb",
-<<<<<<< HEAD
-      16
+      "sri lanka",
+      28
     ],
     [
-      "savings hnb",
-      14
-=======
+      "combank credit",
+      25
+    ],
+    [
+      "credit cards",
+      23
+    ],
+    [
+      "interest rates",
+      22
+    ],
+    [
+      "debit cards",
+      21
+    ],
+    [
+      "bank ceylon",
+      20
+    ],
+    [
+      "credit debit",
+      18
+    ],
+    [
+      "savings accounts",
+      18
+    ],
+    [
+      "combank digital",
       17
     ],
     [
-      "savings hnb",
+      "current accounts",
+      15
+    ],
+    [
+      "digital bank",
+      14
+    ],
+    [
+      "bank account",
+      14
+    ],
+    [
+      "higher return",
+      14
+    ],
+    [
+      "senior citizens",
       13
->>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
     ],
     [
-      "finance general",
+      "fixed deposits",
+      12
+    ],
+    [
+      "credit card",
+      12
+    ],
+    [
+      "dreams reality",
       11
     ],
     [
-      "general savings",
+      "attractive interest",
       11
     ],
     [
-<<<<<<< HEAD
-      "finance partners",
+      "flash digital",
       10
     ],
     [
-      "finance presence",
+      "debit card",
       10
     ],
     [
-=======
-      "finance international",
+      "payment app",
       10
     ],
     [
-      "international women",
-      10
-    ],
-    [
-      "women day",
-      10
-    ],
-    [
-      "finance partners",
-      10
-    ],
-    [
-      "finance presence",
-      10
-    ],
-    [
->>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
-      "presence branch",
-      10
-    ],
-    [
-      "branch mullaitivu",
-      10
-    ],
-    [
-<<<<<<< HEAD
-      "finance international",
-      10
-    ],
-    [
-      "international women",
-      10
-    ],
-    [
-      "women day",
-      10
-    ],
-    [
-=======
->>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
-      "finance young",
-      10
-    ],
-    [
-      "young minds",
-      10
-    ],
-    [
-      "minds yalu",
-      10
-    ],
-    [
-      "yalu daskam",
-      10
-    ],
-    [
-      "daskam art",
-      10
-    ],
-    [
-      "art workshop",
-      10
-    ],
-    [
-      "workshop wijeyawardana",
-      10
-    ],
-    [
-      "wijeyawardana vidyalaya",
-      10
-    ],
-    [
-<<<<<<< HEAD
-      "miyulasi women",
+      "personal loans",
       9
     ],
     [
-      "women savings",
+      "cards info",
       9
     ],
     [
-      "partners january",
-      9
-    ],
-    [
-      "mullaitivu january",
-      9
-    ],
-    [
-      "day march",
-=======
-      "day march",
-      9
-    ],
-    [
-      "march hnb",
-      9
-    ],
-    [
-      "miyulasi women",
-      9
-    ],
-    [
-      "women savings",
-      9
-    ],
-    [
-      "partners january",
->>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
+      "best bank",
       9
     ]
   ],
   "top_trigrams": [
     [
-      "january hnb finance",
-<<<<<<< HEAD
-      16
+      "commercial bank ceylon",
+      20
     ],
     [
-      "savings hnb finance",
+      "digital bank account",
       14
-=======
-      17
     ],
     [
-      "savings hnb finance",
-      13
->>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
+      "credit debit cards",
+      12
     ],
     [
-      "hnb finance general",
+      "attractive interest rates",
       11
     ],
     [
-      "finance general savings",
-      11
-    ],
-    [
-<<<<<<< HEAD
-      "hnb finance partners",
+      "flash digital bank",
       10
     ],
     [
-=======
-      "hnb finance international",
+      "combank credit card",
       10
     ],
     [
-      "finance international women",
-      10
-    ],
-    [
-      "international women day",
-      10
-    ],
-    [
-      "hnb finance partners",
-      10
-    ],
-    [
->>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
-      "hnb finance presence",
-      10
-    ],
-    [
-      "finance presence branch",
-      10
-    ],
-    [
-      "presence branch mullaitivu",
-      10
-    ],
-    [
-<<<<<<< HEAD
-      "hnb finance international",
-      10
-    ],
-    [
-      "finance international women",
-      10
-    ],
-    [
-      "international women day",
-      10
-    ],
-    [
-=======
->>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
-      "hnb finance young",
-      10
-    ],
-    [
-      "finance young minds",
-      10
-    ],
-    [
-      "young minds yalu",
-      10
-    ],
-    [
-      "minds yalu daskam",
-      10
-    ],
-    [
-      "yalu daskam art",
-      10
-    ],
-    [
-      "daskam art workshop",
-      10
-    ],
-    [
-      "art workshop wijeyawardana",
-      10
-    ],
-    [
-      "workshop wijeyawardana vidyalaya",
-      10
-    ],
-    [
-<<<<<<< HEAD
-      "miyulasi women savings",
+      "combank digital combank",
       9
     ],
     [
-      "finance partners january",
-      9
+      "combank credit cards",
+      8
     ],
     [
-      "branch mullaitivu january",
-      9
+      "combank credit debit",
+      7
     ],
     [
-      "women day march",
-      9
+      "higher return funds",
+      7
     ],
     [
-      "day march hnb",
-      9
+      "return funds fixed",
+      7
     ],
     [
-      "march hnb finance",
-=======
-      "women day march",
-      9
+      "funds fixed deposits",
+      7
     ],
     [
-      "day march hnb",
-      9
+      "money higher return",
+      7
     ],
     [
-      "march hnb finance",
-      9
+      "dreams reality easy",
+      7
     ],
     [
-      "miyulasi women savings",
-      9
+      "selection savings accounts",
+      7
     ],
     [
-      "finance partners january",
-      9
+      "savings accounts flexibility",
+      7
     ],
     [
-      "partners january hnb",
->>>>>>> 5b142e3982c42db785a7f0845f907a4ddde3c949
-      9
+      "accounts flexibility lifestyle",
+      7
+    ],
+    [
+      "exclusive accounts senior",
+      7
+    ],
+    [
+      "accounts senior citizens",
+      7
+    ],
+    [
+      "senior citizens attractive",
+      7
+    ],
+    [
+      "citizens attractive interest",
+      7
+    ],
+    [
+      "interest rates convenience",
+      7
+    ],
+    [
+      "today children brighter",
+      7
+    ],
+    [
+      "children brighter tomorrow",
+      7
+    ],
+    [
+      "deposits current accounts",
+      7
     ]
   ]
 }

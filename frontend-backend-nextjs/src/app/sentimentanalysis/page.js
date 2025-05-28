@@ -20,12 +20,16 @@ export default function SentimentAnalysis() {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
+
+        // ✅ Only set a demo token if it's missing
         if (!token) {
-            router.push("/auth/signin");
-        } else {
-            setIsLoggedIn(true);
+            localStorage.setItem("token", "demo-token-123");
         }
+
+        setIsLoggedIn(true); // trust localStorage presence
     }, []);
+
+
 
     const fetchSentimentResults = async (language) => {
         try {
@@ -300,6 +304,14 @@ export default function SentimentAnalysis() {
                         </table>
                         
                     </div>
+                </div>
+                <div className="mt-8 flex justify-center">
+                    <button
+                        onClick={() => router.push("/explainability")}
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-md shadow-lg transition duration-200"
+                    >
+                        Go to Explainability Page
+                    </button>
                 </div>
             </div>
             <Footer />

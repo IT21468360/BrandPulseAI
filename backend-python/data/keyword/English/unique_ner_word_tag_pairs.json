@@ -1,122 +1,474 @@
 [
     [
-        "Art Workshop Wijeyawardana Vidyalaya February",
+        "ACH",
+        "ORG"
+    ],
+    [
+        "AG ZTB BC Mitte",
         "PRODUCT"
     ],
     [
-        "Explore News Updates",
+        "AUD Canada Bank Montreal",
+        "ORG"
+    ],
+    [
+        "Anagi ComBank range",
         "PRODUCT"
     ],
     [
-        "General Savings",
+        "Australia",
+        "GPE"
+    ],
+    [
+        "BCITITMM Italy Banco",
         "PRODUCT"
     ],
     [
-        "General Savings Success Stories",
+        "BIC Code Swift CCY Account",
         "PRODUCT"
+    ],
+    [
+        "Bank",
+        "GPE"
+    ],
+    [
+        "Business Loans",
+        "PRODUCT"
+    ],
+    [
+        "CAD China Standard Chartered Bank",
+        "PRODUCT"
+    ],
+    [
+        "Cards ComBank Cards",
+        "PRODUCT"
+    ],
+    [
+        "Cards Loans Savings",
+        "PRODUCT"
+    ],
+    [
+        "Chung ku",
+        "PERSON"
+    ],
+    [
+        "Classic Debit Cards",
+        "PRODUCT"
+    ],
+    [
+        "ComBank",
+        "ORG"
+    ],
+    [
+        "ComBank App",
+        "PRODUCT"
+    ],
+    [
+        "ComBank Apps",
+        "PRODUCT"
+    ],
+    [
+        "ComBank Best Bank Sri Lanka Global Finance",
+        "ORG"
+    ],
+    [
+        "ComBank Cards",
+        "PRODUCT"
+    ],
+    [
+        "ComBank ComBank App",
+        "PRODUCT"
+    ],
+    [
+        "ComBank ComBank ComBank",
+        "PRODUCT"
+    ],
+    [
+        "ComBank Credit Card",
+        "PRODUCT"
+    ],
+    [
+        "ComBank Credit Cards",
+        "PRODUCT"
+    ],
+    [
+        "ComBank Credit Debit Cards",
+        "PRODUCT"
+    ],
+    [
+        "ComBank Debit Card",
+        "PRODUCT"
+    ],
+    [
+        "ComBank Digital",
+        "PRODUCT"
+    ],
+    [
+        "ComBank Digital ComBank Digital",
+        "PRODUCT"
+    ],
+    [
+        "ComBank Golds",
+        "PRODUCT"
+    ],
+    [
+        "ComBank Max Rewards",
+        "PRODUCT"
+    ],
+    [
+        "ComBank Max Rewards ComBank Digital",
+        "PRODUCT"
+    ],
+    [
+        "ComBank Personal Banking",
+        "PRODUCT"
+    ],
+    [
+        "ComBank Personal Loans",
+        "PRODUCT"
+    ],
+    [
+        "ComBank east Vavunathivu second",
+        "PRODUCT"
+    ],
+    [
+        "Commercial Bank",
+        "ORG"
+    ],
+    [
+        "Commercial Bank Ceylon",
+        "ORG"
+    ],
+    [
+        "Commercial Bank Ceylon PLC",
+        "ORG"
+    ],
+    [
+        "Commercial Bank Ceylon Vavunathivu Batticaloa",
+        "ORG"
+    ],
+    [
+        "Commercial Bank Diribala Development Loan",
+        "ORG"
+    ],
+    [
+        "Commercial House",
+        "ORG"
+    ],
+    [
+        "Complaint Reporting Format",
+        "PRODUCT"
+    ],
+    [
+        "Content Bigger Text Bigger Cursor Readable",
+        "ORG"
+    ],
+    [
+        "Country Name Address Bank",
+        "PRODUCT"
+    ],
+    [
+        "Credit Card",
+        "PRODUCT"
+    ],
+    [
+        "Credit Cards",
+        "PRODUCT"
+    ],
+    [
+        "Credit Debit Cards",
+        "PRODUCT"
+    ],
+    [
+        "DIFC",
+        "ORG"
+    ],
+    [
+        "Debit Cards",
+        "PRODUCT"
+    ],
+    [
+        "Digital Bank Account Flash Digital Bank Account Flash",
+        "PRODUCT"
+    ],
+    [
+        "Digital Banking",
+        "SERVICE"
+    ],
+    [
+        "Discount Credit Debit",
+        "PRODUCT"
+    ],
+    [
+        "Dubai Financial Services Authority",
+        "SERVICE"
+    ],
+    [
+        "Fixed Deposits",
+        "PRODUCT"
+    ],
+    [
+        "Flash Digital Bank Account",
+        "PRODUCT"
+    ],
+    [
+        "Flash Digital Bank Account Flash",
+        "PRODUCT"
+    ],
+    [
+        "Flash Digital Bank Account Flash Digital Bank Account Flash",
+        "PRODUCT"
+    ],
+    [
+        "Foreign Account Tax Compliance",
+        "PRODUCT"
+    ],
+    [
+        "Foreign Account Tax Compliance Act FATCA",
+        "PRODUCT"
+    ],
+    [
+        "Foreign Financial Institution",
+        "ORG"
+    ],
+    [
+        "Germany",
+        "GPE"
     ],
     [
         "Gold Loans",
         "PRODUCT"
     ],
     [
-        "Great Place TAGS Awards",
+        "Gold Silver Credit Cards",
         "PRODUCT"
     ],
     [
-        "HNB",
+        "Home Loans",
+        "PRODUCT"
+    ],
+    [
+        "IDIBINBB India Standard Chartered Bank Mumbai Crescenzo",
+        "PRODUCT"
+    ],
+    [
+        "Indian Bank Corporate Office",
         "ORG"
     ],
     [
-        "HNB FINANCE",
-        "ORG"
-    ],
-    [
-        "HNB FINANCE International",
-        "PRODUCT"
-    ],
-    [
-        "HNB Finance",
-        "ORG"
-    ],
-    [
-        "HNB Finance",
-        "PRODUCT"
-    ],
-    [
-        "HNB Finance General Savings",
-        "PRODUCT"
-    ],
-    [
-        "HNB Finance Leasing",
-        "PRODUCT"
-    ],
-    [
-        "HNB Finance PLC",
-        "ORG"
-    ],
-    [
-        "Housing Financial Solution",
-        "PRODUCT"
-    ],
-    [
-        "Kiya",
+        "Italy",
         "GPE"
     ],
     [
-        "Mehewara CSR Projects",
-        "SERVICE"
-    ],
-    [
-        "Mehewara CSR Projects Mehewara",
-        "SERVICE"
-    ],
-    [
-        "Micro Loans",
-        "PRODUCT"
-    ],
-    [
-        "Miyulasi Women 's Savings",
+        "JPY Korea Korea Exchange Bank",
         "ORG"
     ],
     [
-        "Miyulasi Women 's Savings",
+        "Japan",
+        "GPE"
+    ],
+    [
+        "KG Rugby Team",
         "PRODUCT"
     ],
     [
-        "Mohoththuwarama Primary School",
-        "PRODUCT"
-    ],
-    [
-        "Relax Personal Loans",
+        "Korea Woori Bank",
         "ORG"
+    ],
+    [
+        "LankaPay Technnovation Awards",
+        "PRODUCT"
+    ],
+    [
+        "Latest News ComBank",
+        "PRODUCT"
+    ],
+    [
+        "Main Accounts",
+        "PRODUCT"
+    ],
+    [
+        "Mainzer Landstrasse Frankfurt",
+        "PRODUCT"
+    ],
+    [
+        "Milan",
+        "GPE"
+    ],
+    [
+        "Minor Youth Accounts",
+        "PRODUCT"
+    ],
+    [
+        "More",
+        "PRODUCT"
+    ],
+    [
+        "More Info",
+        "PRODUCT"
+    ],
+    [
+        "More Info Classic Debit Cards",
+        "PRODUCT"
+    ],
+    [
+        "More Info Easy Payment Great",
+        "PRODUCT"
+    ],
+    [
+        "More Info Upto Discount Credit Debit",
+        "PRODUCT"
+    ],
+    [
+        "More Info Visa Infinite Card",
+        "PRODUCT"
+    ],
+    [
+        "Navigation Highlight Links Page",
+        "ORG"
+    ],
+    [
+        "New Zealand Banking Group Limited",
+        "ORG"
+    ],
+    [
+        "Personal Loans",
+        "PRODUCT"
+    ],
+    [
+        "Piazza Della Scala",
+        "PRODUCT"
+    ],
+    [
+        "Premium Credit Cards",
+        "PRODUCT"
+    ],
+    [
+        "Prepaid Card Balance",
+        "PRODUCT"
+    ],
+    [
+        "R. Loan",
+        "PRODUCT"
+    ],
+    [
+        "RemitPlus RemitPlus",
+        "PRODUCT"
+    ],
+    [
+        "RemitPlus RemitPlus Safe",
+        "PRODUCT"
+    ],
+    [
+        "RemitPlus Safe",
+        "PRODUCT"
+    ],
+    [
+        "Remittances Credit Card",
+        "PRODUCT"
+    ],
+    [
+        "SCBLINBB Italy",
+        "PRODUCT"
     ],
     [
         "SME",
         "ORG"
     ],
     [
-        "SSE",
+        "Safe",
         "ORG"
     ],
     [
-        "Sri Lanka",
+        "Sanath Manatunge",
+        "PERSON"
+    ],
+    [
+        "Self Registration Portal",
+        "PRODUCT"
+    ],
+    [
+        "Senior Citizens Accounts",
+        "PRODUCT"
+    ],
+    [
+        "Senior Citizens Exclusive",
+        "PRODUCT"
+    ],
+    [
+        "Services Savings Accounts",
+        "PRODUCT"
+    ],
+    [
+        "Sri Lanka Commercial Bank Ceylon",
+        "ORG"
+    ],
+    [
+        "Sri Lanka Global Finance",
+        "ORG"
+    ],
+    [
+        "Sri Lankans Students",
+        "ORG"
+    ],
+    [
+        "SriLankan Airlines",
+        "PRODUCT"
+    ],
+    [
+        "Substantial Beneficial Owner",
+        "PRODUCT"
+    ],
+    [
+        "Sumitomo Mitsui Banking Corporation International Business Operations Dept",
+        "ORG"
+    ],
+    [
+        "Tokyo",
         "GPE"
     ],
     [
-        "Swashakthi Savings",
+        "Tools Calculator Rewards Promotion",
         "PRODUCT"
     ],
     [
-        "Yalu Daskam",
+        "UNCRITMM Japan Standard",
         "PRODUCT"
     ],
     [
-        "Yalu Daskam Art Workshop Wijeyawardana Vidyalaya",
+        "Upto Discount Credit Debit",
         "PRODUCT"
     ],
     [
-        "Yalu Daskam Art Workshop Wijeyawardana Vidyalaya February",
+        "Visa Commercial Bank Ceylon",
+        "ORG"
+    ],
+    [
+        "Visa Infinite Card",
         "PRODUCT"
+    ],
+    [
+        "digital bank",
+        "ORG"
+    ],
+    [
+        "ePassbook ePassbook ePassbook",
+        "PRODUCT"
+    ],
+    [
+        "online banking here",
+        "SERVICE"
+    ],
+    [
+        "selection Savings Accounts",
+        "PRODUCT"
+    ],
+    [
+        "today",
+        "DATE"
+    ],
+    [
+        "tomorrow",
+        "DATE"
     ]
 ]

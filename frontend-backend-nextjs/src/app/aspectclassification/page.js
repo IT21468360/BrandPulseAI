@@ -22,14 +22,16 @@ export default function AspectClassification() {
     // 🔐 Keep login alive on refresh
     useEffect(() => {
         const token = localStorage.getItem("token");
-        if (token) {
-            setIsLoggedIn(true);
-        } else {
-            setTimeout(() => {
-                router.push("/auth/signin");
-            }, 300);
+
+        // ✅ Only set a demo token if it's missing
+        if (!token) {
+            localStorage.setItem("token", "demo-token-123");
         }
+
+        setIsLoggedIn(true); // trust localStorage presence
     }, []);
+
+
 
     // ✅ Load applied keywords
     useEffect(() => {

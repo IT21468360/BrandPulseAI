@@ -76,20 +76,40 @@ def extract_main_text(driver):
     return list(content_set)
 
 # ✅ Scrape content from a given URL
-def scrape_website(url):
+def scrape_website(url, max_pages=3):
     try:
         service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service, options=options)
         driver.get(url)
 
-        all_page_content = extract_main_text(driver)
+        all_page_content = set()
+
+        for page_num in range(max_pages):
+            print(f"🔄 Scraping page {page_num + 1}...")
+            page_content = extract_main_text(driver)
+            all_page_content.update(page_content)
+
+            try:
+                # Try to find a "Next" button or link and click it
+                next_buttons = driver.find_elements(By.XPATH, "//a[contains(text(),'Next') or contains(text(),'>>') or contains(text(),'›')]")
+                if next_buttons:
+                    next_buttons[0].click()
+                    time.sleep(3)  # Wait for next page to load
+                else:
+                    print("ℹ️ No next button found, stopping early.")
+                    break
+            except Exception as e:
+                print(f"⚠️ Pagination error: {e}")
+                break
+
     except Exception as e:
         print(f"❌ Scraping error: {e}")
         return None
     finally:
         driver.quit()
 
-    return all_page_content
+    return list(all_page_content)
+
 
 # ✅ Main scraping function (called from `scrape_route.py`)
 async def scrape_content(url: str, date_range: dict):
